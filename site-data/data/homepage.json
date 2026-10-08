@@ -1,0 +1,155 @@
+{
+  "_note": "Homepage sections in order, as on the live site. Image paths are relative to site-data/.",
+  "header": {
+    "logo": "images/2026/07/FLEX-CHICKEN-Version-1-Colored_1.png",
+    "nav": [
+      { "label": "Home", "href": "/" },
+      { "label": "Order Here", "href": "/full-menu/" },
+      {
+        "label": "Menu",
+        "href": "/category/full-menu/",
+        "children": [
+          "Wings & Chicken", "Burgers", "Wraps", "Chicken & Wings Meal", "Burger Meals", "Box Meals",
+          "Kids Meals", "BBQ Items", "Ribs", "Peri Peri", "Boneless Chicken", "Loaded Fries", "Sides",
+          "Family Deals", "Add-Ons and Dips", "Soft Drinks"
+        ]
+      },
+      { "label": "About Us", "href": "/about-us/" },
+      { "label": "Contact Us", "href": "/contact-us/" }
+    ],
+    "utilities": ["Search", "Login / Sign Up (modal: username/email, password, remember me, forgot password, register)", "Cart (shows £ total + item count)"]
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "eyebrow": "Rainham’s local chicken shop",
+      "headline": ["BIG FLAVOUR.", "BIG VALUE.", "FLEX YOUR CRAVING."],
+      "subheadline": "Fresh crispy chicken, loaded burgers and spicy wings made in Rainham.",
+      "ctas": [
+        { "label": "Order Delivery", "href": "/full-menu/" },
+        { "label": "Collect Now", "href": "/full-menu/" }
+      ],
+      "badge": "Free delivery over £20 within 2 miles",
+      "image": "images/2026/07/Hot-honey-burger-meal-scaled-e1783891062509.jpg"
+    },
+    {
+      "id": "category-strip",
+      "items": [
+        { "emoji": "⭐", "label": "Most Popular", "anchor": "most-popular" },
+        { "emoji": "🔥", "label": "Flex Signature", "anchor": "flex-signature" },
+        { "emoji": "🍔", "label": "Smash & Doner", "anchor": "smash-doner" },
+        { "emoji": "♨️", "label": "Grill", "anchor": "wraps-peri-peri" },
+        { "emoji": "🍖", "label": "BBQ", "anchor": "bbq-ribs" },
+        { "emoji": "🍔", "label": "Burger Meals", "anchor": "burger-meals" },
+        { "emoji": "🍗", "label": "Boneless", "anchor": "kids" },
+        { "emoji": "📦", "label": "Box Meals", "anchor": "box-meals" },
+        { "emoji": "🍟", "label": "Loaded Fries", "anchor": "loaded-fries-sides" },
+        { "emoji": "🍗", "label": "Chicken & Wings", "anchor": "chicken-wings-meals" }
+      ],
+      "note": "Links go to /full-menu/#anchor. most-popular, flex-signature and smash-doner sections do NOT exist on the live menu page (dead anchors)."
+    },
+    {
+      "id": "halal",
+      "title": "100% HALAL",
+      "text": "Prepared the Halal way",
+      "cta": { "label": "View Halal Certificate →", "href": "/halal-certification/" },
+      "image": "images/2026/07/WhatsApp-Image-2026-07-23-at-11.14.12-PM.jpeg"
+    },
+    {
+      "id": "offers",
+      "eyebrow": "Made to share",
+      "title": "Big Value Offers",
+      "items": [
+        {
+          "title": "Flex Feast for Two",
+          "text": "6 pieces of chicken, 6 wings, 2 regular fries and 2 drinks.",
+          "price": 17.99,
+          "price_label": "£17.99",
+          "cta": { "label": "Order Now", "href": "/full-menu/" },
+          "image": "images/2026/07/Wings-meal-scaled-e1783887897133.jpg",
+          "note": "No matching product exists in the shop for 'Flex Feast for Two' - homepage-only offer."
+        },
+        {
+          "title": "Flex Variety Box",
+          "text": "2 pieces of chicken, 3 spicy wings, regular fries and a drink.",
+          "price": 7.49,
+          "price_label": "Direct price £7.49",
+          "cta": { "label": "Order Now", "href": "/product/flex-variety-box/" },
+          "image": "images/2026/07/2-PICE-Chicken.jpg"
+        },
+        {
+          "title": "Hot Honey Burger Meal",
+          "text": "Hot honey chicken burger served with regular fries and a drink.",
+          "price": 6.99,
+          "price_label": "Direct price £6.99",
+          "cta": { "label": "Order Now", "href": "/product/hot-honey-burger-meal/" },
+          "image": "images/2026/07/Hot-honey-burger-meal-scaled-e1783891062509.jpg"
+        }
+      ]
+    },
+    {
+      "id": "most-popular",
+      "eyebrow": "Customer favourites",
+      "title": "Most popular",
+      "text": "Choose a product, select your options and add it to your basket.",
+      "product_slugs": [
+        "4-spicy-wings", "12-spicy-wings", "5-chicken-strips", "6-spicy-wings",
+        "20-spicy-wings", "2-piece-chicken", "chicken-strips-burger-meal", "beans"
+      ],
+      "card_actions": ["Add to Box / Choose options", "Wishlist", "Compare", "Quick view"]
+    },
+    {
+      "id": "why-flex",
+      "title": "Why choose Flex?",
+      "items": [
+        { "icon": "🔥", "title": "Freshly prepared", "text": "Chicken, burgers and wings prepared for your order." },
+        { "icon": "£", "title": "Direct value", "text": "Order directly for our website prices and offers." },
+        { "icon": "📍", "title": "Local Rainham team", "text": "Serving Rainham from Upminster Road South." },
+        { "icon": "✓", "title": "Live updates", "text": "Follow your order from acceptance to delivery." }
+      ]
+    },
+    {
+      "id": "reviews",
+      "rating_text": "★★★★★ 5/5 on Just Eat",
+      "text": "Based on 9 reviews from verified Just Eat customers. We never create fake customer quotes.",
+      "cta": { "label": "View verified listing", "href": "https://www.just-eat.co.uk/restaurants-flex-chicken-rainham-rm13/menu" }
+    },
+    {
+      "id": "order-your-way",
+      "title": "Order your way",
+      "text": "Choose delivery or collection and pay securely by card. Apple Pay and Google Pay are available on supported devices.",
+      "cta": { "label": "Start your order", "href": "/full-menu/" }
+    },
+    {
+      "id": "delivery-info",
+      "title": "Delivery information",
+      "blocks": [
+        { "title": "Opening hours", "text": "Daily, 12:00 PM–11:00 PM" },
+        { "title": "Delivery area", "text": "Up to 3 miles. Final availability and minimum order are confirmed at checkout." },
+        { "title": "Find us", "text": "107 Upminster Road South\nRainham, RM13 9AA\n020 3837 6035" }
+      ],
+      "cta": { "label": "Check delivery and order", "href": "/full-menu/" }
+    },
+    {
+      "id": "rewards",
+      "eyebrow": "Coming soon",
+      "title": "Flex Rewards",
+      "text": "We’re preparing a direct-order rewards programme for our regular customers.",
+      "cta": { "label": "Open your account", "href": "/customer-account/" }
+    },
+    {
+      "id": "closing-cta",
+      "title": "Real food. Real flavour.",
+      "cta": { "label": "View the full menu", "href": "/full-menu/" },
+      "images": [
+        "images/2026/07/Classic-Filltes-burger-Meal-scaled-e1783890811769.jpg",
+        "images/2026/07/1020-WINGS-2-scaled-e1783881897856.jpg",
+        "images/2026/07/BBQ-Berger-Meal-scaled-e1783890535695.jpg",
+        "images/2026/07/Half-pounder-meal-scaled-e1783891162121.jpg"
+      ]
+    }
+  ],
+  "footer": {
+    "copyright": "Copyright © 2026 - Flex Chicken by Omar Faruk"
+  }
+}

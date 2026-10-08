@@ -1,0 +1,5431 @@
+[
+  {
+    "id": 1155,
+    "name": "Chicken Fillet Burger",
+    "slug": "chicken-fillet-burger",
+    "url": "https://flexchicken.co.uk/product/chicken-fillet-burger/",
+    "price": 4.49,
+    "regular_price": 4.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Crispy chicken, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Fillets-Burger-scaled-e1783891559144.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Fillets-Burger-scaled-e1783891559144.jpg",
+        "alt": "Chicken Fillet Burger"
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1156,
+    "name": "1/4 Pounder Burger",
+    "slug": "1-4-pounder-burger",
+    "url": "https://flexchicken.co.uk/product/1-4-pounder-burger/",
+    "price": 4.49,
+    "regular_price": 4.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Juicy 4oz beef patty with lettuce, melted cheese, ketchup & burger sauce.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Quater-pounder-Burger-Meal-1-scaled-e1784052306395.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Quater-pounder-Burger-Meal-1-scaled-e1784052306395.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1157,
+    "name": "Hot Honey Burger",
+    "slug": "hot-honey-burger",
+    "url": "https://flexchicken.co.uk/product/hot-honey-burger/",
+    "price": 4.99,
+    "regular_price": 4.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Crispy chicken dipped in sweet hot honey, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Hot-honey-Burger-scaled-e1783891493451.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Hot-honey-Burger-scaled-e1783891493451.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1158,
+    "name": "1/2 Pounder Burger",
+    "slug": "1-2-pounder-burger",
+    "url": "https://flexchicken.co.uk/product/1-2-pounder-burger/",
+    "price": 6.59,
+    "regular_price": 6.59,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Double juicy 4oz beef patties with lettuce, melted cheese, ketchup & burger sauce.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Half-Pounder-Burger-scaled.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Half-Pounder-Burger-scaled.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1159,
+    "name": "Spicy Chicken Burger",
+    "slug": "spicy-chicken-burger",
+    "url": "https://flexchicken.co.uk/product/spicy-chicken-burger/",
+    "price": 5.39,
+    "regular_price": 5.39,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Spicy & crispy chicken, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/09/Spicy-Burger-scaled-e1788707273826.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/09/Spicy-Burger-scaled-e1788707273826.jpg",
+        "alt": "Spicy Burger"
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1160,
+    "name": "Chicken Strips Burger",
+    "slug": "chicken-strips-burger",
+    "url": "https://flexchicken.co.uk/product/chicken-strips-burger/",
+    "price": 2.49,
+    "regular_price": 2.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Chicken strips, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1161,
+    "name": "BBQ Fillet Burger",
+    "slug": "bbq-fillet-burger",
+    "url": "https://flexchicken.co.uk/product/bbq-fillet-burger/",
+    "price": 4.49,
+    "regular_price": 4.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Crispy chicken dipped in BBQ sauce, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 89,
+        "slug": "bbq",
+        "name": "BBQ"
+      },
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/BBQ-Burger-1-scaled-e1783892161303.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/BBQ-Burger-1-scaled-e1783892161303.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1162,
+    "name": "Peri Peri Burger",
+    "slug": "peri-peri-burger",
+    "url": "https://flexchicken.co.uk/product/peri-peri-burger/",
+    "price": 5.49,
+    "regular_price": 5.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Juicy grilled chicken fillet with melted cheese, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      },
+      {
+        "id": 77,
+        "slug": "peri-peri-chicken",
+        "name": "Peri Peri Chicken"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/grill-Burger-scaled-e1783888643131.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/grill-Burger-scaled-e1783888643131.jpg",
+        "alt": "grill Burger"
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Choose your heat level",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Medium",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Hot",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Lemon & Herb",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1163,
+    "name": "Double Fillet Burger",
+    "slug": "double-fillet-burger",
+    "url": "https://flexchicken.co.uk/product/double-fillet-burger/",
+    "price": 5.99,
+    "regular_price": 5.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Double crispy chicken fillets, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1164,
+    "name": "Cheese Burger",
+    "slug": "cheese-burger",
+    "url": "https://flexchicken.co.uk/product/cheese-burger/",
+    "price": 2.49,
+    "regular_price": 2.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Juicy 2oz beef patty with lettuce, melted cheese, ketchup & burger sauce.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Cheese-Burger-1-scaled-e1784052113814.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Cheese-Burger-1-scaled-e1784052113814.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1166,
+    "name": "Flex Fusion Burger",
+    "slug": "flex-fusion-burger",
+    "url": "https://flexchicken.co.uk/product/flex-fusion-burger/",
+    "price": 5.99,
+    "regular_price": 5.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Juicy 4oz beef patty with crispy chicken fillet and hash brown, lettuce, cheese, ketchup & mayo.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1167,
+    "name": "Triple Flex Burger",
+    "slug": "triple-flex-burger",
+    "url": "https://flexchicken.co.uk/product/triple-flex-burger/",
+    "price": 4.99,
+    "regular_price": 4.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Triple layered bun with two juicy 2oz beef patties, lettuce, cheese, ketchup & burger sauce.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/3-mm-burger-scaled-e1783891412949.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/3-mm-burger-scaled-e1783891412949.jpg",
+        "alt": "Triple Flex Burger"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1168,
+    "name": "Double Cheese Burger",
+    "slug": "double-cheese-burger",
+    "url": "https://flexchicken.co.uk/product/double-cheese-burger/",
+    "price": 3.99,
+    "regular_price": 3.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Double juicy 2oz beef patties with lettuce, melted cheese, ketchup & burger sauce.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Dubble-Cheese-burger-scaled-e1784052400258.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Dubble-Cheese-burger-scaled-e1784052400258.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1169,
+    "name": "Hash Brown Stack",
+    "slug": "hash-brown-stack",
+    "url": "https://flexchicken.co.uk/product/hash-brown-stack/",
+    "price": 4.99,
+    "regular_price": 4.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Crispy chicken, hash brown, cheese, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1170,
+    "name": "Chicken Wrap",
+    "slug": "chicken-wrap",
+    "url": "https://flexchicken.co.uk/product/chicken-wrap/",
+    "price": 4.49,
+    "regular_price": 4.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Crispy chicken, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/09/Chicken-Wrap-scaled-e1788707528675.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/09/Chicken-Wrap-scaled-e1788707528675.jpg",
+        "alt": "Chicken Wrap"
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1171,
+    "name": "Spicy Chicken Wrap",
+    "slug": "spicy-chicken-wrap",
+    "url": "https://flexchicken.co.uk/product/spicy-chicken-wrap/",
+    "price": 4.99,
+    "regular_price": 4.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Spicy & crispy chicken, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1173,
+    "name": "Chicken Fillet Burger Meal",
+    "slug": "chicken-fillet-burger-meal",
+    "url": "https://flexchicken.co.uk/product/chicken-fillet-burger-meal/",
+    "price": 5.99,
+    "regular_price": 5.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Classic-Filltes-burger-Meal-scaled-e1783890811769.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Classic-Filltes-burger-Meal-scaled-e1783890811769.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1174,
+    "name": "1/4 Pounder Burger Meal",
+    "slug": "1-4-pounder-burger-meal",
+    "url": "https://flexchicken.co.uk/product/1-4-pounder-burger-meal/",
+    "price": 6.49,
+    "regular_price": 6.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1175,
+    "name": "Hot Honey Burger Meal",
+    "slug": "hot-honey-burger-meal",
+    "url": "https://flexchicken.co.uk/product/hot-honey-burger-meal/",
+    "price": 6.99,
+    "regular_price": 6.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Hot-honey-burger-meal-scaled-e1783891062509.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Hot-honey-burger-meal-scaled-e1783891062509.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1176,
+    "name": "1/2 Pounder Burger Meal",
+    "slug": "1-2-pounder-burger-meal",
+    "url": "https://flexchicken.co.uk/product/1-2-pounder-burger-meal/",
+    "price": 7.49,
+    "regular_price": 7.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Half-pounder-meal-scaled-e1783891162121.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Half-pounder-meal-scaled-e1783891162121.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1177,
+    "name": "Spicy Chicken Burger Meal",
+    "slug": "spicy-chicken-burger-meal",
+    "url": "https://flexchicken.co.uk/product/spicy-chicken-burger-meal/",
+    "price": 6.49,
+    "regular_price": 6.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/spicy-burger-meal-scaled.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/spicy-burger-meal-scaled.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1178,
+    "name": "Chicken Strips Burger Meal",
+    "slug": "chicken-strips-burger-meal",
+    "url": "https://flexchicken.co.uk/product/chicken-strips-burger-meal/",
+    "price": 4.49,
+    "regular_price": 4.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1179,
+    "name": "BBQ Fillet Burger Meal",
+    "slug": "bbq-fillet-burger-meal",
+    "url": "https://flexchicken.co.uk/product/bbq-fillet-burger-meal/",
+    "price": 6.49,
+    "regular_price": 6.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 89,
+        "slug": "bbq",
+        "name": "BBQ"
+      },
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/BBQ-Berger-Meal-scaled-e1783890535695.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/BBQ-Berger-Meal-scaled-e1783890535695.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1180,
+    "name": "Peri Peri Burger Meal",
+    "slug": "peri-peri-burger-meal",
+    "url": "https://flexchicken.co.uk/product/peri-peri-burger-meal/",
+    "price": 7.49,
+    "regular_price": 7.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      },
+      {
+        "id": 77,
+        "slug": "peri-peri-chicken",
+        "name": "Peri Peri Chicken"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Grill-Burger-meal-scaled-e1783890989477.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Grill-Burger-meal-scaled-e1783890989477.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Choose your heat level",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Medium",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Hot",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Lemon & Herb",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1181,
+    "name": "Double Fillet Burger Meal",
+    "slug": "double-fillet-burger-meal",
+    "url": "https://flexchicken.co.uk/product/double-fillet-burger-meal/",
+    "price": 7.99,
+    "regular_price": 7.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Dubble-fillets-burger-meal-scaled-e1783890903931.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Dubble-fillets-burger-meal-scaled-e1783890903931.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1182,
+    "name": "Cheese Burger Meal",
+    "slug": "cheese-burger-meal",
+    "url": "https://flexchicken.co.uk/product/cheese-burger-meal/",
+    "price": 4.99,
+    "regular_price": 4.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Cheese-Burger-meal-scaled-e1783890330855.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Cheese-Burger-meal-scaled-e1783890330855.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1183,
+    "name": "Smash Burger Meal",
+    "slug": "smash-burger-meal",
+    "url": "https://flexchicken.co.uk/product/smash-burger-meal/",
+    "price": 10.19,
+    "regular_price": 10.19,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1184,
+    "name": "Fusion Flex Burger Meal",
+    "slug": "fusion-flex-burger-meal",
+    "url": "https://flexchicken.co.uk/product/fusion-flex-burger-meal/",
+    "price": 7.99,
+    "regular_price": 7.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Flex-Fution-Box-scaled-e1783890023443.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Flex-Fution-Box-scaled-e1783890023443.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1185,
+    "name": "Triple Flex Burger Meal",
+    "slug": "triple-flex-burger-meal",
+    "url": "https://flexchicken.co.uk/product/triple-flex-burger-meal/",
+    "price": 6.49,
+    "regular_price": 6.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/3m-Burger-meal-scaled-e1783890223325.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/3m-Burger-meal-scaled-e1783890223325.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1186,
+    "name": "Double Cheese Burger Meal",
+    "slug": "double-cheese-burger-meal",
+    "url": "https://flexchicken.co.uk/product/double-cheese-burger-meal/",
+    "price": 5.99,
+    "regular_price": 5.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 71,
+        "slug": "burger-meals",
+        "name": "Burger Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1188,
+    "name": "Chicken Fillet Burger Box Meal",
+    "slug": "chicken-fillet-burger-box-meal",
+    "url": "https://flexchicken.co.uk/product/chicken-fillet-burger-box-meal/",
+    "price": 7.99,
+    "regular_price": 7.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Chips, drink & 3 wings.",
+    "categories": [
+      {
+        "id": 72,
+        "slug": "box-meals",
+        "name": "Box Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Sides",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Coleslaw",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "BBQ Beans",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1189,
+    "name": "1/4 Pounder Burger Box Meal",
+    "slug": "1-4-pounder-burger-box-meal",
+    "url": "https://flexchicken.co.uk/product/1-4-pounder-burger-box-meal/",
+    "price": 8.49,
+    "regular_price": 8.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Chips, drink & 3 wings.",
+    "categories": [
+      {
+        "id": 72,
+        "slug": "box-meals",
+        "name": "Box Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Sides",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Coleslaw",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "BBQ Beans",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1190,
+    "name": "Fusion Flex Burger Box Meal",
+    "slug": "fusion-flex-burger-box-meal",
+    "url": "https://flexchicken.co.uk/product/fusion-flex-burger-box-meal/",
+    "price": 9.99,
+    "regular_price": 9.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Chips, drink & 3 wings.",
+    "categories": [
+      {
+        "id": 72,
+        "slug": "box-meals",
+        "name": "Box Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Sides",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Coleslaw",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "BBQ Beans",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1191,
+    "name": "1/2 Pounder Burger Box Meal",
+    "slug": "1-2-pounder-burger-box-meal",
+    "url": "https://flexchicken.co.uk/product/1-2-pounder-burger-box-meal/",
+    "price": 9.49,
+    "regular_price": 9.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Chips, drink & 3 wings.",
+    "categories": [
+      {
+        "id": 72,
+        "slug": "box-meals",
+        "name": "Box Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Sides",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Coleslaw",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "BBQ Beans",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1192,
+    "name": "Spicy Chicken Burger Box Meal",
+    "slug": "spicy-chicken-burger-box-meal",
+    "url": "https://flexchicken.co.uk/product/spicy-chicken-burger-box-meal/",
+    "price": 8.49,
+    "regular_price": 8.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Chips, drink & 3 wings.",
+    "categories": [
+      {
+        "id": 72,
+        "slug": "box-meals",
+        "name": "Box Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Sides",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Coleslaw",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "BBQ Beans",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1193,
+    "name": "Flex Variety Box",
+    "slug": "flex-variety-box",
+    "url": "https://flexchicken.co.uk/product/flex-variety-box/",
+    "price": 7.49,
+    "regular_price": 7.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "2 piece chicken, 3 spicy wings, chips & drink.",
+    "categories": [
+      {
+        "id": 72,
+        "slug": "box-meals",
+        "name": "Box Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Sides",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Coleslaw",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "BBQ Beans",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1195,
+    "name": "4 Spicy Wings",
+    "slug": "4-spicy-wings",
+    "url": "https://flexchicken.co.uk/product/4-spicy-wings/",
+    "price": 2.29,
+    "regular_price": 2.29,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 73,
+        "slug": "wings",
+        "name": "Wings"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/1020-WINGS-1-scaled-e1783887747720.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/1020-WINGS-1-scaled-e1783887747720.jpg",
+        "alt": "Wings"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1196,
+    "name": "6 Spicy Wings",
+    "slug": "6-spicy-wings",
+    "url": "https://flexchicken.co.uk/product/6-spicy-wings/",
+    "price": 3.2,
+    "regular_price": 3.2,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 73,
+        "slug": "wings",
+        "name": "Wings"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/6-wings-1-scaled-e1783887641782.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/6-wings-1-scaled-e1783887641782.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1197,
+    "name": "8 Spicy Wings",
+    "slug": "8-spicy-wings",
+    "url": "https://flexchicken.co.uk/product/8-spicy-wings/",
+    "price": 3.99,
+    "regular_price": 3.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 73,
+        "slug": "wings",
+        "name": "Wings"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/1020-WINGS-1-scaled-e1783887747720.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/1020-WINGS-1-scaled-e1783887747720.jpg",
+        "alt": "Wings"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1198,
+    "name": "12 Spicy Wings",
+    "slug": "12-spicy-wings",
+    "url": "https://flexchicken.co.uk/product/12-spicy-wings/",
+    "price": 5.99,
+    "regular_price": 5.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 73,
+        "slug": "wings",
+        "name": "Wings"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/1020-WINGS-2-scaled-e1783881897856.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/1020-WINGS-2-scaled-e1783881897856.jpg",
+        "alt": "12 wings"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1199,
+    "name": "20 Spicy Wings",
+    "slug": "20-spicy-wings",
+    "url": "https://flexchicken.co.uk/product/20-spicy-wings/",
+    "price": 9.49,
+    "regular_price": 9.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 73,
+        "slug": "wings",
+        "name": "Wings"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/1020-WINGS-1-scaled-e1783887747720.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/1020-WINGS-1-scaled-e1783887747720.jpg",
+        "alt": "Wings"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1200,
+    "name": "1 Piece Chicken",
+    "slug": "1-piece-chicken",
+    "url": "https://flexchicken.co.uk/product/1-piece-chicken/",
+    "price": 1.79,
+    "regular_price": 1.79,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 74,
+        "slug": "chicken",
+        "name": "Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1201,
+    "name": "2 Piece Chicken",
+    "slug": "2-piece-chicken",
+    "url": "https://flexchicken.co.uk/product/2-piece-chicken/",
+    "price": 2.99,
+    "regular_price": 2.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 74,
+        "slug": "chicken",
+        "name": "Chicken"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/2-PICE-Chicken-scaled.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/2-PICE-Chicken-scaled.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1202,
+    "name": "3 Piece Chicken",
+    "slug": "3-piece-chicken",
+    "url": "https://flexchicken.co.uk/product/3-piece-chicken/",
+    "price": 4.49,
+    "regular_price": 4.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 74,
+        "slug": "chicken",
+        "name": "Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1204,
+    "name": "6 Piece Chicken",
+    "slug": "6-piece-chicken",
+    "url": "https://flexchicken.co.uk/product/6-piece-chicken/",
+    "price": 8.49,
+    "regular_price": 8.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 74,
+        "slug": "chicken",
+        "name": "Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1205,
+    "name": "10 Piece Chicken",
+    "slug": "10-piece-chicken",
+    "url": "https://flexchicken.co.uk/product/10-piece-chicken/",
+    "price": 14.49,
+    "regular_price": 14.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 74,
+        "slug": "chicken",
+        "name": "Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1206,
+    "name": "Large Popcorn Chicken",
+    "slug": "large-popcorn-chicken-2",
+    "url": "https://flexchicken.co.uk/product/large-popcorn-chicken-2/",
+    "price": 6.99,
+    "regular_price": 6.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1207,
+    "name": "6 Spicy Wings Meal",
+    "slug": "6-spicy-wings-meal",
+    "url": "https://flexchicken.co.uk/product/6-spicy-wings-meal/",
+    "price": 5.99,
+    "regular_price": 5.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 75,
+        "slug": "wings-meals",
+        "name": "Wings Meals"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/6-Wings-meal-scaled-e1783887825638.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/6-Wings-meal-scaled-e1783887825638.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1208,
+    "name": "4 Spicy Wings Meal",
+    "slug": "3-spicy-wings-meal",
+    "url": "https://flexchicken.co.uk/product/3-spicy-wings-meal/",
+    "price": 5.39,
+    "regular_price": 5.39,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 75,
+        "slug": "wings-meals",
+        "name": "Wings Meals"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Wings-meal-scaled-e1783887897133.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Wings-meal-scaled-e1783887897133.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1209,
+    "name": "1 Piece Chicken Meal",
+    "slug": "1-piece-chicken-meal",
+    "url": "https://flexchicken.co.uk/product/1-piece-chicken-meal/",
+    "price": 4.49,
+    "regular_price": 4.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 76,
+        "slug": "chicken-meals",
+        "name": "Chicken Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1210,
+    "name": "Flex Combo Meal 1",
+    "slug": "flex-combo-meal-1",
+    "url": "https://flexchicken.co.uk/product/flex-combo-meal-1/",
+    "price": 5.99,
+    "regular_price": 5.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "1 piece chicken, 3 spicy wings, chips & drink.",
+    "categories": [
+      {
+        "id": 76,
+        "slug": "chicken-meals",
+        "name": "Chicken Meals"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/Combo-meal-1-scaled-e1783889505985.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/Combo-meal-1-scaled-e1783889505985.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1211,
+    "name": "2 Piece Chicken Meal",
+    "slug": "2-piece-chicken-meal",
+    "url": "https://flexchicken.co.uk/product/2-piece-chicken-meal/",
+    "price": 5.99,
+    "regular_price": 5.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 76,
+        "slug": "chicken-meals",
+        "name": "Chicken Meals"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/2-pc-chicken-meal-scaled-e1783889801254.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/2-pc-chicken-meal-scaled-e1783889801254.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1212,
+    "name": "3 Piece Chicken Meal",
+    "slug": "3-piece-chicken-meal",
+    "url": "https://flexchicken.co.uk/product/3-piece-chicken-meal/",
+    "price": 7.49,
+    "regular_price": 7.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 76,
+        "slug": "chicken-meals",
+        "name": "Chicken Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1214,
+    "name": "Whole chicken",
+    "slug": "whole-chicken",
+    "url": "https://flexchicken.co.uk/product/whole-chicken/",
+    "price": 15.59,
+    "regular_price": 15.59,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "4 Cut Chicken 4 Pices",
+    "categories": [
+      {
+        "id": 77,
+        "slug": "peri-peri-chicken",
+        "name": "Peri Peri Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Choose your heat level",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Medium",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Hot",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Lemon & Herb",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1215,
+    "name": "Half Chicken",
+    "slug": "half-chicken",
+    "url": "https://flexchicken.co.uk/product/half-chicken/",
+    "price": 10.79,
+    "regular_price": 10.79,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "4 Cut Chicken 2 Pices",
+    "categories": [
+      {
+        "id": 77,
+        "slug": "peri-peri-chicken",
+        "name": "Peri Peri Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Choose your heat level",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Medium",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Hot",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Lemon & Herb",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1216,
+    "name": "Product",
+    "slug": "product-6",
+    "url": "https://flexchicken.co.uk/product/product-6/",
+    "price": 0.0,
+    "regular_price": 0.0,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1217,
+    "name": "5 Chicken Strips",
+    "slug": "5-chicken-strips",
+    "url": "https://flexchicken.co.uk/product/5-chicken-strips/",
+    "price": 4.49,
+    "regular_price": 4.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 78,
+        "slug": "boneless-chicken",
+        "name": "Boneless Chicken"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/5-Srtips-scaled-e1783889588456.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/5-Srtips-scaled-e1783889588456.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1218,
+    "name": "10 Chicken Strips",
+    "slug": "10-chicken-strips",
+    "url": "https://flexchicken.co.uk/product/10-chicken-strips/",
+    "price": 9.49,
+    "regular_price": 9.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 78,
+        "slug": "boneless-chicken",
+        "name": "Boneless Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1219,
+    "name": "Regular Popcorn Chicken",
+    "slug": "regular-popcorn-chicken",
+    "url": "https://flexchicken.co.uk/product/regular-popcorn-chicken/",
+    "price": 3.49,
+    "regular_price": 3.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 78,
+        "slug": "boneless-chicken",
+        "name": "Boneless Chicken"
+      },
+      {
+        "id": 88,
+        "slug": "kids-meals",
+        "name": "Kids Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1220,
+    "name": "Large Popcorn Chicken",
+    "slug": "large-popcorn-chicken",
+    "url": "https://flexchicken.co.uk/product/large-popcorn-chicken/",
+    "price": 8.39,
+    "regular_price": 8.39,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 78,
+        "slug": "boneless-chicken",
+        "name": "Boneless Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1221,
+    "name": "6 Chicken Nuggets",
+    "slug": "6-chicken-nuggets",
+    "url": "https://flexchicken.co.uk/product/6-chicken-nuggets/",
+    "price": 3.49,
+    "regular_price": 3.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 78,
+        "slug": "boneless-chicken",
+        "name": "Boneless Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1222,
+    "name": "9 Chicken Nuggets",
+    "slug": "9-chicken-nuggets",
+    "url": "https://flexchicken.co.uk/product/9-chicken-nuggets/",
+    "price": 6.49,
+    "regular_price": 6.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 78,
+        "slug": "boneless-chicken",
+        "name": "Boneless Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1223,
+    "name": "20 Chicken Nuggets",
+    "slug": "20-chicken-nuggets",
+    "url": "https://flexchicken.co.uk/product/20-chicken-nuggets/",
+    "price": 10.99,
+    "regular_price": 10.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 78,
+        "slug": "boneless-chicken",
+        "name": "Boneless Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1224,
+    "name": "Chicken Strips Meal",
+    "slug": "chicken-strips-meal",
+    "url": "https://flexchicken.co.uk/product/chicken-strips-meal/",
+    "price": 6.49,
+    "regular_price": 6.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 78,
+        "slug": "boneless-chicken",
+        "name": "Boneless Chicken"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/strips-meal-scaled-e1783889885790.jpg",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/strips-meal-scaled-e1783889885790.jpg",
+        "alt": ""
+      }
+    ],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1225,
+    "name": "Fries (Regular)",
+    "slug": "fries-regular",
+    "url": "https://flexchicken.co.uk/product/fries-regular/",
+    "price": 1.99,
+    "regular_price": 1.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 79,
+        "slug": "sides",
+        "name": "Sides"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1226,
+    "name": "Fries (Large)",
+    "slug": "fries-large",
+    "url": "https://flexchicken.co.uk/product/fries-large/",
+    "price": 2.79,
+    "regular_price": 2.79,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 79,
+        "slug": "sides",
+        "name": "Sides"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1227,
+    "name": "Mozzarella Sticks x 4",
+    "slug": "mozzarella-sticks-x-4",
+    "url": "https://flexchicken.co.uk/product/mozzarella-sticks-x-4/",
+    "price": 1.99,
+    "regular_price": 1.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 79,
+        "slug": "sides",
+        "name": "Sides"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1228,
+    "name": "Mozzarella Stick x 7",
+    "slug": "mozzarella-stick-x-7",
+    "url": "https://flexchicken.co.uk/product/mozzarella-stick-x-7/",
+    "price": 3.49,
+    "regular_price": 3.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 79,
+        "slug": "sides",
+        "name": "Sides"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1229,
+    "name": "Onion Ringas x 4",
+    "slug": "onion-ringas-x-4",
+    "url": "https://flexchicken.co.uk/product/onion-ringas-x-4/",
+    "price": 2.39,
+    "regular_price": 2.39,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 79,
+        "slug": "sides",
+        "name": "Sides"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1230,
+    "name": "Onion Ringas x 8",
+    "slug": "onion-ringas-x-8",
+    "url": "https://flexchicken.co.uk/product/onion-ringas-x-8/",
+    "price": 3.49,
+    "regular_price": 3.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 79,
+        "slug": "sides",
+        "name": "Sides"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1231,
+    "name": "Onion Ringas x 12",
+    "slug": "onion-ringas-x-12",
+    "url": "https://flexchicken.co.uk/product/onion-ringas-x-12/",
+    "price": 5.49,
+    "regular_price": 5.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 79,
+        "slug": "sides",
+        "name": "Sides"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1232,
+    "name": "Coleslaw",
+    "slug": "coleslaw",
+    "url": "https://flexchicken.co.uk/product/coleslaw/",
+    "price": 1.49,
+    "regular_price": 1.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 79,
+        "slug": "sides",
+        "name": "Sides"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/edited-photo-3.png",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/edited-photo-3.png",
+        "alt": "Coleslaw"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1233,
+    "name": "BBQ Beans",
+    "slug": "beans",
+    "url": "https://flexchicken.co.uk/product/beans/",
+    "price": 1.49,
+    "regular_price": 1.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 79,
+        "slug": "sides",
+        "name": "Sides"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/edited-photo-1.png",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/edited-photo-1.png",
+        "alt": "BBQ Beans"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1619,
+    "name": "Spicy Chicken Wrap Meal",
+    "slug": "chicken-wrap-2",
+    "url": "https://flexchicken.co.uk/product/chicken-wrap-2/",
+    "price": 6.49,
+    "regular_price": 6.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Crispy chicken, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 87,
+        "slug": "wraps",
+        "name": "Wraps"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1622,
+    "name": "Spicy Chicken Wrap",
+    "slug": "spicy-chicken-wrap-2",
+    "url": "https://flexchicken.co.uk/product/spicy-chicken-wrap-2/",
+    "price": 5.99,
+    "regular_price": 5.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Spicy & crispy chicken, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 87,
+        "slug": "wraps",
+        "name": "Wraps"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1625,
+    "name": "Peri Peri Wrap Meal",
+    "slug": "peri-peri-wrap-meal",
+    "url": "https://flexchicken.co.uk/product/peri-peri-wrap-meal/",
+    "price": 6.99,
+    "regular_price": 6.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Grilled Chicken strips, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 77,
+        "slug": "peri-peri-chicken",
+        "name": "Peri Peri Chicken"
+      },
+      {
+        "id": 87,
+        "slug": "wraps",
+        "name": "Wraps"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Choose your heat level",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Medium",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Hot",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Lemon & Herb",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1626,
+    "name": "Peri Peri Wrap",
+    "slug": "peri-peri-wrap",
+    "url": "https://flexchicken.co.uk/product/peri-peri-wrap/",
+    "price": 5.49,
+    "regular_price": 5.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 77,
+        "slug": "peri-peri-chicken",
+        "name": "Peri Peri Chicken"
+      },
+      {
+        "id": 87,
+        "slug": "wraps",
+        "name": "Wraps"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Choose your heat level",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Medium",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Hot",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Lemon & Herb",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1627,
+    "name": "Chicken Wrap",
+    "slug": "chicken-wrap-3",
+    "url": "https://flexchicken.co.uk/product/chicken-wrap-3/",
+    "price": 4.49,
+    "regular_price": 4.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Crispy chicken, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 87,
+        "slug": "wraps",
+        "name": "Wraps"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Make It Cheesy:",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Add Cheese",
+            "price_add": 0.39,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1693,
+    "name": "Water",
+    "slug": "water",
+    "url": "https://flexchicken.co.uk/product/water/",
+    "price": 1.29,
+    "regular_price": 1.29,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 92,
+        "slug": "softdrinks",
+        "name": "Soft drinks"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1695,
+    "name": "7Up",
+    "slug": "7up",
+    "url": "https://flexchicken.co.uk/product/7up/",
+    "price": 1.29,
+    "regular_price": 1.29,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 92,
+        "slug": "softdrinks",
+        "name": "Soft drinks"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/7up-original-330ml.png",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/7up-original-330ml.png",
+        "alt": "7Up Original lemon and lime 330 ml can"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1696,
+    "name": "Pepsi",
+    "slug": "pepsi",
+    "url": "https://flexchicken.co.uk/product/pepsi/",
+    "price": 1.29,
+    "regular_price": 1.29,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 92,
+        "slug": "softdrinks",
+        "name": "Soft drinks"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/pepsi-330ml.png",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/pepsi-330ml.png",
+        "alt": "Pepsi Original 330 ml can"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1697,
+    "name": "Diet Pepsi",
+    "slug": "diet-pepsi",
+    "url": "https://flexchicken.co.uk/product/diet-pepsi/",
+    "price": 1.29,
+    "regular_price": 1.29,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 92,
+        "slug": "softdrinks",
+        "name": "Soft drinks"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/diet-pepsi-330ml.png",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/diet-pepsi-330ml.png",
+        "alt": "Diet Pepsi 330 ml can"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1698,
+    "name": "Tango Orange",
+    "slug": "tango-orange",
+    "url": "https://flexchicken.co.uk/product/tango-orange/",
+    "price": 1.29,
+    "regular_price": 1.29,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 92,
+        "slug": "softdrinks",
+        "name": "Soft drinks"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1699,
+    "name": "Coca Cola",
+    "slug": "coca-cola",
+    "url": "https://flexchicken.co.uk/product/coca-cola/",
+    "price": 1.29,
+    "regular_price": 1.29,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 92,
+        "slug": "softdrinks",
+        "name": "Soft drinks"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/coca-cola-original-official.webp",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/coca-cola-original-official.webp",
+        "alt": "Coca-Cola Original Taste 330 ml can"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1700,
+    "name": "Coke Zero",
+    "slug": "coke-zero",
+    "url": "https://flexchicken.co.uk/product/coke-zero/",
+    "price": 1.29,
+    "regular_price": 1.29,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 92,
+        "slug": "softdrinks",
+        "name": "Soft drinks"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/coke-zero-330ml.webp",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/coke-zero-330ml.webp",
+        "alt": "Coca-Cola Zero Sugar 330 ml can"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1701,
+    "name": "Mirinda Orange",
+    "slug": "mirinda-orange",
+    "url": "https://flexchicken.co.uk/product/mirinda-orange/",
+    "price": 1.29,
+    "regular_price": 1.29,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 92,
+        "slug": "softdrinks",
+        "name": "Soft drinks"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/mirinda-orange-330ml.png",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/mirinda-orange-330ml.png",
+        "alt": "Mirinda Orange 330 ml can"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1703,
+    "name": "Mirinda Strawberry",
+    "slug": "mirinda-strawberry",
+    "url": "https://flexchicken.co.uk/product/mirinda-strawberry/",
+    "price": 1.29,
+    "regular_price": 1.29,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 92,
+        "slug": "softdrinks",
+        "name": "Soft drinks"
+      }
+    ],
+    "images": [
+      {
+        "local": "images/2026/07/mirinda-strawberry-330ml.png",
+        "source_url": "https://flexchicken.co.uk/wp-content/uploads/2026/07/mirinda-strawberry-330ml.png",
+        "alt": "Mirinda Strawberry 330 ml can"
+      }
+    ],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1705,
+    "name": "Loaded Fries",
+    "slug": "loaded-fries",
+    "url": "https://flexchicken.co.uk/product/loaded-fries/",
+    "price": 4.99,
+    "regular_price": 4.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 91,
+        "slug": "loaded-fries",
+        "name": "Loaded Fries"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1712,
+    "name": "Spicy BBQ Fillet Burger",
+    "slug": "spicy-bbq-fillet-burger",
+    "url": "https://flexchicken.co.uk/product/spicy-bbq-fillet-burger/",
+    "price": 5.49,
+    "regular_price": 5.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Crispy Spicy chicken dipped in BBQ sauce, lettuce & mayo.",
+    "categories": [
+      {
+        "id": 89,
+        "slug": "bbq",
+        "name": "BBQ"
+      },
+      {
+        "id": 70,
+        "slug": "burgers",
+        "name": "Burgers"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1713,
+    "name": "Spicy BBQ Fillet Burger Meal",
+    "slug": "spicy-bbq-fillet-burger-meal",
+    "url": "https://flexchicken.co.uk/product/spicy-bbq-fillet-burger-meal/",
+    "price": 6.99,
+    "regular_price": 6.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "Served with chips & drink.",
+    "categories": [
+      {
+        "id": 89,
+        "slug": "bbq",
+        "name": "BBQ"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Customisation: (Optional)",
+        "type": "radio",
+        "required": false,
+        "choices": [
+          {
+            "label": "Remove Lettuce",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Remove Mayo & Lettuce",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      },
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1714,
+    "name": "BBQ Wings x 3",
+    "slug": "bbq-wings",
+    "url": "https://flexchicken.co.uk/product/bbq-wings/",
+    "price": 1.99,
+    "regular_price": 1.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 89,
+        "slug": "bbq",
+        "name": "BBQ"
+      },
+      {
+        "id": 73,
+        "slug": "wings",
+        "name": "Wings"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1725,
+    "name": "Popcorn Chicken Meal",
+    "slug": "popcorn-chicken-meal",
+    "url": "https://flexchicken.co.uk/product/popcorn-chicken-meal/",
+    "price": 4.99,
+    "regular_price": 4.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 78,
+        "slug": "boneless-chicken",
+        "name": "Boneless Chicken"
+      },
+      {
+        "id": 88,
+        "slug": "kids-meals",
+        "name": "Kids Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1726,
+    "name": "Chicken Nuggets Meal",
+    "slug": "chicken-nuggets-meal",
+    "url": "https://flexchicken.co.uk/product/chicken-nuggets-meal/",
+    "price": 4.99,
+    "regular_price": 4.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 78,
+        "slug": "boneless-chicken",
+        "name": "Boneless Chicken"
+      },
+      {
+        "id": 88,
+        "slug": "kids-meals",
+        "name": "Kids Meals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Fries",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Regular Fries",
+            "price_add": 0.0,
+            "default": true
+          }
+        ]
+      },
+      {
+        "label": "Drink",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Water",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "7Up",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Diet Pepsi",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Tango Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coca Cola",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Coke Zero",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Orange",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Mirinda Strawberry",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1730,
+    "name": "BBQ Wings x 5",
+    "slug": "bbq-wings-x-5",
+    "url": "https://flexchicken.co.uk/product/bbq-wings-x-5/",
+    "price": 4.49,
+    "regular_price": 4.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 89,
+        "slug": "bbq",
+        "name": "BBQ"
+      },
+      {
+        "id": 73,
+        "slug": "wings",
+        "name": "Wings"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1731,
+    "name": "BBQ Wings x 8",
+    "slug": "bbq-wings-x-8",
+    "url": "https://flexchicken.co.uk/product/bbq-wings-x-8/",
+    "price": 5.39,
+    "regular_price": 5.39,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 89,
+        "slug": "bbq",
+        "name": "BBQ"
+      },
+      {
+        "id": 73,
+        "slug": "wings",
+        "name": "Wings"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1732,
+    "name": "BBQ Wings x 12",
+    "slug": "bbq-wings-x-12",
+    "url": "https://flexchicken.co.uk/product/bbq-wings-x-12/",
+    "price": 4.99,
+    "regular_price": 4.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 89,
+        "slug": "bbq",
+        "name": "BBQ"
+      },
+      {
+        "id": 73,
+        "slug": "wings",
+        "name": "Wings"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1733,
+    "name": "BBQ Wings x 20",
+    "slug": "bbq-wings-x-20",
+    "url": "https://flexchicken.co.uk/product/bbq-wings-x-20/",
+    "price": 15.49,
+    "regular_price": 15.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 89,
+        "slug": "bbq",
+        "name": "BBQ"
+      },
+      {
+        "id": 73,
+        "slug": "wings",
+        "name": "Wings"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1737,
+    "name": "Family Wings deals",
+    "slug": "family-deals",
+    "url": "https://flexchicken.co.uk/product/family-deals/",
+    "price": 22.99,
+    "regular_price": 22.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "20 spicy wings, 4 regular fries, 2 sides (coleslaw and BBQ beans) and 4 soft drink",
+    "categories": [
+      {
+        "id": 93,
+        "slug": "family-deals",
+        "name": "Family deals"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1739,
+    "name": "BBQ Lamb Ribs x 1",
+    "slug": "bbq-lamb-ribs-x-1",
+    "url": "https://flexchicken.co.uk/product/bbq-lamb-ribs-x-1/",
+    "price": 1.99,
+    "regular_price": 1.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 90,
+        "slug": "ribs",
+        "name": "Ribs"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1740,
+    "name": "BBQ Lamb Ribs x 3",
+    "slug": "bbq-lamb-ribs-x-3",
+    "url": "https://flexchicken.co.uk/product/bbq-lamb-ribs-x-3/",
+    "price": 5.49,
+    "regular_price": 5.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 90,
+        "slug": "ribs",
+        "name": "Ribs"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1741,
+    "name": "BBQ Lamb Ribs x 5",
+    "slug": "bbq-lamb-ribs-x-5",
+    "url": "https://flexchicken.co.uk/product/bbq-lamb-ribs-x-5/",
+    "price": 9.89,
+    "regular_price": 9.89,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 90,
+        "slug": "ribs",
+        "name": "Ribs"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1742,
+    "name": "BBQ Lamb Ribs x 12",
+    "slug": "bbq-lamb-ribs-x-12",
+    "url": "https://flexchicken.co.uk/product/bbq-lamb-ribs-x-12/",
+    "price": 22.99,
+    "regular_price": 22.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 90,
+        "slug": "ribs",
+        "name": "Ribs"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": []
+  },
+  {
+    "id": 1956,
+    "name": "Peri Peri Wings x 3",
+    "slug": "peri-peri-wings-x-3",
+    "url": "https://flexchicken.co.uk/product/peri-peri-wings-x-3/",
+    "price": 4.79,
+    "regular_price": 4.79,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 77,
+        "slug": "peri-peri-chicken",
+        "name": "Peri Peri Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Choose your heat level",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Medium",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Hot",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Lemon & Herb",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1957,
+    "name": "Peri Peri Wings x 5",
+    "slug": "peri-peri-wings-x-5",
+    "url": "https://flexchicken.co.uk/product/peri-peri-wings-x-5/",
+    "price": 5.99,
+    "regular_price": 5.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 77,
+        "slug": "peri-peri-chicken",
+        "name": "Peri Peri Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Choose your heat level",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Medium",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Hot",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Lemon & Herb",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1958,
+    "name": "Peri Peri Wings x 8",
+    "slug": "peri-peri-wings-x-8",
+    "url": "https://flexchicken.co.uk/product/peri-peri-wings-x-8/",
+    "price": 9.49,
+    "regular_price": 9.49,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 77,
+        "slug": "peri-peri-chicken",
+        "name": "Peri Peri Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Choose your heat level",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Medium",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Hot",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Lemon & Herb",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1959,
+    "name": "Peri Peri Wings x 20",
+    "slug": "peri-peri-wings-x-12",
+    "url": "https://flexchicken.co.uk/product/peri-peri-wings-x-12/",
+    "price": 19.99,
+    "regular_price": 19.99,
+    "on_sale": false,
+    "currency": "GBP",
+    "description": "",
+    "categories": [
+      {
+        "id": 77,
+        "slug": "peri-peri-chicken",
+        "name": "Peri Peri Chicken"
+      }
+    ],
+    "images": [],
+    "in_stock": true,
+    "options": [
+      {
+        "label": "Choose your heat level",
+        "type": "radio",
+        "required": true,
+        "choices": [
+          {
+            "label": "Medium",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Hot",
+            "price_add": 0.0,
+            "default": false
+          },
+          {
+            "label": "Lemon & Herb",
+            "price_add": 0.0,
+            "default": false
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "flexchicken",
+  // Pages from the OpenNext build, /api/ to the shop's Durable Object.
+  "main": "worker.js",
+  "compatibility_date": "2026-06-01",
+  // nodejs_compat: the Next.js server bundle needs Node built-ins.
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".open-next/assets"
+  },
+  // The shop's database: one Durable Object with SQLite storage.
+  "durable_objects": {
+    "bindings": [{ "name": "SHOP", "class_name": "ShopObject" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["ShopObject"] }],
+  // Secrets, set with `npx wrangler secret put NAME` (never in this file):
+  //   ADMIN_PIN, DRIVER_PIN  shift codes for /admin and /driver
+  //   SESSION_SECRET         signs staff cookies (at least 32 characters)
+  "observability": {
+    "enabled": true
+  }
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "id": 89,
+    "slug": "bbq",
+    "name": "BBQ",
+    "count": 9,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 78,
+    "slug": "boneless-chicken",
+    "name": "Boneless Chicken",
+    "count": 10,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 72,
+    "slug": "box-meals",
+    "name": "Box Meals",
+    "count": 6,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 71,
+    "slug": "burger-meals",
+    "name": "Burger Meals",
+    "count": 14,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 70,
+    "slug": "burgers",
+    "name": "Burgers",
+    "count": 17,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 74,
+    "slug": "chicken",
+    "name": "Chicken",
+    "count": 5,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 76,
+    "slug": "chicken-meals",
+    "name": "Chicken Meals",
+    "count": 4,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 93,
+    "slug": "family-deals",
+    "name": "Family deals",
+    "count": 1,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 16,
+    "slug": "flex-exclusive",
+    "name": "Flex exclusive",
+    "count": 2,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 88,
+    "slug": "kids-meals",
+    "name": "Kids Meals",
+    "count": 3,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 91,
+    "slug": "loaded-fries",
+    "name": "Loaded Fries",
+    "count": 1,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 77,
+    "slug": "peri-peri-chicken",
+    "name": "Peri Peri Chicken",
+    "count": 10,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 90,
+    "slug": "ribs",
+    "name": "Ribs",
+    "count": 4,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 79,
+    "slug": "sides",
+    "name": "Sides",
+    "count": 9,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 92,
+    "slug": "softdrinks",
+    "name": "Soft drinks",
+    "count": 9,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 73,
+    "slug": "wings",
+    "name": "Wings",
+    "count": 10,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 75,
+    "slug": "wings-meals",
+    "name": "Wings Meals",
+    "count": 2,
+    "description": "",
+    "image": null
+  },
+  {
+    "id": 87,
+    "slug": "wraps",
+    "name": "Wraps",
+    "count": 5,
+    "description": "",
+    "image": null
+  }
+]

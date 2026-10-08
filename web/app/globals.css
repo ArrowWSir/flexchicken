@@ -1,0 +1,556 @@
+@import "tailwindcss";
+
+/* ── Flex Chicken tokens ──
+   Brand colours are sampled from the logo files, never picked by eye:
+   FLEX red #d92b2d, CHICKEN coral #f5845c, flame #fcc282 -> #e63e4b (from the official SVGs).
+
+   60-30-10, for colour and for space:
+   60  cream ground and open whitespace
+   30  dark roast objects standing on it (header chrome, action bar, sheets)
+       and the red foil loyalty card
+   10  logo red/coral for actions, prices and stamps
+
+   Contrast on the ground (#ecdecb, toasted a shade darker at the owner's
+   request): ink 13.3:1, muted 6.7:1, red-ink 5.6:1. On paper cards
+   (#fffaf3): ink 16.9:1, muted 8.5:1, red-ink 7.2:1.
+
+   Rules the palette relies on (audited 2026-10-06):
+   - Cards are "paper" (ground-raised) with shadow-paper, so they lift off
+     the ground instead of melting into it (1.27:1 plus a warm shadow).
+   - Form fields are outlined in --color-field (>= 3:1 on paper and on the
+     ground, WCAG 1.4.11); --color-line is for decoration only.
+   - Bright FLEX red (#d92b2d, 3.7:1) is for fills, big headings and icons;
+     small red text uses red-ink. Coral (#f5845c, 1.9:1) is never text.
+   - On dark screens, fields are outlined in cream/45 (>= 3.5:1). */
+@theme {
+  --color-ground: #ecdecb;
+  --color-ground-raised: #fffaf3; /* paper: cards and sheets */
+  --color-surface: #e2d1b9;
+  --color-line: #c9ad88; /* decorative edges only */
+  --color-field: #8a6c50; /* form-field outlines: 4.7:1 on paper, 3.7:1 on ground */
+  --color-ink: #24160f;
+  --color-muted: #5c4636;
+
+  --color-roast-950: #160d09;
+  --color-roast-900: #1f130d;
+  --color-roast-800: #2d1c15;
+  --color-roast-700: #45291c;
+  --color-roast-200: #e9d9c8;
+
+  --color-flex: #d92b2d; /* FLEX wordmark: fills, big headings, icons; not small text */
+  --color-flex-deep: #b71918; /* live site's dark red */
+  --color-flex-ink: #a8191a; /* red text on cream */
+  --color-coral: #f5845c; /* CHICKEN wordmark: fills only, never text */
+  --color-flame-light: #fcc282;
+  --color-flame-deep: #e63e4b;
+  --color-gold: #d6b36a;
+  --color-cream: #fff6ea;
+  /* "Go" green for open / ready / on shift: white text on it is 5.4:1. */
+  --color-go: #287a1c;
+  --color-go-deep: #1f6215;
+
+  --color-wood-dark: #6a3812;
+  --color-wood: #8f4e1a;
+  --color-wood-light: #b5743a;
+
+  /* Paper cards: a hairline of light on top, a soft warm fall below. */
+  --shadow-paper: inset 0 1px 0 rgb(255 255 255 / 0.7), 0 1px 2px rgb(69 41 28 / 0.08), 0 14px 28px -20px rgb(69 41 28 / 0.45);
+
+  --font-sans: var(--font-poppins), "Segoe UI", sans-serif;
+  --font-display: var(--font-montserrat), var(--font-poppins), sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-in-quint: cubic-bezier(0.64, 0, 0.78, 0);
+}
+
+html {
+  /* Nothing may side-scroll the page on a phone: the table and the drinks row
+     bleed past the frame on purpose. */
+  overflow-x: clip;
+  background: var(--color-ground);
+  color-scheme: light;
+  -webkit-tap-highlight-color: transparent;
+  scrollbar-color: var(--color-roast-700) var(--color-surface);
+}
+
+body {
+  min-height: 100dvh;
+  /* Warm light gathered at the top, so the cream is a lit counter, not a fill. */
+  background:
+    radial-gradient(110% 55% at 50% 0%, rgb(246 236 222 / 0.6), rgb(246 236 222 / 0) 60%),
+    radial-gradient(90% 40% at 100% 45%, rgb(245 132 92 / 0.07), rgb(245 132 92 / 0) 70%),
+    var(--color-ground);
+  color: var(--color-ink);
+  caret-color: var(--color-flex);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The page is one column (the owner's frame). Anything that runs past it,
+   like the table, is cut at the frame edge, never scrolled to. */
+.page-frame {
+  width: 100%;
+  max-width: 760px;
+  margin-inline: auto;
+  overflow-x: clip;
+}
+.page-gutter {
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+@media (min-width: 640px) {
+  .page-gutter {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+::selection {
+  background: var(--color-flame-light);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-flex-ink);
+  outline-offset: 3px;
+}
+.on-dark :focus-visible,
+.on-dark:focus-visible {
+  outline-color: var(--color-cream);
+}
+
+/* The flame gradient from the logo mark, as a hairline under the header. */
+.flame-rule {
+  background: linear-gradient(90deg, var(--color-flame-light), var(--color-coral) 45%, var(--color-flame-deep) 75%, var(--color-flex));
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+/* Horizontal scrollers (drinks, dish names). Paint containment keeps their
+   overflow inside them; without it Chrome widened the whole page by the
+   length of the row, even inside a clipped frame. */
+.scroll-row {
+  contain: paint;
+  overscroll-behavior-x: contain;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.press {
+  transition: transform 140ms var(--ease-out-cubic), background-color 180ms ease-out, box-shadow 180ms ease-out,
+    color 180ms ease-out;
+}
+.press:active {
+  transform: scale(0.96);
+}
+
+/* ── Loyalty card ── */
+.card-scene {
+  perspective: 1400px;
+  container-type: inline-size;
+}
+.card-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 820ms var(--ease-out-expo);
+}
+.card-inner[data-flipped="true"] {
+  transform: rotateY(180deg);
+}
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Red foil: the owner's texture, recoloured to the wordmark red. */
+  background: var(--color-flex-deep) url("/brand/card-face.webp") center / cover;
+  box-shadow:
+    0 26px 48px -20px rgb(110 14 14 / 0.55),
+    0 4px 10px -4px rgb(45 28 21 / 0.25),
+    inset 0 0 0 1px rgb(255 214 200 / 0.18),
+    inset 0 1px 0 rgb(255 230 220 / 0.35);
+}
+.card-back {
+  transform: rotateY(180deg);
+}
+/* Foil catches light: a fixed soft highlight plus one that follows the pointer. */
+.card-face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 18% 0%, rgb(255 220 200 / 0.28), rgb(255 220 200 / 0) 55%),
+    radial-gradient(90% 70% at 100% 100%, rgb(40 0 0 / 0.35), rgb(40 0 0 / 0) 60%);
+}
+.card-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 20px;
+  pointer-events: none;
+  background: radial-gradient(240px circle at var(--mx, 30%) var(--my, 20%), rgb(255 236 226 / 0.22), rgb(255 236 226 / 0) 60%);
+  opacity: 0;
+  transition: opacity 450ms var(--ease-out-cubic);
+}
+@media (hover: hover) {
+  .card-sheen:hover::after {
+    opacity: 1;
+  }
+}
+
+.stamp {
+  opacity: 0;
+}
+.card-inner[data-revealed="true"] .stamp {
+  animation: stamp-press 520ms var(--stamp-delay, 0ms) var(--ease-out-expo) both;
+}
+@keyframes stamp-press {
+  from {
+    opacity: 0;
+    transform: scale(1.6) rotate(calc(var(--tilt) - 25deg));
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(var(--tilt));
+  }
+}
+
+/* The receipt-stamp badge on /stamp lands like a rubber stamp. */
+.stamp-thud {
+  animation: stamp-thud 480ms 120ms var(--ease-out-expo) both;
+}
+@keyframes stamp-thud {
+  from {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* The surprise place pulses once the card is full: the 9th visit is a gift. */
+.surprise-ready {
+  animation: surprise-pulse 2.4s ease-in-out infinite;
+}
+@keyframes surprise-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(252 194 130 / 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 1.6cqw rgb(252 194 130 / 0);
+  }
+}
+
+/* ── Shiny category badge ──
+   An enamel disc in a metal ring: conic-gradient ring, a fixed specular cap,
+   and a light band that sweeps across slowly, faster on hover/focus. */
+.badge-ring {
+  background: conic-gradient(
+    from 210deg,
+    #f8e3b3,
+    var(--color-gold) 14%,
+    #8c6a2c 30%,
+    #f3d99a 46%,
+    var(--color-gold) 60%,
+    #7a5a22 78%,
+    #f8e3b3
+  );
+  box-shadow:
+    0 10px 20px -10px rgb(45 28 21 / 0.55),
+    0 2px 4px rgb(45 28 21 / 0.18),
+    inset 0 1px 1px rgb(255 255 255 / 0.7);
+}
+.badge-ring[data-active="true"] {
+  background: conic-gradient(
+    from 210deg,
+    var(--color-flame-light),
+    var(--color-coral) 18%,
+    var(--color-flex-deep) 34%,
+    var(--color-flame-light) 50%,
+    var(--color-flex) 66%,
+    #7d1011 80%,
+    var(--color-flame-light)
+  );
+  box-shadow:
+    0 14px 26px -12px rgb(183 25 24 / 0.7),
+    0 0 0 3px rgb(217 43 45 / 0.14),
+    inset 0 1px 1px rgb(255 255 255 / 0.6);
+}
+.badge-enamel {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(circle at 50% 40%, #fffaf2, #f1e3cf 70%, #e3cfb3);
+}
+.badge-enamel[data-active="true"] {
+  background: radial-gradient(circle at 50% 40%, #3b2419, var(--color-roast-800) 65%, var(--color-roast-950));
+}
+.badge-enamel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(100% 62% at 34% 6%, rgb(255 255 255 / 0.62), rgb(255 255 255 / 0.08) 50%, rgb(255 255 255 / 0) 60%),
+    radial-gradient(90% 60% at 60% 112%, rgb(60 30 10 / 0.22), rgb(60 30 10 / 0) 62%);
+}
+.badge-enamel::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(115deg, rgb(255 255 255 / 0) 40%, rgb(255 255 255 / 0.55) 50%, rgb(255 255 255 / 0) 60%);
+  transform: translateX(-140%);
+  animation: badge-sweep 5.5s var(--sweep-delay, 0s) var(--ease-out-cubic) infinite;
+}
+@media (hover: hover) {
+  .badge-button:hover .badge-enamel::after {
+    animation-duration: 1.4s;
+  }
+}
+.badge-button:focus-visible .badge-enamel::after {
+  animation-duration: 1.4s;
+}
+@keyframes badge-sweep {
+  0%,
+  62% {
+    transform: translateX(-140%);
+  }
+  100% {
+    transform: translateX(140%);
+  }
+}
+
+/* ── Turning table (TableStage.js moves everything; CSS only paints) ── */
+.table-top {
+  background: url("/scene/wood-top.webp") center / cover;
+  box-shadow:
+    inset 0 0 0 2px rgb(255 238 214 / 0.35),
+    inset 0 0 40px rgb(60 36 18 / 0.35);
+  will-change: transform;
+}
+.table-light {
+  pointer-events: none;
+  background:
+    radial-gradient(55% 50% at 30% 28%, rgb(255 246 232 / 0.32), rgb(255 246 232 / 0) 70%),
+    radial-gradient(closest-side, rgb(0 0 0 / 0) 70%, rgb(40 22 10 / 0.28) 100%);
+}
+.table-edge {
+  background:
+    linear-gradient(90deg, rgb(30 16 8 / 0.55), rgb(30 16 8 / 0.05) 25%, rgb(255 236 214 / 0.14) 42%, rgb(30 16 8 / 0.08) 62%, rgb(30 16 8 / 0.6)),
+    url("/scene/wood-edge.webp") repeat-x;
+  background-size: 100% 100%, auto 100%;
+  box-shadow: 0 22px 30px -14px rgb(45 28 21 / 0.45);
+}
+.table-shadow {
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(45 28 21 / 0.28), rgb(45 28 21 / 0.1) 60%, rgb(45 28 21 / 0));
+  filter: blur(6px);
+}
+/* The plate is the owner's own, cut out of plate 1.jpg (assets-src/
+   make_scene.py). A round plate looks the same at any rotation, so only its
+   position and scale change as the table turns. */
+.plate {
+  background: url("/scene/plate.webp") center / 100% 100% no-repeat;
+}
+/* The jute mat under each plate (make_scene.py); its top edge is at the top
+   of the box, its braided edge peeks out below. */
+.table-mat {
+  background: url("/scene/mat.webp") center top / 100% 100% no-repeat;
+}
+.plate-shadow {
+  border-radius: 50%;
+  filter: blur(3px);
+  background: radial-gradient(closest-side, rgb(40 22 10 / 0.5), rgb(40 22 10 / 0.18) 55%, rgb(40 22 10 / 0));
+}
+/* Food on its plate. The contact shadow pools where the food touches the
+   plate; the drop shadow, sized from the dish's width (--dw, set by
+   TableStage), falls forward-right, away from the light at the back left. */
+.dish-shadow {
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(38 20 8 / 0.62), rgb(38 20 8 / 0.3) 55%, rgb(38 20 8 / 0));
+  filter: blur(1.5px);
+  mix-blend-mode: multiply;
+}
+.dish-img {
+  filter: drop-shadow(calc(var(--dw, 100) * 0.012px) calc(var(--dw, 100) * 0.022px) calc(var(--dw, 100) * 0.02px) rgb(40 22 10 / 0.38))
+    drop-shadow(0 calc(var(--dw, 100) * 0.006px) calc(var(--dw, 100) * 0.006px) rgb(40 22 10 / 0.3));
+}
+/* Hidden until TableStage places it: the server HTML has no sizes yet, so an
+   unplaced dish would show at its full 720px. layout() sets opacity inline. */
+.table-piece {
+  opacity: 0;
+  will-change: transform;
+}
+
+/* "Add to Box": the copy of a dish in flight to the Box (FlyToBox.js). It
+   floats above the page, so its shadow is long and soft. */
+.fly-to-box {
+  position: fixed;
+  z-index: 60;
+  pointer-events: none;
+  transform-origin: center;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 14px 14px rgb(40 22 10 / 0.35));
+}
+.fly-to-box img {
+  object-fit: contain;
+}
+
+/* Dish title swap, in step with the table: out through a mask, then in. */
+[data-phase="out"] .title-line {
+  animation: title-out 240ms var(--ease-in-quint) both;
+}
+[data-phase="out"] .title-line--second {
+  animation-delay: 40ms;
+}
+[data-phase="in"] .title-line {
+  animation: title-in 420ms 200ms var(--ease-out-expo) both;
+}
+[data-phase="in"] .title-line--second {
+  animation-delay: 260ms;
+}
+@keyframes title-out {
+  to {
+    transform: translateY(-110%);
+  }
+}
+@keyframes title-in {
+  from {
+    transform: translateY(110%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-inner {
+    transition-duration: 1ms;
+  }
+  .stamp,
+  .card-inner[data-revealed="true"] .stamp {
+    animation: none;
+    opacity: 1;
+    transform: rotate(var(--tilt));
+  }
+  .surprise-ready,
+  .stamp-thud,
+  .badge-enamel::after,
+  [data-phase] .title-line {
+    animation: none !important;
+  }
+  .press:active {
+    transform: none;
+  }
+}
+
+/* ── Map pins (components/map) ── */
+.map-pin {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 3px solid #fff;
+  box-shadow: 0 6px 14px -4px rgb(45 28 21 / 0.55);
+}
+.map-pin span {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background: #fff;
+}
+.map-pin--shop {
+  background: var(--color-flex);
+}
+.map-pin--home {
+  background: var(--color-roast-800);
+}
+.map-pin--driver {
+  background: var(--color-go);
+  animation: driver-ping 1.8s ease-out infinite;
+}
+@keyframes driver-ping {
+  0% {
+    box-shadow: 0 0 0 0 rgb(47 138 34 / 0.55), 0 6px 14px -4px rgb(45 28 21 / 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 18px rgb(47 138 34 / 0), 0 6px 14px -4px rgb(45 28 21 / 0.55);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .map-pin--driver {
+    animation: none;
+  }
+}
+
+/* Offer tickets under the loyalty card (OfferStrip.js): a flame stub torn
+   off along a perforation, with a notch cut out top and bottom. */
+.offer-stub {
+  position: relative;
+  background: linear-gradient(160deg, var(--color-flame-light), var(--color-coral) 70%);
+}
+.offer-stub::after {
+  content: "";
+  position: absolute;
+  inset: 10px -1px 10px auto;
+  border-right: 2px dashed rgb(45 28 21 / 0.35);
+}
+.offer-ticket::before,
+.offer-ticket::after {
+  content: "";
+  position: absolute;
+  left: calc(34% - 9px);
+  z-index: 1;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-ground);
+}
+.offer-ticket::before {
+  top: -9px;
+}
+.offer-ticket::after {
+  bottom: -9px;
+}
+
+/* The printable menu (/full-menu). On paper: white, no buttons, two columns
+   on A4, and colours kept so the red headings print red. */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+  body {
+    background: #fff;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .menu-sheet {
+    max-width: none;
+    padding: 0;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .menu-columns {
+    columns: 2;
+  }
+}

@@ -1,0 +1,18 @@
+# The app has its own rules in web/.gitignore (node_modules, builds, .env*, .dev.vars).
+
+# Old WordPress site backup and scraped copies: kept locally, not published.
+Flex-Chicken.zip
+site-data/raw/
+site-data/images/
+
+# Logs and local tooling
+*.log
+.shop-server.log
+web/test-results/
+web/playwright-report/
+.DS_Store
+Thumbs.db
+
+# Python caches
+__pycache__/
+*.pyc

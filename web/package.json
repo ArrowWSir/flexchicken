@@ -1,0 +1,38 @@
+{
+  "name": "flexchicken",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 3200",
+    "build": "next build",
+    "start": "next start",
+    "shop": "next build && next start -H 0.0.0.0 -p 3000",
+    "test": "vitest run",
+    "e2e": "playwright test",
+    "menu": "node scripts/build-menu.mjs",
+    "preview": "node scripts/cloud.mjs preview",
+    "deploy": "node scripts/cloud.mjs deploy"
+  },
+  "dependencies": {
+    "@number-flow/react": "^0.6.2",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^1.33.0",
+    "motion": "^14.0.0",
+    "next": "^16.3.5",
+    "qrcode": "^1.5.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-leaflet": "^5.0.0",
+    "vaul": "^1.1.2"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@opennextjs/cloudflare": "^1.20.6",
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/postcss": "^4",
+    "tailwindcss": "^4",
+    "vitest": "^3",
+    "wrangler": "^4.135.0"
+  }
+}

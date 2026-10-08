@@ -1,0 +1,115 @@
+{
+  "name": "Flex Chicken",
+  "legal_name": "Flex Chicken LTD",
+  "tagline": "Rainham's local chicken shop",
+  "slogan": "Big flavour. Big value. Flex your craving.",
+  "website": "https://flexchicken.co.uk/",
+  "phone": "020 3837 6035",
+  "phone_e164": "+442038376035",
+  "email": "info@flexchicken.co.uk",
+  "address": {
+    "street": "107 Upminster Road South",
+    "locality": "Rainham",
+    "region": "London",
+    "postcode": "RM13 9AA",
+    "country": "GB",
+    "short": "107 Upminster Rd S, Rainham RM13 9AA"
+  },
+  "geo": {
+    "latitude": 51.518732,
+    "longitude": 0.193829
+  },
+  "maps": {
+    "directions_url": "https://www.google.com/maps/search/?api=1&query=107%20Upminster%20Rd%20S%2C%20Rainham%20RM13%209AA",
+    "embed_url": "https://www.google.com/maps?q=Flex+Chicken,+107+Upminster+Road+South,+Rainham,+RM13+9AA&output=embed",
+    "google_business_share": "https://share.google/FFh392JBgtRvEprQj"
+  },
+  "opening_hours": {
+    "display": "Daily, 12:00 PM - 11:00 PM",
+    "schedule": {
+      "monday": [
+        "12:00",
+        "23:00"
+      ],
+      "tuesday": [
+        "12:00",
+        "23:00"
+      ],
+      "wednesday": [
+        "12:00",
+        "23:00"
+      ],
+      "thursday": [
+        "12:00",
+        "23:00"
+      ],
+      "friday": [
+        "12:00",
+        "23:00"
+      ],
+      "saturday": [
+        "12:00",
+        "23:00"
+      ],
+      "sunday": [
+        "12:00",
+        "23:00"
+      ]
+    }
+  },
+  "ordering": {
+    "modes": [
+      "delivery",
+      "collection"
+    ],
+    "delivery_radius_miles": 3,
+    "delivery_note": "Up to 3 miles. Final availability and minimum order are confirmed at checkout.",
+    "free_delivery": "Free delivery over £20 within 2 miles",
+    "free_delivery_conflict_note": "Homepage says £20 within 2 miles; site meta description says free local delivery over £15. Confirm with owner.",
+    "payment": [
+      "Card",
+      "Apple Pay",
+      "Google Pay"
+    ],
+    "payment_note": "Pay securely by card. Apple Pay and Google Pay are available on supported devices.",
+    "cart_name": "Flex Box",
+    "add_to_cart_label": "Add to Box",
+    "live_order_tracking": true,
+    "rewards_programme": "Flex Rewards - coming soon"
+  },
+  "halal": {
+    "claim": "100% HALAL - Prepared the Halal way",
+    "badge_image": "images/2026/07/WhatsApp-Image-2026-07-23-at-11.14.12-PM.jpeg",
+    "certificate_page_note": "The live /halal-certification/ page is EMPTY - certificate document needs to be supplied by owner."
+  },
+  "cuisine": [
+    "Chicken",
+    "Burgers",
+    "Fast Food"
+  ],
+  "price_range": "£",
+  "social": {
+    "instagram": "https://www.instagram.com/flexchickenrainham/"
+  },
+  "reviews": {
+    "just_eat_url": "https://www.just-eat.co.uk/restaurants-flex-chicken-rainham-rm13/menu",
+    "rating": 5,
+    "rating_scale": 5,
+    "review_count": 9,
+    "note": "5/5 on Just Eat based on 9 reviews from verified Just Eat customers. Site states: 'We never create fake customer quotes.'"
+  },
+  "brand_assets": {
+    "logo_primary": "images/2026/07/FLEX-CHICKEN-Version-1-Colored_1.png",
+    "icon": "images/2026/07/FLEX-CHICKEN-Icon-Colored_1.png",
+    "favicon_source": "images/2026/07/cropped-FLEX-CHICKEN-Icon-Colored-1.jpg",
+    "logo_white_WARNING": "images/2026/07/Logo-white.png is NOT Flex Chicken (it is another business's logo, 'Ambia's Beauty', left in the media library). Never use it. No white Flex logo exists."
+  },
+  "copyright": "Copyright © 2026 - Flex Chicken by Omar Faruk",
+  "seo": {
+    "title": "Flex Chicken | Order for Delivery",
+    "meta_description": "Order crispy fried chicken, juicy burgers, spicy wings and family deals from Flex Chicken Rainham. Fast collection and free local delivery over £15",
+    "og_title": "Flex Chicken - Rainham",
+    "og_description": "Big flavour, crispy chicken and unbeatable value in Rainham. Order burgers, spicy wings and family feasts from Flex Chicken delivery or collection.",
+    "default_description": "Order fresh chicken, burgers, wings and meal deals from Flex Chicken in Rainham for delivery or collection."
+  }
+}

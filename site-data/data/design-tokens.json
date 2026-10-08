@@ -1,0 +1,74 @@
+{
+  "_note": "Current live design (WordPress Blocksy theme + custom CSS). Reference only - new design instructions to follow.",
+  "colors": {
+    "brand_orange": "#ff6310",
+    "brand_orange_hover": "#ed4d00",
+    "brand_orange_dark": "#d94b00",
+    "brand_orange_light": "#fd7c47",
+    "brand_red": "#b71918",
+    "button_red": "#b92c3e",
+    "button_red_hover": "#9c2131",
+    "menu_pill_active_red": "#d60000",
+    "menu_pill_hover_yellow": "#ffbf00",
+    "gold_accent": "#d6b36a",
+    "text_dark_brown": "#2d1c15",
+    "text_brown": "#542719",
+    "text_muted_brown": "#76584a",
+    "text_dark": "#111518",
+    "text_grey": "#687279",
+    "cream_bg": "#fff7f2",
+    "cream_bg_alt": "#fff4eb",
+    "cream_bg_light": "#fffdfb",
+    "peach_border": "#f7d5c2",
+    "warm_border": "#eee6e1",
+    "neutral_bg": "#f4f5f6",
+    "neutral_border": "#e9ebec",
+    "white": "#ffffff",
+    "success_green": "#2cad0a",
+    "logo_flex_red": "#d92b2d",
+    "logo_chicken_coral": "#f5845c",
+    "logo_flame_light": "#fcc282",
+    "logo_flame_deep": "#e63e4b"
+  },
+  "blocksy_palette": {
+    "color-1": "#ff6310",
+    "color-2": "#fd7c47",
+    "color-3": "#687279",
+    "color-4": "#111518",
+    "color-5": "#E9EBEC",
+    "color-6": "#F4F5F6",
+    "color-7": "#ffffff",
+    "color-8": "#ffffff"
+  },
+  "typography": {
+    "primary_font": "Poppins, sans-serif",
+    "google_font_loaded": "Poppins 700",
+    "heading_weights": [
+      700,
+      800,
+      850
+    ],
+    "button_font_size": "15px",
+    "button_font_weight": 600
+  },
+  "shape": {
+    "button_radius": "10px",
+    "card_radius": "8px",
+    "pill_radius": "999px",
+    "shadow_warm": "rgba(70, 39, 25, .08-.09)",
+    "shadow_orange_glow": "rgba(255, 99, 16, .22)"
+  },
+  "brand_assets": {
+    "logo_primary": "images/2026/07/FLEX-CHICKEN-Version-1-Colored_1.png",
+    "icon": "images/2026/07/FLEX-CHICKEN-Icon-Colored_1.png",
+    "favicon": "images/2026/07/cropped-FLEX-CHICKEN-Icon-Colored-1.jpg",
+    "logo_white_WARNING": "images/2026/07/Logo-white.png is NOT Flex Chicken (it is another business's logo, 'Ambia's Beauty', left in the media library). Never use it. No white Flex logo exists."
+  },
+  "ui_copy_conventions": {
+    "cart_name": "Flex Box",
+    "add_to_cart": "Add to Box",
+    "product_page_add_to_cart": "Add to Flex Box",
+    "choose_options": "Choose options",
+    "currency": "GBP (£), 2 decimals"
+  }
+}

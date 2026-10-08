@@ -1,0 +1,397 @@
+{
+  "nav_pills": [
+    {
+      "anchor": "most-popular",
+      "label": "⭐ Most Popular",
+      "section_exists": false
+    },
+    {
+      "anchor": "flex-signature",
+      "label": "🔥 Flex Signature",
+      "section_exists": false
+    },
+    {
+      "anchor": "smash-doner",
+      "label": "🍔 Smash & Doner",
+      "section_exists": false
+    },
+    {
+      "anchor": "burgers",
+      "label": "🍔 Burgers",
+      "section_exists": true
+    },
+    {
+      "anchor": "burger-meals",
+      "label": "🍟 Burger Meals",
+      "section_exists": true
+    },
+    {
+      "anchor": "chicken-wings",
+      "label": "🍗 Chicken & Wings",
+      "section_exists": true
+    },
+    {
+      "anchor": "chicken-wings-meals",
+      "label": "🍗 Chicken & Wings Meals",
+      "section_exists": true
+    },
+    {
+      "anchor": "box-meals",
+      "label": "📦 Box Meals",
+      "section_exists": true
+    },
+    {
+      "anchor": "wraps-peri-peri",
+      "label": "🌯 Wraps & Peri-Peri",
+      "section_exists": true
+    },
+    {
+      "anchor": "bbq-ribs",
+      "label": "🔥 BBQ & Ribs",
+      "section_exists": true
+    },
+    {
+      "anchor": "loaded-fries-sides",
+      "label": "🍟 Loaded Fries & Sides",
+      "section_exists": true
+    },
+    {
+      "anchor": "family-deals",
+      "label": "👨‍👩‍👧 Family Deals",
+      "section_exists": true
+    },
+    {
+      "anchor": "kids",
+      "label": "🧒 Kids & Boneless",
+      "section_exists": true
+    },
+    {
+      "anchor": "drinks",
+      "label": "🥤 Drinks",
+      "section_exists": true
+    },
+    {
+      "anchor": "dips",
+      "label": "🥫 Dips",
+      "section_exists": false
+    }
+  ],
+  "sections": [
+    {
+      "anchor": "chicken-wings",
+      "title": "Chicken & Wings",
+      "product_ids": [
+        1200,
+        1714,
+        1195,
+        1201,
+        1196,
+        1197,
+        1202,
+        1730,
+        1731,
+        1732,
+        1198,
+        1204,
+        1199,
+        1205,
+        1733
+      ],
+      "products": [
+        "1 Piece Chicken",
+        "BBQ Wings x 3",
+        "4 Spicy Wings",
+        "2 Piece Chicken",
+        "6 Spicy Wings",
+        "8 Spicy Wings",
+        "3 Piece Chicken",
+        "BBQ Wings x 5",
+        "BBQ Wings x 8",
+        "BBQ Wings x 12",
+        "12 Spicy Wings",
+        "6 Piece Chicken",
+        "20 Spicy Wings",
+        "10 Piece Chicken",
+        "BBQ Wings x 20"
+      ]
+    },
+    {
+      "anchor": "chicken-wings-meals",
+      "title": "Chicken & Wings Meals",
+      "product_ids": [
+        1208,
+        1209,
+        1207,
+        1210,
+        1211,
+        1212
+      ],
+      "products": [
+        "4 Spicy Wings Meal",
+        "1 Piece Chicken Meal",
+        "6 Spicy Wings Meal",
+        "Flex Combo Meal 1",
+        "2 Piece Chicken Meal",
+        "3 Piece Chicken Meal"
+      ]
+    },
+    {
+      "anchor": "burgers",
+      "title": "Burgers",
+      "product_ids": [
+        1160,
+        1164,
+        1168,
+        1155,
+        1156,
+        1159,
+        1161,
+        1170,
+        1157,
+        1167,
+        1169,
+        1171,
+        1158,
+        1162,
+        1712,
+        1163,
+        1166
+      ],
+      "products": [
+        "Chicken Strips Burger",
+        "Cheese Burger",
+        "Double Cheese Burger",
+        "Chicken Fillet Burger",
+        "1/4 Pounder Burger",
+        "Spicy Chicken Burger",
+        "BBQ Fillet Burger",
+        "Chicken Wrap",
+        "Hot Honey Burger",
+        "Triple Flex Burger",
+        "Hash Brown Stack",
+        "Spicy Chicken Wrap",
+        "1/2 Pounder Burger",
+        "Peri Peri Burger",
+        "Spicy BBQ Fillet Burger",
+        "Double Fillet Burger",
+        "Flex Fusion Burger"
+      ]
+    },
+    {
+      "anchor": "burger-meals",
+      "title": "Burger Meal",
+      "product_ids": [
+        1178,
+        1182,
+        1173,
+        1186,
+        1174,
+        1177,
+        1179,
+        1185,
+        1175,
+        1176,
+        1180,
+        1181,
+        1184,
+        1183
+      ],
+      "products": [
+        "Chicken Strips Burger Meal",
+        "Cheese Burger Meal",
+        "Chicken Fillet Burger Meal",
+        "Double Cheese Burger Meal",
+        "1/4 Pounder Burger Meal",
+        "Spicy Chicken Burger Meal",
+        "BBQ Fillet Burger Meal",
+        "Triple Flex Burger Meal",
+        "Hot Honey Burger Meal",
+        "1/2 Pounder Burger Meal",
+        "Peri Peri Burger Meal",
+        "Double Fillet Burger Meal",
+        "Fusion Flex Burger Meal",
+        "Smash Burger Meal"
+      ]
+    },
+    {
+      "anchor": "box-meals",
+      "title": "Box Meals",
+      "product_ids": [
+        1193,
+        1188,
+        1189,
+        1192,
+        1191,
+        1190
+      ],
+      "products": [
+        "Flex Variety Box",
+        "Chicken Fillet Burger Box Meal",
+        "1/4 Pounder Burger Box Meal",
+        "Spicy Chicken Burger Box Meal",
+        "1/2 Pounder Burger Box Meal",
+        "Fusion Flex Burger Box Meal"
+      ]
+    },
+    {
+      "anchor": "wraps-peri-peri",
+      "title": "Wraps & Peri-Peri",
+      "product_ids": [
+        1959,
+        1214,
+        1958,
+        1215,
+        1180,
+        1625,
+        1619,
+        1957,
+        1622,
+        1626,
+        1162,
+        1627,
+        1956
+      ],
+      "products": [
+        "Peri Peri Wings x 20",
+        "Whole chicken",
+        "Peri Peri Wings x 8",
+        "Half Chicken",
+        "Peri Peri Burger Meal",
+        "Peri Peri Wrap Meal",
+        "Spicy Chicken Wrap Meal",
+        "Peri Peri Wings x 5",
+        "Spicy Chicken Wrap",
+        "Peri Peri Wrap",
+        "Peri Peri Burger",
+        "Chicken Wrap",
+        "Peri Peri Wings x 3"
+      ]
+    },
+    {
+      "anchor": "bbq-ribs",
+      "title": "BBQ & Ribs",
+      "product_ids": [
+        1714,
+        1739,
+        1161,
+        1730,
+        1731,
+        1732,
+        1712,
+        1740,
+        1179,
+        1713,
+        1741,
+        1733,
+        1742
+      ],
+      "products": [
+        "BBQ Wings x 3",
+        "BBQ Lamb Ribs x 1",
+        "BBQ Fillet Burger",
+        "BBQ Wings x 5",
+        "BBQ Wings x 8",
+        "BBQ Wings x 12",
+        "Spicy BBQ Fillet Burger",
+        "BBQ Lamb Ribs x 3",
+        "BBQ Fillet Burger Meal",
+        "Spicy BBQ Fillet Burger Meal",
+        "BBQ Lamb Ribs x 5",
+        "BBQ Wings x 20",
+        "BBQ Lamb Ribs x 12"
+      ]
+    },
+    {
+      "anchor": "loaded-fries-sides",
+      "title": "Loaded Fries & Sides",
+      "product_ids": [
+        1231,
+        1705,
+        1230,
+        1228,
+        1226,
+        1229,
+        1227,
+        1225,
+        1233,
+        1232
+      ],
+      "products": [
+        "Onion Ringas x 12",
+        "Loaded Fries",
+        "Onion Ringas x 8",
+        "Mozzarella Stick x 7",
+        "Fries (Large)",
+        "Onion Ringas x 4",
+        "Mozzarella Sticks x 4",
+        "Fries (Regular)",
+        "BBQ Beans",
+        "Coleslaw"
+      ]
+    },
+    {
+      "anchor": "family-deals",
+      "title": "Family Deals",
+      "product_ids": [
+        1737
+      ],
+      "products": [
+        "Family Wings deals"
+      ]
+    },
+    {
+      "anchor": "kids",
+      "title": "Kids & Boneless",
+      "product_ids": [
+        1218,
+        1223,
+        1217,
+        1221,
+        1222,
+        1726,
+        1224,
+        1220,
+        1725,
+        1219
+      ],
+      "products": [
+        "10 Chicken Strips",
+        "20 Chicken Nuggets",
+        "5 Chicken Strips",
+        "6 Chicken Nuggets",
+        "9 Chicken Nuggets",
+        "Chicken Nuggets Meal",
+        "Chicken Strips Meal",
+        "Large Popcorn Chicken",
+        "Popcorn Chicken Meal",
+        "Regular Popcorn Chicken"
+      ]
+    },
+    {
+      "anchor": "drinks",
+      "title": "Soft Drinks",
+      "product_ids": [
+        1695,
+        1699,
+        1700,
+        1697,
+        1701,
+        1703,
+        1696,
+        1698,
+        1693
+      ],
+      "products": [
+        "7Up",
+        "Coca Cola",
+        "Coke Zero",
+        "Diet Pepsi",
+        "Mirinda Orange",
+        "Mirinda Strawberry",
+        "Pepsi",
+        "Tango Orange",
+        "Water"
+      ]
+    }
+  ]
+}

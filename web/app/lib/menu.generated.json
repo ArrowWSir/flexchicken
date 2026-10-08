@@ -1,0 +1,4216 @@
+{
+  "categories": [
+    {
+      "id": "burgers",
+      "label": "Burgers",
+      "short": "Burgers",
+      "icon": "burger",
+      "items": [
+        {
+          "id": 1155,
+          "slug": "chicken-fillet-burger",
+          "categoryId": "burgers",
+          "name": "Chicken Fillet Burger",
+          "titleLight": "Chicken Fillet",
+          "titleBold": "Burger",
+          "price": 4.49,
+          "description": "Crispy chicken, lettuce & mayo.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Make It Cheesy",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Add Cheese",
+                  "priceAdd": 0.39
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": "/menu/chicken-fillet-burger.webp"
+        },
+        {
+          "id": 1156,
+          "slug": "1-4-pounder-burger",
+          "categoryId": "burgers",
+          "name": "1/4 Pounder Burger",
+          "titleLight": "1/4 Pounder",
+          "titleBold": "Burger",
+          "price": 4.49,
+          "description": "Juicy 4oz beef patty with lettuce, melted cheese, ketchup & burger sauce.",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/1-4-pounder-burger.webp"
+        },
+        {
+          "id": 1157,
+          "slug": "hot-honey-burger",
+          "categoryId": "burgers",
+          "name": "Hot Honey Burger",
+          "titleLight": "Hot Honey",
+          "titleBold": "Burger",
+          "price": 4.99,
+          "description": "Crispy chicken dipped in sweet hot honey, lettuce & mayo.",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/hot-honey-burger.webp"
+        },
+        {
+          "id": 1158,
+          "slug": "1-2-pounder-burger",
+          "categoryId": "burgers",
+          "name": "1/2 Pounder Burger",
+          "titleLight": "1/2 Pounder",
+          "titleBold": "Burger",
+          "price": 5.49,
+          "description": "Double juicy 4oz beef patties with lettuce, melted cheese, ketchup & burger sauce.",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/1-2-pounder-burger.webp"
+        },
+        {
+          "id": 1159,
+          "slug": "spicy-chicken-burger",
+          "categoryId": "burgers",
+          "name": "Spicy Chicken Burger",
+          "titleLight": "Spicy Chicken",
+          "titleBold": "Burger",
+          "price": 4.49,
+          "description": "Spicy & crispy chicken, lettuce & mayo.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": "/menu/spicy-chicken-burger.webp"
+        },
+        {
+          "id": 1160,
+          "slug": "chicken-strips-burger",
+          "categoryId": "burgers",
+          "name": "Chicken Strips Burger",
+          "titleLight": "Chicken Strips",
+          "titleBold": "Burger",
+          "price": 3.49,
+          "description": "Chicken strips, lettuce & mayo.",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1161,
+          "slug": "bbq-fillet-burger",
+          "categoryId": "burgers",
+          "name": "BBQ Fillet Burger",
+          "titleLight": "BBQ Fillet",
+          "titleBold": "Burger",
+          "price": 4.49,
+          "description": "Crispy chicken dipped in BBQ sauce, lettuce & mayo.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Make It Cheesy",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Add Cheese",
+                  "priceAdd": 0.39
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": "/menu/bbq-fillet-burger.webp"
+        },
+        {
+          "id": 1162,
+          "slug": "peri-peri-burger",
+          "categoryId": "burgers",
+          "name": "Peri Peri Burger",
+          "titleLight": "Peri Peri",
+          "titleBold": "Burger",
+          "price": 5.49,
+          "description": "Juicy grilled chicken fillet with melted cheese, lettuce & mayo.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Make It Cheesy",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Add Cheese",
+                  "priceAdd": 0.39
+                }
+              ]
+            },
+            {
+              "label": "Choose your heat level",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Medium",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Hot",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Lemon & Herb",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": "/menu/peri-peri-burger.webp"
+        },
+        {
+          "id": 1163,
+          "slug": "double-fillet-burger",
+          "categoryId": "burgers",
+          "name": "Double Fillet Burger",
+          "titleLight": "Double Fillet",
+          "titleBold": "Burger",
+          "price": 5.99,
+          "description": "Double crispy chicken fillets, lettuce & mayo.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Make It Cheesy",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Add Cheese",
+                  "priceAdd": 0.39
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": "/menu/double-fillet-burger.webp"
+        },
+        {
+          "id": 1164,
+          "slug": "cheese-burger",
+          "categoryId": "burgers",
+          "name": "Cheeseburger",
+          "titleLight": "",
+          "titleBold": "Cheeseburger",
+          "price": 2.38,
+          "description": "Juicy 2oz beef patty with lettuce, melted cheese, ketchup & burger sauce.",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/cheese-burger.webp"
+        },
+        {
+          "id": "smash-burger",
+          "slug": "smash-burger",
+          "categoryId": "burgers",
+          "name": "Smash Burger",
+          "titleLight": "",
+          "titleBold": "Smash Burger",
+          "price": 6.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1166,
+          "slug": "flex-fusion-burger",
+          "categoryId": "burgers",
+          "name": "Flex Fusion Burger",
+          "titleLight": "Flex Fusion",
+          "titleBold": "Burger",
+          "price": 5.99,
+          "description": "Juicy 4oz beef patty with crispy chicken fillet and hash brown, lettuce, cheese, ketchup & mayo.",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1167,
+          "slug": "triple-flex-burger",
+          "categoryId": "burgers",
+          "name": "Triple Flex Burger",
+          "titleLight": "Triple Flex",
+          "titleBold": "Burger",
+          "price": 6.49,
+          "description": "Triple layered bun with two juicy 2oz beef patties, lettuce, cheese, ketchup & burger sauce.",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/triple-flex-burger.webp"
+        },
+        {
+          "id": 1168,
+          "slug": "double-cheese-burger",
+          "categoryId": "burgers",
+          "name": "Double Cheeseburger",
+          "titleLight": "",
+          "titleBold": "Double Cheeseburger",
+          "price": 3.99,
+          "description": "Double juicy 2oz beef patties with lettuce, melted cheese, ketchup & burger sauce.",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/double-cheese-burger.webp"
+        },
+        {
+          "id": 1169,
+          "slug": "hash-brown-stack",
+          "categoryId": "burgers",
+          "name": "Hash Brown Stack",
+          "titleLight": "Hash Brown",
+          "titleBold": "Stack",
+          "price": 4.99,
+          "description": "Crispy chicken, hash brown, cheese, lettuce & mayo.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": "/menu/hash-brown-stack.webp"
+        }
+      ]
+    },
+    {
+      "id": "wraps",
+      "label": "Wraps",
+      "short": "Wraps",
+      "icon": "utensils",
+      "items": [
+        {
+          "id": 1627,
+          "slug": "chicken-wrap-3",
+          "categoryId": "wraps",
+          "name": "Chicken Wrap",
+          "titleLight": "",
+          "titleBold": "Chicken Wrap",
+          "price": 4.49,
+          "description": "Crispy chicken, lettuce & mayo.",
+          "options": [
+            {
+              "label": "Make It Cheesy",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Add Cheese",
+                  "priceAdd": 0.39
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": "/menu/chicken-wrap.webp"
+        },
+        {
+          "id": 1622,
+          "slug": "spicy-chicken-wrap-2",
+          "categoryId": "wraps",
+          "name": "Spicy Chicken Wrap",
+          "titleLight": "Spicy Chicken",
+          "titleBold": "Wrap",
+          "price": 4.99,
+          "description": "Spicy & crispy chicken, lettuce & mayo.",
+          "options": [
+            {
+              "label": "Make It Cheesy",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Add Cheese",
+                  "priceAdd": 0.39
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "bbq",
+      "label": "BBQ",
+      "short": "BBQ",
+      "icon": "grill",
+      "items": [
+        {
+          "id": 1712,
+          "slug": "spicy-bbq-fillet-burger",
+          "categoryId": "bbq",
+          "name": "Spicy BBQ Fillet Burger",
+          "titleLight": "Spicy BBQ Fillet",
+          "titleBold": "Burger",
+          "price": 5.49,
+          "description": "Crispy Spicy chicken dipped in BBQ sauce, lettuce & mayo.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1179,
+          "slug": "bbq-fillet-burger-meal",
+          "categoryId": "bbq",
+          "name": "BBQ Fillet Burger Meal",
+          "titleLight": "BBQ Fillet",
+          "titleBold": "Burger Meal",
+          "price": 6.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Make It Cheesy",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Add Cheese",
+                  "priceAdd": 0.39
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/bbq-fillet-burger-meal.webp"
+        },
+        {
+          "id": 1713,
+          "slug": "spicy-bbq-fillet-burger-meal",
+          "categoryId": "bbq",
+          "name": "Spicy BBQ Fillet Burger Meal",
+          "titleLight": "Spicy BBQ Fillet",
+          "titleBold": "Burger Meal",
+          "price": 7.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": 1714,
+          "slug": "bbq-wings",
+          "categoryId": "bbq",
+          "name": "BBQ Wings – 3 Piece",
+          "titleLight": "BBQ",
+          "titleBold": "Wings – 3 Piece",
+          "price": 1.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1730,
+          "slug": "bbq-wings-x-5",
+          "categoryId": "bbq",
+          "name": "BBQ Wings – 5 Piece",
+          "titleLight": "BBQ",
+          "titleBold": "Wings – 5 Piece",
+          "price": 2.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1731,
+          "slug": "bbq-wings-x-8",
+          "categoryId": "bbq",
+          "name": "BBQ Wings – 8 Piece",
+          "titleLight": "BBQ",
+          "titleBold": "Wings – 8 Piece",
+          "price": 3.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1732,
+          "slug": "bbq-wings-x-12",
+          "categoryId": "bbq",
+          "name": "BBQ Wings – 12 Piece",
+          "titleLight": "BBQ",
+          "titleBold": "Wings – 12 Piece",
+          "price": 5.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1733,
+          "slug": "bbq-wings-x-20",
+          "categoryId": "bbq",
+          "name": "BBQ Wings – 20 Piece",
+          "titleLight": "BBQ",
+          "titleBold": "Wings – 20 Piece",
+          "price": 9.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": "bbq-wings-meal-5",
+          "slug": "bbq-wings-meal-5",
+          "categoryId": "bbq",
+          "name": "BBQ Wings Meal – 5 Piece",
+          "titleLight": "BBQ",
+          "titleBold": "Wings Meal – 5 Piece",
+          "price": 6.99,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "ribs",
+      "label": "Ribs",
+      "short": "Ribs",
+      "icon": "bbq",
+      "items": [
+        {
+          "id": 1739,
+          "slug": "bbq-lamb-ribs-x-1",
+          "categoryId": "ribs",
+          "name": "BBQ Ribs – 1 Piece",
+          "titleLight": "BBQ",
+          "titleBold": "Ribs – 1 Piece",
+          "price": 2.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/bbq-lamb-ribs-x-1.webp"
+        },
+        {
+          "id": "bbq-ribs-2",
+          "slug": "bbq-ribs-2",
+          "categoryId": "ribs",
+          "name": "BBQ Ribs – 2 Piece",
+          "titleLight": "BBQ",
+          "titleBold": "Ribs – 2 Piece",
+          "price": 4.89,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1741,
+          "slug": "bbq-lamb-ribs-x-5",
+          "categoryId": "ribs",
+          "name": "BBQ Ribs – 5 Piece",
+          "titleLight": "BBQ",
+          "titleBold": "Ribs – 5 Piece",
+          "price": 9.89,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/bbq-lamb-ribs-x-5.webp"
+        },
+        {
+          "id": "bbq-ribs-8",
+          "slug": "bbq-ribs-8",
+          "categoryId": "ribs",
+          "name": "BBQ Ribs – 8 Piece",
+          "titleLight": "BBQ",
+          "titleBold": "Ribs – 8 Piece",
+          "price": 17.89,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1742,
+          "slug": "bbq-lamb-ribs-x-12",
+          "categoryId": "ribs",
+          "name": "BBQ Ribs – 12 Piece",
+          "titleLight": "BBQ",
+          "titleBold": "Ribs – 12 Piece",
+          "price": 22.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/bbq-lamb-ribs-x-12.webp"
+        }
+      ]
+    },
+    {
+      "id": "peri-peri",
+      "label": "Peri Peri",
+      "short": "Peri Peri",
+      "icon": "flame",
+      "items": [
+        {
+          "id": 1214,
+          "slug": "whole-chicken",
+          "categoryId": "peri-peri",
+          "name": "Peri Peri Chicken – Whole",
+          "titleLight": "Peri Peri",
+          "titleBold": "Chicken – Whole",
+          "price": 12.99,
+          "description": "Whole chicken, 4 cut.",
+          "options": [
+            {
+              "label": "Choose your heat level",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Medium",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Hot",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Lemon & Herb",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1215,
+          "slug": "half-chicken",
+          "categoryId": "peri-peri",
+          "name": "Peri Peri Chicken – Half",
+          "titleLight": "Peri Peri",
+          "titleBold": "Chicken – Half",
+          "price": 8.99,
+          "description": "Half chicken, 2 cut.",
+          "options": [
+            {
+              "label": "Choose your heat level",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Medium",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Hot",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Lemon & Herb",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1956,
+          "slug": "peri-peri-wings-x-3",
+          "categoryId": "peri-peri",
+          "name": "Peri Peri Wings – 3 Piece",
+          "titleLight": "Peri Peri",
+          "titleBold": "Wings – 3 Piece",
+          "price": 3.99,
+          "description": "",
+          "options": [
+            {
+              "label": "Choose your heat level",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Medium",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Hot",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Lemon & Herb",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1957,
+          "slug": "peri-peri-wings-x-5",
+          "categoryId": "peri-peri",
+          "name": "Peri Peri Wings – 5 Piece",
+          "titleLight": "Peri Peri",
+          "titleBold": "Wings – 5 Piece",
+          "price": 5.99,
+          "description": "",
+          "options": [
+            {
+              "label": "Choose your heat level",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Medium",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Hot",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Lemon & Herb",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1958,
+          "slug": "peri-peri-wings-x-8",
+          "categoryId": "peri-peri",
+          "name": "Peri Peri Wings – 8 Piece",
+          "titleLight": "Peri Peri",
+          "titleBold": "Wings – 8 Piece",
+          "price": 9.49,
+          "description": "",
+          "options": [
+            {
+              "label": "Choose your heat level",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Medium",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Hot",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Lemon & Herb",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": "peri-peri-wings-12",
+          "slug": "peri-peri-wings-12",
+          "categoryId": "peri-peri",
+          "name": "Peri Peri Wings – 12 Piece",
+          "titleLight": "Peri Peri",
+          "titleBold": "Wings – 12 Piece",
+          "price": 12.49,
+          "description": "",
+          "options": [
+            {
+              "label": "Choose your heat level",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Medium",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Hot",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Lemon & Herb",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1959,
+          "slug": "peri-peri-wings-x-12",
+          "categoryId": "peri-peri",
+          "name": "Peri Peri Wings – 20 Piece",
+          "titleLight": "Peri Peri",
+          "titleBold": "Wings – 20 Piece",
+          "price": 19.99,
+          "description": "",
+          "options": [
+            {
+              "label": "Choose your heat level",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Medium",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Hot",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Lemon & Herb",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1180,
+          "slug": "peri-peri-burger-meal",
+          "categoryId": "peri-peri",
+          "name": "Peri Peri Burger Meal",
+          "titleLight": "Peri Peri",
+          "titleBold": "Burger Meal",
+          "price": 7.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Choose your heat level",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Medium",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Hot",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Lemon & Herb",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/peri-peri-burger-meal.webp"
+        },
+        {
+          "id": 1625,
+          "slug": "peri-peri-wrap-meal",
+          "categoryId": "peri-peri",
+          "name": "Peri Peri Wrap Meal",
+          "titleLight": "Peri Peri",
+          "titleBold": "Wrap Meal",
+          "price": 6.99,
+          "description": "Grilled Chicken strips, lettuce & mayo.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Make It Cheesy",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Add Cheese",
+                  "priceAdd": 0.39
+                }
+              ]
+            },
+            {
+              "label": "Choose your heat level",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Medium",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Hot",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Lemon & Herb",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": "peri-peri-wings-meal-half",
+          "slug": "peri-peri-wings-meal-half",
+          "categoryId": "peri-peri",
+          "name": "Peri Peri Wings Meal – Half",
+          "titleLight": "Peri Peri",
+          "titleBold": "Wings Meal – Half",
+          "price": 9.99,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Choose your heat level",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Medium",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Hot",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Lemon & Herb",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "burger-meals",
+      "label": "Burger Meals",
+      "short": "Burger Meals",
+      "icon": "burger-meal",
+      "items": [
+        {
+          "id": 1173,
+          "slug": "chicken-fillet-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "Chicken Fillet Burger Meal",
+          "titleLight": "Chicken Fillet",
+          "titleBold": "Burger Meal",
+          "price": 5.99,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Make It Cheesy",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Add Cheese",
+                  "priceAdd": 0.39
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/chicken-fillet-burger-meal.webp"
+        },
+        {
+          "id": 1174,
+          "slug": "1-4-pounder-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "1/4 Pounder Burger Meal",
+          "titleLight": "1/4 Pounder",
+          "titleBold": "Burger Meal",
+          "price": 6.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": 1175,
+          "slug": "hot-honey-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "Hot Honey Burger Meal",
+          "titleLight": "Hot Honey",
+          "titleBold": "Burger Meal",
+          "price": 6.99,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/hot-honey-burger-meal.webp"
+        },
+        {
+          "id": 1176,
+          "slug": "1-2-pounder-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "1/2 Pounder Burger Meal",
+          "titleLight": "1/2 Pounder",
+          "titleBold": "Burger Meal",
+          "price": 7.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/1-2-pounder-burger-meal.webp"
+        },
+        {
+          "id": 1177,
+          "slug": "spicy-chicken-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "Spicy Chicken Burger Meal",
+          "titleLight": "Spicy Chicken",
+          "titleBold": "Burger Meal",
+          "price": 6.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/spicy-chicken-burger-meal.webp"
+        },
+        {
+          "id": 1178,
+          "slug": "chicken-strips-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "Chicken Strips Burger Meal",
+          "titleLight": "Chicken Strips",
+          "titleBold": "Burger Meal",
+          "price": 5.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": 1179,
+          "slug": "bbq-fillet-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "BBQ Fillet Burger Meal",
+          "titleLight": "BBQ Fillet",
+          "titleBold": "Burger Meal",
+          "price": 6.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Make It Cheesy",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Add Cheese",
+                  "priceAdd": 0.39
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/bbq-fillet-burger-meal.webp"
+        },
+        {
+          "id": 1180,
+          "slug": "peri-peri-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "Peri Peri Burger Meal",
+          "titleLight": "Peri Peri",
+          "titleBold": "Burger Meal",
+          "price": 7.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Choose your heat level",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Medium",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Hot",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Lemon & Herb",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/peri-peri-burger-meal.webp"
+        },
+        {
+          "id": 1181,
+          "slug": "double-fillet-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "Double Fillet Burger Meal",
+          "titleLight": "Double Fillet",
+          "titleBold": "Burger Meal",
+          "price": 7.99,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Make It Cheesy",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Add Cheese",
+                  "priceAdd": 0.39
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/double-fillet-burger-meal.webp"
+        },
+        {
+          "id": 1182,
+          "slug": "cheese-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "Cheeseburger Meal",
+          "titleLight": "",
+          "titleBold": "Cheeseburger Meal",
+          "price": 5.39,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/cheese-burger-meal.webp"
+        },
+        {
+          "id": 1183,
+          "slug": "smash-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "Smash Burger Meal",
+          "titleLight": "Smash",
+          "titleBold": "Burger Meal",
+          "price": 8.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": 1184,
+          "slug": "fusion-flex-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "Fusion Flex Burger Meal",
+          "titleLight": "Fusion Flex",
+          "titleBold": "Burger Meal",
+          "price": 7.99,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/fusion-flex-burger-meal.webp"
+        },
+        {
+          "id": 1185,
+          "slug": "triple-flex-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "Triple Flex Burger Meal",
+          "titleLight": "Triple Flex",
+          "titleBold": "Burger Meal",
+          "price": 6.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/triple-flex-burger-meal.webp"
+        },
+        {
+          "id": 1186,
+          "slug": "double-cheese-burger-meal",
+          "categoryId": "burger-meals",
+          "name": "Double Cheeseburger Meal",
+          "titleLight": "Double",
+          "titleBold": "Cheeseburger Meal",
+          "price": 5.99,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": "hash-brown-stack-meal",
+          "slug": "hash-brown-stack-meal",
+          "categoryId": "burger-meals",
+          "name": "Hash Brown Stack Meal",
+          "titleLight": "Hash Brown",
+          "titleBold": "Stack Meal",
+          "price": 6.99,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "box-meals",
+      "label": "Box Meals",
+      "short": "Box Meals",
+      "icon": "box",
+      "items": [
+        {
+          "id": 1188,
+          "slug": "chicken-fillet-burger-box-meal",
+          "categoryId": "box-meals",
+          "name": "Chicken Fillet Burger Box Meal",
+          "titleLight": "Chicken Fillet",
+          "titleBold": "Burger Box Meal",
+          "price": 7.99,
+          "description": "Chips, drink & 3 wings.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Make It Cheesy",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Add Cheese",
+                  "priceAdd": 0.39
+                }
+              ]
+            },
+            {
+              "label": "Sides",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Coleslaw",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "BBQ Beans",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": 1189,
+          "slug": "1-4-pounder-burger-box-meal",
+          "categoryId": "box-meals",
+          "name": "1/4 Pounder Burger Box Meal",
+          "titleLight": "1/4 Pounder",
+          "titleBold": "Burger Box Meal",
+          "price": 8.49,
+          "description": "Chips, drink & 3 wings.",
+          "options": [
+            {
+              "label": "Sides",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Coleslaw",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "BBQ Beans",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": 1191,
+          "slug": "1-2-pounder-burger-box-meal",
+          "categoryId": "box-meals",
+          "name": "1/2 Pounder Burger Box Meal",
+          "titleLight": "1/2 Pounder",
+          "titleBold": "Burger Box Meal",
+          "price": 8.49,
+          "description": "Chips, drink & 3 wings.",
+          "options": [
+            {
+              "label": "Sides",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Coleslaw",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "BBQ Beans",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": 1192,
+          "slug": "spicy-chicken-burger-box-meal",
+          "categoryId": "box-meals",
+          "name": "Spicy Chicken Burger Box Meal",
+          "titleLight": "Spicy Chicken",
+          "titleBold": "Burger Box Meal",
+          "price": 8.49,
+          "description": "Chips, drink & 3 wings.",
+          "options": [
+            {
+              "label": "Customisation: (Optional)",
+              "isRequired": false,
+              "choices": [
+                {
+                  "label": "Remove Lettuce",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Remove Mayo & Lettuce",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Sides",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Coleslaw",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "BBQ Beans",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": 1190,
+          "slug": "fusion-flex-burger-box-meal",
+          "categoryId": "box-meals",
+          "name": "Fusion Flex Burger Box Meal",
+          "titleLight": "Fusion Flex",
+          "titleBold": "Burger Box Meal",
+          "price": 9.99,
+          "description": "Chips, drink & 3 wings.",
+          "options": [
+            {
+              "label": "Sides",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Coleslaw",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "BBQ Beans",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": 1193,
+          "slug": "flex-variety-box",
+          "categoryId": "box-meals",
+          "name": "Flex Variety Box",
+          "titleLight": "Flex",
+          "titleBold": "Variety Box",
+          "price": 7.49,
+          "description": "2 piece chicken, 3 spicy wings, chips & drink.",
+          "options": [
+            {
+              "label": "Sides",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Coleslaw",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "BBQ Beans",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "wings-chicken",
+      "label": "Wings & Chicken",
+      "short": "Wings",
+      "icon": "drumstick",
+      "items": [
+        {
+          "id": 1195,
+          "slug": "4-spicy-wings",
+          "categoryId": "wings-chicken",
+          "name": "4 Spicy Wings",
+          "titleLight": "4 Spicy",
+          "titleBold": "Wings",
+          "price": 2.29,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/4-spicy-wings.webp"
+        },
+        {
+          "id": 1196,
+          "slug": "6-spicy-wings",
+          "categoryId": "wings-chicken",
+          "name": "6 Spicy Wings",
+          "titleLight": "6 Spicy",
+          "titleBold": "Wings",
+          "price": 3.2,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/6-spicy-wings.webp"
+        },
+        {
+          "id": 1197,
+          "slug": "8-spicy-wings",
+          "categoryId": "wings-chicken",
+          "name": "8 Spicy Wings",
+          "titleLight": "8 Spicy",
+          "titleBold": "Wings",
+          "price": 3.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/8-spicy-wings.webp"
+        },
+        {
+          "id": 1198,
+          "slug": "12-spicy-wings",
+          "categoryId": "wings-chicken",
+          "name": "12 Spicy Wings",
+          "titleLight": "12 Spicy",
+          "titleBold": "Wings",
+          "price": 5.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/12-spicy-wings.webp"
+        },
+        {
+          "id": 1199,
+          "slug": "20-spicy-wings",
+          "categoryId": "wings-chicken",
+          "name": "20 Spicy Wings",
+          "titleLight": "20 Spicy",
+          "titleBold": "Wings",
+          "price": 9.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/20-spicy-wings.webp"
+        },
+        {
+          "id": 1200,
+          "slug": "1-piece-chicken",
+          "categoryId": "wings-chicken",
+          "name": "1 Piece Chicken",
+          "titleLight": "1 Piece",
+          "titleBold": "Chicken",
+          "price": 1.79,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1201,
+          "slug": "2-piece-chicken",
+          "categoryId": "wings-chicken",
+          "name": "2 Piece Chicken",
+          "titleLight": "2 Piece",
+          "titleBold": "Chicken",
+          "price": 2.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/2-piece-chicken.webp"
+        },
+        {
+          "id": 1202,
+          "slug": "3-piece-chicken",
+          "categoryId": "wings-chicken",
+          "name": "3 Piece Chicken",
+          "titleLight": "3 Piece",
+          "titleBold": "Chicken",
+          "price": 4.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": "4-piece-chicken",
+          "slug": "4-piece-chicken",
+          "categoryId": "wings-chicken",
+          "name": "4 Piece Chicken",
+          "titleLight": "4 Piece",
+          "titleBold": "Chicken",
+          "price": 5.89,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1204,
+          "slug": "6-piece-chicken",
+          "categoryId": "wings-chicken",
+          "name": "6 Piece Chicken",
+          "titleLight": "6 Piece",
+          "titleBold": "Chicken",
+          "price": 8.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1205,
+          "slug": "10-piece-chicken",
+          "categoryId": "wings-chicken",
+          "name": "10 Piece Chicken",
+          "titleLight": "10 Piece",
+          "titleBold": "Chicken",
+          "price": 14.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1208,
+          "slug": "3-spicy-wings-meal",
+          "categoryId": "wings-chicken",
+          "name": "3 Spicy Wings Meal",
+          "titleLight": "3 Spicy",
+          "titleBold": "Wings Meal",
+          "price": 4.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/3-spicy-wings-meal.webp"
+        },
+        {
+          "id": 1207,
+          "slug": "6-spicy-wings-meal",
+          "categoryId": "wings-chicken",
+          "name": "6 Spicy Wings Meal",
+          "titleLight": "6 Spicy",
+          "titleBold": "Wings Meal",
+          "price": 5.99,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/6-spicy-wings-meal.webp"
+        },
+        {
+          "id": 1209,
+          "slug": "1-piece-chicken-meal",
+          "categoryId": "wings-chicken",
+          "name": "1 Piece Chicken Meal",
+          "titleLight": "1 Piece",
+          "titleBold": "Chicken Meal",
+          "price": 4.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": 1211,
+          "slug": "2-piece-chicken-meal",
+          "categoryId": "wings-chicken",
+          "name": "2 Piece Chicken Meal",
+          "titleLight": "2 Piece",
+          "titleBold": "Chicken Meal",
+          "price": 5.99,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/2-piece-chicken-meal.webp"
+        },
+        {
+          "id": 1212,
+          "slug": "3-piece-chicken-meal",
+          "categoryId": "wings-chicken",
+          "name": "3 Piece Chicken Meal",
+          "titleLight": "3 Piece",
+          "titleBold": "Chicken Meal",
+          "price": 7.49,
+          "description": "Served with chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": 1210,
+          "slug": "flex-combo-meal-1",
+          "categoryId": "wings-chicken",
+          "name": "Flex Combo Meal 1",
+          "titleLight": "Flex",
+          "titleBold": "Combo Meal 1",
+          "price": 5.99,
+          "description": "1 piece chicken, 3 spicy wings, chips & drink.",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/flex-combo-meal-1.webp"
+        }
+      ]
+    },
+    {
+      "id": "boneless",
+      "label": "Boneless Chicken",
+      "short": "Boneless",
+      "icon": "popcorn",
+      "items": [
+        {
+          "id": 1217,
+          "slug": "5-chicken-strips",
+          "categoryId": "boneless",
+          "name": "5 Chicken Strips",
+          "titleLight": "5 Chicken",
+          "titleBold": "Strips",
+          "price": 4.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/5-chicken-strips.webp"
+        },
+        {
+          "id": 1218,
+          "slug": "10-chicken-strips",
+          "categoryId": "boneless",
+          "name": "10 Chicken Strips",
+          "titleLight": "10 Chicken",
+          "titleBold": "Strips",
+          "price": 9.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1219,
+          "slug": "regular-popcorn-chicken",
+          "categoryId": "boneless",
+          "name": "Regular Popcorn Chicken",
+          "titleLight": "Regular Popcorn",
+          "titleBold": "Chicken",
+          "price": 3.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1206,
+          "slug": "large-popcorn-chicken-2",
+          "categoryId": "boneless",
+          "name": "Large Popcorn Chicken",
+          "titleLight": "Large Popcorn",
+          "titleBold": "Chicken",
+          "price": 6.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1221,
+          "slug": "6-chicken-nuggets",
+          "categoryId": "boneless",
+          "name": "6 Chicken Nuggets",
+          "titleLight": "6 Chicken",
+          "titleBold": "Nuggets",
+          "price": 3.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1222,
+          "slug": "9-chicken-nuggets",
+          "categoryId": "boneless",
+          "name": "9 Chicken Nuggets",
+          "titleLight": "9 Chicken",
+          "titleBold": "Nuggets",
+          "price": 6.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1223,
+          "slug": "20-chicken-nuggets",
+          "categoryId": "boneless",
+          "name": "20 Chicken Nuggets",
+          "titleLight": "20 Chicken",
+          "titleBold": "Nuggets",
+          "price": 10.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1224,
+          "slug": "chicken-strips-meal",
+          "categoryId": "boneless",
+          "name": "Chicken Strips Meal",
+          "titleLight": "Chicken",
+          "titleBold": "Strips Meal",
+          "price": 6.49,
+          "description": "",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": "/menu/chicken-strips-meal.webp"
+        },
+        {
+          "id": 1726,
+          "slug": "chicken-nuggets-meal",
+          "categoryId": "boneless",
+          "name": "6 Chicken Nuggets Meal",
+          "titleLight": "6 Chicken",
+          "titleBold": "Nuggets Meal",
+          "price": 4.49,
+          "description": "",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        },
+        {
+          "id": 1725,
+          "slug": "popcorn-chicken-meal",
+          "categoryId": "boneless",
+          "name": "Regular Popcorn Chicken Meal",
+          "titleLight": "Regular Popcorn",
+          "titleBold": "Chicken Meal",
+          "price": 4.49,
+          "description": "",
+          "options": [
+            {
+              "label": "Fries",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Regular Fries",
+                  "priceAdd": 0
+                }
+              ]
+            },
+            {
+              "label": "Drink",
+              "isRequired": true,
+              "choices": [
+                {
+                  "label": "Water",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "7Up",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Diet Pepsi",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Tango Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coca Cola",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Orange",
+                  "priceAdd": 0
+                },
+                {
+                  "label": "Mirinda Strawberry",
+                  "priceAdd": 0
+                }
+              ]
+            }
+          ],
+          "isMeal": true,
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "sides",
+      "label": "Sides & Dips",
+      "short": "Sides",
+      "icon": "salad",
+      "items": [
+        {
+          "id": 1225,
+          "slug": "fries-regular",
+          "categoryId": "sides",
+          "name": "Fries (Regular)",
+          "titleLight": "",
+          "titleBold": "Fries (Regular)",
+          "price": 1.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1226,
+          "slug": "fries-large",
+          "categoryId": "sides",
+          "name": "Fries (Large)",
+          "titleLight": "",
+          "titleBold": "Fries (Large)",
+          "price": 2.79,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1227,
+          "slug": "mozzarella-sticks-x-4",
+          "categoryId": "sides",
+          "name": "Mozzarella Sticks (4 Pcs)",
+          "titleLight": "Mozzarella",
+          "titleBold": "Sticks (4 Pcs)",
+          "price": 1.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1228,
+          "slug": "mozzarella-stick-x-7",
+          "categoryId": "sides",
+          "name": "Mozzarella Sticks (8 Pcs)",
+          "titleLight": "Mozzarella",
+          "titleBold": "Sticks (8 Pcs)",
+          "price": 3.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1229,
+          "slug": "onion-ringas-x-4",
+          "categoryId": "sides",
+          "name": "Onion Rings (6 Pcs)",
+          "titleLight": "Onion",
+          "titleBold": "Rings (6 Pcs)",
+          "price": 1.99,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/onion-ringas-x-4.webp"
+        },
+        {
+          "id": 1230,
+          "slug": "onion-ringas-x-8",
+          "categoryId": "sides",
+          "name": "Onion Rings (12 Pcs)",
+          "titleLight": "Onion",
+          "titleBold": "Rings (12 Pcs)",
+          "price": 3.89,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/onion-ringas-x-8.webp"
+        },
+        {
+          "id": 1231,
+          "slug": "onion-ringas-x-12",
+          "categoryId": "sides",
+          "name": "Onion Rings (20 Pcs)",
+          "titleLight": "Onion",
+          "titleBold": "Rings (20 Pcs)",
+          "price": 5.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/onion-ringas-x-12.webp"
+        },
+        {
+          "id": 1232,
+          "slug": "coleslaw",
+          "categoryId": "sides",
+          "name": "Coleslaw",
+          "titleLight": "",
+          "titleBold": "Coleslaw",
+          "price": 1.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/coleslaw.webp"
+        },
+        {
+          "id": 1233,
+          "slug": "beans",
+          "categoryId": "sides",
+          "name": "Beans",
+          "titleLight": "",
+          "titleBold": "Beans",
+          "price": 1.49,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/beans.webp"
+        },
+        {
+          "id": "dip-garlic-mayo",
+          "slug": "dip-garlic-mayo",
+          "categoryId": "sides",
+          "name": "Garlic Mayo",
+          "titleLight": "",
+          "titleBold": "Garlic Mayo",
+          "price": 0.5,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": "dip-chilli-mayo",
+          "slug": "dip-chilli-mayo",
+          "categoryId": "sides",
+          "name": "Chilli Mayo",
+          "titleLight": "",
+          "titleBold": "Chilli Mayo",
+          "price": 0.5,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": "dip-peri-peri-sauce",
+          "slug": "dip-peri-peri-sauce",
+          "categoryId": "sides",
+          "name": "Peri Peri Sauce",
+          "titleLight": "Peri Peri",
+          "titleBold": "Sauce",
+          "price": 0.5,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": "dip-sweet-chilli-sauce",
+          "slug": "dip-sweet-chilli-sauce",
+          "categoryId": "sides",
+          "name": "Sweet Chilli Sauce",
+          "titleLight": "Sweet Chilli",
+          "titleBold": "Sauce",
+          "price": 0.5,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": "dip-bbq-sauce",
+          "slug": "dip-bbq-sauce",
+          "categoryId": "sides",
+          "name": "BBQ Sauce",
+          "titleLight": "",
+          "titleBold": "BBQ Sauce",
+          "price": 0.5,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "drinks",
+      "label": "Drinks",
+      "short": "Drinks",
+      "icon": "cup",
+      "items": [
+        {
+          "id": 1695,
+          "slug": "7up",
+          "categoryId": "drinks",
+          "name": "7Up",
+          "titleLight": "",
+          "titleBold": "7Up",
+          "price": 1.29,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/7up.webp"
+        },
+        {
+          "id": 1699,
+          "slug": "coca-cola",
+          "categoryId": "drinks",
+          "name": "Coca Cola",
+          "titleLight": "",
+          "titleBold": "Coca Cola",
+          "price": 1.29,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/coca-cola.webp"
+        },
+        {
+          "id": 1700,
+          "slug": "coke-zero",
+          "categoryId": "drinks",
+          "name": "Coke Zero",
+          "titleLight": "",
+          "titleBold": "Coke Zero",
+          "price": 1.29,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/coke-zero.webp"
+        },
+        {
+          "id": 1697,
+          "slug": "diet-pepsi",
+          "categoryId": "drinks",
+          "name": "Diet Pepsi",
+          "titleLight": "",
+          "titleBold": "Diet Pepsi",
+          "price": 1.29,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/diet-pepsi.webp"
+        },
+        {
+          "id": 1701,
+          "slug": "mirinda-orange",
+          "categoryId": "drinks",
+          "name": "Mirinda Orange",
+          "titleLight": "",
+          "titleBold": "Mirinda Orange",
+          "price": 1.29,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/mirinda-orange.webp"
+        },
+        {
+          "id": 1703,
+          "slug": "mirinda-strawberry",
+          "categoryId": "drinks",
+          "name": "Mirinda Strawberry",
+          "titleLight": "",
+          "titleBold": "Mirinda Strawberry",
+          "price": 1.29,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/mirinda-strawberry.webp"
+        },
+        {
+          "id": 1696,
+          "slug": "pepsi",
+          "categoryId": "drinks",
+          "name": "Pepsi",
+          "titleLight": "",
+          "titleBold": "Pepsi",
+          "price": 1.29,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": "/menu/pepsi.webp"
+        },
+        {
+          "id": 1698,
+          "slug": "tango-orange",
+          "categoryId": "drinks",
+          "name": "Tango Orange",
+          "titleLight": "",
+          "titleBold": "Tango Orange",
+          "price": 1.29,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        },
+        {
+          "id": 1693,
+          "slug": "water",
+          "categoryId": "drinks",
+          "name": "Water",
+          "titleLight": "",
+          "titleBold": "Water",
+          "price": 1.29,
+          "description": "",
+          "options": [],
+          "isMeal": false,
+          "image": null
+        }
+      ]
+    }
+  ]
+}
