@@ -10,6 +10,7 @@ import FlyToBox from "./cart/FlyToBox";
 import Header from "./Header";
 import LoyaltyCard from "./card/LoyaltyCard";
 import EmberField from "./EmberField";
+import PlateBackdrop from "./PlateBackdrop";
 import OfferStrip from "./offers/OfferStrip";
 
 const TOAST_MS = 2200;
@@ -57,6 +58,7 @@ export default function AppShell({ children, withCard = true }) {
   const customer = useLoyaltyCard();
   return (
     <CartProvider>
+      <PlateBackdrop />
       <EmberField />
       <Header />
       <main className="page-frame relative z-[1]">

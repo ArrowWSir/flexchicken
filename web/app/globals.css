@@ -95,6 +95,20 @@ body {
   margin-inline: auto;
   overflow-x: clip;
 }
+
+/* The plate backdrop (PlateBackdrop.js) runs behind the page, so text that
+   sits straight on the ground gets a halo of the ground colour to stay
+   readable over the chicken. Anything with its own fill (cards, buttons,
+   pills) is excluded, so the halo never shows on paper, red or roast. */
+main.page-frame {
+  text-shadow:
+    0 0 2px rgb(236 222 203 / 0.95),
+    0 0 8px rgb(236 222 203 / 0.9),
+    0 0 18px rgb(236 222 203 / 0.75);
+}
+main.page-frame :where([class*="bg-"], [class*="bg-"] *) {
+  text-shadow: none;
+}
 .page-gutter {
   padding-left: max(1rem, env(safe-area-inset-left));
   padding-right: max(1rem, env(safe-area-inset-right));
