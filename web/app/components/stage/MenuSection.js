@@ -53,20 +53,23 @@ export default function MenuSection() {
 
   return (
     <section id="menu" aria-labelledby="menu-heading" className="mt-12 scroll-mt-20">
-      <div className="mb-5 flex items-end justify-between gap-3">
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-flex-ink">Order here</p>
-          <h2 id="menu-heading" className="mt-1 font-display text-[clamp(28px,8.4vw,40px)] font-black uppercase leading-[0.92] tracking-[-0.02em]">
-            Pick your <span className="text-flex">craving</span>
-          </h2>
+      {/* backdrop-calm: the plate backdrop softens behind the badges (globals.css). */}
+      <div className="backdrop-calm">
+        <div className="mb-5 flex items-end justify-between gap-3">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-flex-ink">Order here</p>
+            <h2 id="menu-heading" className="mt-1 font-display text-[clamp(28px,8.4vw,40px)] font-black uppercase leading-[0.92] tracking-[-0.02em]">
+              Pick your <span className="text-flex">craving</span>
+            </h2>
+          </div>
+          <MenuDownload
+            label="Menu"
+            className="press mb-0.5 flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-ground-raised px-3.5 text-[13px] font-semibold text-ink ring-1 ring-line hover:bg-surface"
+          />
         </div>
-        <MenuDownload
-          label="Menu"
-          className="press mb-0.5 flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-ground-raised px-3.5 text-[13px] font-semibold text-ink ring-1 ring-line hover:bg-surface"
-        />
-      </div>
 
-      <BadgeGrid categories={categories} activeId={target.categoryId} onSelect={chooseCategory} />
+        <BadgeGrid categories={categories} activeId={target.categoryId} onSelect={chooseCategory} />
+      </div>
 
       <div ref={tableRef} className="relative isolate -mr-4 mt-4 scroll-mt-20 sm:-mr-8">
         {/* isolate: plates stack among themselves, never above the sticky header. */}
