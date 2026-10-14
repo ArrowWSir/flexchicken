@@ -19,6 +19,10 @@ npx playwright test -c playwright.cloud.config.mjs   # cross-device tests, with 
 npm run deploy       # database build, live on Cloudflare
 ```
 
+## Deploys
+
+The live site is **https://flexchicken.uk** (Cloudflare Worker `flexchicken`). Pushing to `main` on GitHub deploys it: Cloudflare Workers Builds is connected to the repo with root directory `web`, build command `node scripts/cloud.mjs build` (the database build) and deploy command `npx wrangler deploy`. `npm run deploy` from this folder does the same by hand. The shift codes and signing key are Worker secrets, so a deploy never changes them.
+
 ## Where the data lives
 
 The live site (`npm run deploy`) keeps the shop's data in a database on Cloudflare: one Durable Object with SQLite storage (`server/`). Every phone, tablet and computer sees the same orders, cards, staff clock and menu, live. `npm run dev`, the tests and `npm run shop` keep using the **browser store** (localStorage, synced between tabs of one browser), which needs no setup.
