@@ -93,7 +93,7 @@ export default function OrderTicket({ order, now, actions = [], footer = null })
           </span>
           <span className="font-semibold text-ink">
             {formatPrice(order.totals.totalPence)}
-            {order.totals.discountPence > 0 && ` (offer −${formatPrice(order.totals.discountPence)})`} · {order.payment.status === "paid" ? "Paid" : isDelivery ? "Pay on delivery" : "Pay at pickup"}
+            {order.totals.discountPence > 0 && ` (offer −${formatPrice(order.totals.discountPence)})`} · {order.payment?.status === "paid" ? "Paid" : isDelivery ? "Cash on delivery" : "Pay at pickup"}
           </span>
         </p>
 

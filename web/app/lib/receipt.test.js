@@ -46,7 +46,7 @@ describe("buildReceipt", () => {
     expect(receipt.mode).toBe("DELIVERY");
     expect(receipt.customer.address).toBe("1 High St, RM13 9AA");
     expect(receipt.totals).toContainEqual(["Delivery", "£1.00"]);
-    expect(receipt.payment).toBe("TO PAY ON DELIVERY");
+    expect(receipt.payment).toBe("CASH ON DELIVERY");
   });
 
   test("an offer is shown by name as a discount line", () => {

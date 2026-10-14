@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import NumberFlow from "@number-flow/react";
-import { Bike, CreditCard, LogOut, ShoppingBag, Store } from "lucide-react";
+import { Bike, LogOut, ShoppingBag, Store } from "lucide-react";
 import { BRAND } from "../lib/brand";
 import { formatPrice } from "../lib/cart";
 import { deliveryQuote } from "../lib/geo";
@@ -14,6 +14,7 @@ import { useCart } from "../components/cart/CartProvider";
 import SignInSheet from "../components/account/SignInSheet";
 import ShopMap from "../components/map/ShopMap";
 import DeliveryCheck from "./DeliveryCheck";
+import PaymentChoice from "./PaymentChoice";
 
 const GBP = { style: "currency", currency: "GBP" };
 // Closed hours block orders in production; in development the screens stay
@@ -117,7 +118,7 @@ export default function CheckoutFlow() {
   const canPlace = mode === "collection" || (place && quote.isAvailable);
 
   return (
-    <div className="mx-auto grid max-w-[560px] gap-4">
+    <div className="mx-auto grid max-w-[560px] grid-cols-1 gap-4">
       <div>
         <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-flex-ink">Checkout</p>
         <h1 className="mt-1 font-display text-[32px] font-black uppercase leading-none tracking-[-0.02em]">Your Flex Box</h1>
@@ -271,13 +272,7 @@ export default function CheckoutFlow() {
             </dd>
           </div>
         </dl>
-        <div className="mt-4 flex gap-3 rounded-2xl bg-surface p-4">
-          <CreditCard className="mt-0.5 size-5 shrink-0 text-roast-700" strokeWidth={1.9} aria-hidden="true" />
-          <p className="text-[12.5px] leading-relaxed text-muted">
-            <strong className="font-semibold text-ink">Card payment by Teya is being connected.</strong> Until it is live, you pay
-            {mode === "delivery" ? " the driver on delivery" : " when you collect"}.
-          </p>
-        </div>
+        <PaymentChoice mode={mode} />
       </Step>
 
       {error && (

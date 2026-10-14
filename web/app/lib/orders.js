@@ -77,7 +77,8 @@ export function buildOrder({ cart, customer, mode, address = null, note = "", se
     lines: cart.lines.map((line) => ({ ...line, choices: line.choices.map((c) => ({ ...c })) })),
     totals: { subtotalPence, discountPence, deliveryPence, totalPence: itemsPence + deliveryPence },
     promo,
-    payment: { provider: "teya", status: "not_connected" },
+    // Cash only until card payment (Teya) is connected; the checkout shows card as coming soon.
+    payment: { method: "cash", provider: null, status: "due" },
     driver: null,
     history: [{ status: "placed", at: now }],
   };

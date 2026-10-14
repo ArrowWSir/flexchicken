@@ -14,7 +14,7 @@ const formatDate = (at) =>
 
 function paymentLabel(order) {
   if (order.payment?.status === "paid") return "PAID";
-  return order.mode === "delivery" ? "TO PAY ON DELIVERY" : "TO PAY AT PICKUP";
+  return order.mode === "delivery" ? "CASH ON DELIVERY" : "TO PAY AT PICKUP";
 }
 
 /**

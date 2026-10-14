@@ -63,7 +63,10 @@ test("buy now takes the item to checkout", async ({ page }) => {
   await page.getByRole("button", { name: /^Buy now: \d+ × / }).click();
   await expect(page).toHaveURL(/\/checkout$/);
   await expect(page.getByText("1 × Cheeseburger")).toBeVisible();
-  await expect(page.getByText(/Card payment by Teya is being connected/)).toBeVisible();
+  // Cash is chosen; card is shown as coming soon and cannot be picked.
+  await expect(page.getByRole("radio", { name: /Pay when you collect|Cash on delivery/ })).toBeChecked();
+  await expect(page.getByRole("radio", { name: /Pay by card/ })).toBeDisabled();
+  await expect(page.getByText("Coming soon")).toBeVisible();
 });
 
 test("the cart survives a reload", async ({ page }) => {

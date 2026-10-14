@@ -6,18 +6,22 @@ import { watchForBlocks } from "./security.mjs";
 // the preview (npm run preview), or CLOUD_URL for the live site.
 const ADMIN_PIN = process.env.CLOUD_ADMIN_PIN || "135792";
 
-const CUSTOMER_PAGES = ["/", "/full-menu", "/checkout", "/account", "/track?id=ord_000000000000000000000000", "/stamp", "/allergens", "/privacy", "/terms"];
+const CUSTOMER_PAGES = ["/", "/full-menu", "/checkout", "/account", "/track?id=ord_000000000000000000000000", "/stamp", "/allergens", "/privacy", "/terms", "/order"];
 const STAFF_PAGES = ["/admin", "/admin/orders", "/admin/cards", "/admin/menu", "/admin/offers", "/admin/shop", "/admin/staff", "/admin/order-list", "/driver", "/clock"];
 
+// The plate backdrop fetches its frames in the background for a while, so a
+// page may never go fully quiet on a slow line: wait a bounded time instead.
+const settle = (page) => page.waitForLoadState("networkidle", { timeout: 8000 }).catch(() => {});
+
 async function scrollThrough(page) {
-  await page.waitForLoadState("networkidle");
+  await settle(page);
   await page.evaluate(async () => {
     for (let y = 0; y <= document.documentElement.scrollHeight; y += 400) {
       window.scrollTo(0, y);
       await new Promise((r) => setTimeout(r, 60));
     }
   });
-  await page.waitForLoadState("networkidle");
+  await settle(page);
 }
 
 test("every response carries the security headers, and none says what the site runs on", async ({ request }) => {
@@ -36,6 +40,7 @@ test("every response carries the security headers, and none says what the site r
 });
 
 test("customer pages load and scroll with nothing blocked", async ({ browser }) => {
+  test.setTimeout(180_000); // ten pages, each scrolled top to bottom
   const context = await browser.newContext(test.info().project.use);
   const blocked = await watchForBlocks(context);
   const page = await context.newPage();
@@ -55,6 +60,7 @@ test("customer pages load and scroll with nothing blocked", async ({ browser }) 
 });
 
 test("staff pages load and scroll with nothing blocked", async ({ browser }) => {
+  test.setTimeout(180_000); // ten pages, each scrolled top to bottom
   const context = await browser.newContext(test.info().project.use);
   const blocked = await watchForBlocks(context);
   const page = await context.newPage();
