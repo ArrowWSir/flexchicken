@@ -151,8 +151,9 @@ export default function LoyaltyCard({ customer }) {
         </span>
       </button>
 
-      <p className="mt-3 text-center text-[12.5px] text-muted">
-        Show this card at the counter. 8 stamps, and your <strong className="font-semibold text-ink">9th visit brings a surprise</strong>.
+      {/* On paper, so it reads over the plate photo behind the card. */}
+      <p className="mx-auto mt-3 w-fit max-w-full text-balance rounded-2xl bg-ground-raised/95 px-3.5 py-2 text-center text-[13px] leading-snug text-ink shadow-paper ring-1 ring-line backdrop-blur-sm">
+        Show this card at the counter. 8 stamps, and your <strong className="font-bold text-flex-ink">9th visit brings a surprise</strong>.
       </p>
       <p className="sr-only" aria-live="polite">
         {customer
