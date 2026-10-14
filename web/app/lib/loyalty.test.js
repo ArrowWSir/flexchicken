@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { addStamp, findCards, isMemberCode, mintCode, readCards, redeemReward, registerCard, removeStamp, renameCard } from "./loyalty";
+import { addStamp, findCards, isMemberCode, mintCode, readCards, redeemReward, registerCard, removeCard, removeStamp, renameCard } from "./loyalty";
 
 const T0 = 1_760_000_000_000;
 const fixed = (n) => () => n; // random() that always returns n
@@ -110,4 +110,25 @@ test("readCards drops junk and repairs counters", () => {
   expect(cards).toHaveLength(1);
   expect(cards[0]).toMatchObject({ code: "1234", stamps: 8, rewards: 0, history: [] });
   expect(readCards("nope")).toEqual([]);
+});
+
+describe("removeCard", () => {
+  const cards = [
+    { id: "a", code: "1111", name: "Ann" },
+    { id: "b", code: "2222", name: "Ben" },
+  ];
+
+  test("takes the card off the register and leaves the rest", () => {
+    expect(removeCard(cards, "a")).toEqual([{ id: "b", code: "2222", name: "Ben" }]);
+  });
+
+  test("does not change the list it is given", () => {
+    const frozen = Object.freeze(cards.map((c) => Object.freeze({ ...c })));
+    removeCard(frozen, "a");
+    expect(frozen).toHaveLength(2);
+  });
+
+  test("says so when the card is already gone", () => {
+    expect(() => removeCard(cards, "zzz")).toThrow("That card is not on the register.");
+  });
 });

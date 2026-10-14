@@ -54,6 +54,7 @@ test("the staff code opens orders and cards, and the owner's code does not", asy
   await expect(page).toHaveURL(/\/staff\/cards$/);
   await expect(page.getByRole("heading", { name: "Loyalty cards" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Download customers (Excel)" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /^Delete card/ })).toHaveCount(0);
   await expect(page.getByPlaceholder("Card code (e.g. 4271) or name")).toBeVisible();
 });
 

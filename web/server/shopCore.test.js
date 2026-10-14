@@ -446,3 +446,15 @@ describe("the staff screen", () => {
     expect(view.stamp_tokens).toEqual([]);
   });
 });
+
+describe("deleting a loyalty card", () => {
+  test("the owner deletes a card; staff and customers cannot", async () => {
+    const { core } = setup();
+    const { result: card } = await core.call("registerCard", [{ id: "fc_usr_dddddddddddddddddd", name: "Jo" }], PUBLIC);
+    await expect(core.call("removeCard", [card.id], STAFF)).rejects.toMatchObject({ status: 403 });
+    await expect(core.call("removeCard", [card.id], PUBLIC)).rejects.toMatchObject({ status: 403 });
+    await core.call("removeCard", [card.id], ADMIN);
+    expect(core.snapshot(["loyalty_cards"], ADMIN).loyalty_cards).toEqual([]);
+    await expect(core.call("removeCard", [card.id], ADMIN)).rejects.toMatchObject({ status: 400 });
+  });
+});

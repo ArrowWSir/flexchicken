@@ -124,6 +124,12 @@ export function redeemReward(cards, id, now, by) {
   });
 }
 
+/** Takes a card off the register, stamps and all. */
+export function removeCard(cards, id) {
+  if (!cards.some((c) => c.id === id)) throw new Error("That card is not on the register.");
+  return cards.filter((c) => c.id !== id);
+}
+
 export function renameCard(cards, id, name) {
   return change(cards, id, (card) => ({ ...card, name: cleanName(name) }));
 }

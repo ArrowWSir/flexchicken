@@ -228,6 +228,7 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
     unstampCard: { allow: SERVICE, run: ([id, who]) => repo.unstampCard(requireId(id), by(who)) },
     redeemCard: { allow: SERVICE, run: ([id, who]) => repo.redeemCard(requireId(id), by(who)) },
     renameCard: { allow: SERVICE, run: ([id, name]) => repo.renameCard(requireId(id), text(name, 60)) },
+    removeCard: { allow: OWNER, run: ([id]) => repo.removeCard(requireId(id)) },
     issueStampToken: { allow: SERVICE, run: ([orderId]) => repo.issueStampToken(orderFor(orderId).id) },
     savePromotion: {
       allow: OWNER,

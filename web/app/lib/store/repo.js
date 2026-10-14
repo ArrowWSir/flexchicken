@@ -189,6 +189,8 @@ export function createRepo(store, now = Date.now, { newOrderId = null, maxOrders
     unstampCard: (id, by) => changeCard((cards) => loyalty.removeStamp(cards, id, now(), by)),
     redeemCard: (id, by) => changeCard((cards) => loyalty.redeemReward(cards, id, now(), by)),
     renameCard: (id, name) => changeCard((cards) => loyalty.renameCard(cards, id, name)),
+    // The customer's phone keeps its card id, so their next visit makes a fresh card with a new code.
+    removeCard: (id) => changeCard((cards) => loyalty.removeCard(cards, id)),
 
     // The one-time stamp QR on a till receipt (lib/stampTokens.js).
     issueStampToken(orderId) {

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Download, Gift, Pencil, Plus, Search, Undo2 } from "lucide-react";
+import { Download, Gift, Pencil, Plus, Search, Trash2, Undo2 } from "lucide-react";
 import { STAMPS_PER_CARD } from "../../lib/card";
 import { downloadCustomersXlsx } from "../../lib/customersXlsx";
 import { findCards } from "../../lib/loyalty";
@@ -36,12 +36,19 @@ function StampMeter({ stamps }) {
   );
 }
 
-function CardRow({ card, now, act }) {
+function CardRow({ card, now, act, isOwner }) {
   const isFull = card.stamps >= STAMPS_PER_CARD;
   const who = card.name || "No name yet";
   const rename = () => {
     const name = window.prompt(`Name for card ${card.code}`, card.name);
     if (name !== null) act(() => getRepo().renameCard(card.id, name), `Card ${card.code} renamed.`);
+  };
+  const remove = () => {
+    const whose = card.name ? ` (${card.name})` : "";
+    const stamps = card.stamps ? ` and its ${card.stamps} stamp${card.stamps === 1 ? "" : "s"}` : "";
+    if (window.confirm(`Delete card ${card.code}${whose}${stamps}? This cannot be undone.`)) {
+      act(() => getRepo().removeCard(card.id), `Card ${card.code} deleted.`);
+    }
   };
   return (
     <li className="rounded-2xl bg-roast-900 p-3.5 ring-1 ring-cream/10">
@@ -100,18 +107,33 @@ function CardRow({ card, now, act }) {
           </button>
         </div>
       </div>
-      {card.history.length > 0 && (
-        <details className="mt-2.5 text-[12.5px] text-cream/70">
-          <summary className="cursor-pointer select-none font-semibold text-cream/80">History</summary>
-          <ol className="mt-1.5 grid gap-0.5">
-            {[...card.history].reverse().map((h, i) => (
-              <li key={`${h.at}-${i}`}>
-                {HISTORY_LABEL[h.type] ?? h.type} · {new Date(h.at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })}
-              </li>
-            ))}
-          </ol>
-        </details>
-      )}
+      <div className="mt-2.5 flex items-start justify-between gap-3">
+        {card.history.length > 0 ? (
+          <details className="min-w-0 flex-1 text-[12.5px] text-cream/70">
+            <summary className="cursor-pointer select-none font-semibold text-cream/80">History</summary>
+            <ol className="mt-1.5 grid gap-0.5">
+              {[...card.history].reverse().map((h, i) => (
+                <li key={`${h.at}-${i}`}>
+                  {HISTORY_LABEL[h.type] ?? h.type} · {new Date(h.at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })}
+                </li>
+              ))}
+            </ol>
+          </details>
+        ) : (
+          <span />
+        )}
+        {isOwner && (
+          <button
+            type="button"
+            onClick={remove}
+            className="press -my-1 flex h-9 shrink-0 items-center gap-1.5 rounded-lg px-2.5 text-[12.5px] font-semibold text-cream/60 hover:bg-flex/20 hover:text-flame-light"
+            aria-label={`Delete card ${card.code}`}
+          >
+            <Trash2 className="size-3.5" aria-hidden="true" />
+            Delete
+          </button>
+        )}
+      </div>
     </li>
   );
 }
@@ -119,7 +141,8 @@ function CardRow({ card, now, act }) {
 /**
  * The counter's card desk: find a customer by the 4-digit code on their card
  * (or their name), then stamp it, take a stamp back or give the surprise.
- * The owner also downloads the customer list; staff (/staff) see no emails.
+ * The owner also downloads the customer list and deletes cards; staff
+ * (/staff) do neither and see no emails.
  */
 export default function CardsDesk({ isOwner = true }) {
   const cards = useCards();
@@ -198,7 +221,7 @@ export default function CardsDesk({ isOwner = true }) {
       {found.length > 0 ? (
         <ul className="grid grid-cols-1 gap-2 xl:grid-cols-2">
           {found.slice(0, SHOWN).map((card) => (
-            <CardRow key={card.id} card={card} now={now} act={act} />
+            <CardRow key={card.id} card={card} now={now} act={act} isOwner={isOwner} />
           ))}
         </ul>
       ) : (

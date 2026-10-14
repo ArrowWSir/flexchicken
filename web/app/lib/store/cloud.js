@@ -313,6 +313,7 @@ export function createCloudRepo({ local, storage, fetcher = fetch, openSocket = 
     unstampCard: (id, by) => call("unstampCard", id, by),
     redeemCard: (id, by) => call("redeemCard", id, by),
     renameCard: (id, name) => call("renameCard", id, name),
+    removeCard: (id) => call("removeCard", id),
     issueStampToken: (orderId) => call("issueStampToken", orderId),
     async redeemStampToken(token, id) {
       cardId = id;

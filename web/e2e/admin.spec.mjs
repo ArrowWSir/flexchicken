@@ -125,3 +125,21 @@ test("the owner downloads signed-in customers' names, emails and card codes as a
     .join("");
   for (const value of ["Name", "Email", "Card code", "Priya Shah", "priya@example.com", code]) expect(text).toContain(value);
 });
+
+test("the owner deletes a card after confirming; cancelling keeps it", async ({ browser }) => {
+  const { shop, admin } = await shopAndAdmin(browser, "/admin/cards");
+  const code = (await shop.getByText(/^#\d{4}$/).first().textContent()).replace("#", "");
+  const remove = admin.getByRole("button", { name: `Delete card ${code}` });
+
+  admin.once("dialog", (dialog) => dialog.dismiss());
+  await remove.click();
+  await expect(admin.getByRole("button", { name: `Add a stamp to card ${code}` })).toBeVisible();
+
+  admin.once("dialog", (dialog) => {
+    expect(dialog.message()).toContain(`Delete card ${code}`);
+    dialog.accept();
+  });
+  await remove.click();
+  await expect(admin.getByText(`Card ${code} deleted.`)).toBeVisible();
+  await expect(admin.getByRole("button", { name: `Add a stamp to card ${code}` })).toHaveCount(0);
+});

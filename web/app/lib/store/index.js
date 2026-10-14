@@ -18,7 +18,7 @@ let repo = null;
 export const ASYNC_ACTIONS = Object.freeze([
   "placeOrder", "advance", "saveSettings", "saveMenuEdits",
   "addStaff", "updateStaff", "removeStaff", "identify", "clockIn", "clockOut", "correctShift",
-  "registerCard", "stampCard", "unstampCard", "redeemCard", "renameCard",
+  "registerCard", "stampCard", "unstampCard", "redeemCard", "renameCard", "removeCard",
   "issueStampToken", "redeemStampToken", "savePromotion", "removePromotion", "pushLocation",
   "saveExpenseSheet", "removeExpenseSheet",
 ]);
