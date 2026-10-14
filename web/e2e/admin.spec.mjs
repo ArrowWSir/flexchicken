@@ -1,4 +1,6 @@
+import { readFile } from "node:fs/promises";
 import { expect, test } from "@playwright/test";
+import { strFromU8, unzipSync } from "fflate";
 import { SIMPLE_DISH, showDish } from "./menu.mjs";
 
 // The shop and the admin open side by side in one browser, as on a till that
@@ -99,4 +101,26 @@ test("the owner changes the driver code, like a password, and the driver screen 
   await driver.getByLabel("Shift code").fill("246813");
   await driver.getByRole("button", { name: "Unlock" }).click();
   await expect(driver.getByRole("tablist", { name: "Deliveries" })).toBeVisible();
+});
+
+test("the owner downloads signed-in customers' names and emails as an Excel file", async ({ browser }) => {
+  const { shop, admin } = await shopAndAdmin(browser, "/admin/cards");
+  await shop.goto("/account");
+  await shop.getByRole("button", { name: "Sign in", exact: true }).click();
+  await shop.getByRole("button", { name: "Continue with Google" }).click();
+  await shop.getByLabel("Name").fill("Priya Shah");
+  await shop.getByLabel("Email").fill("Priya@Example.com");
+  await shop.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect(admin.getByText("priya@example.com")).toBeVisible();
+
+  const [download] = await Promise.all([admin.waitForEvent("download"), admin.getByRole("button", { name: "Download customers (Excel)" }).click()]);
+  expect(download.suggestedFilename()).toMatch(/^flex-chicken-customers-\d{4}-\d{2}-\d{2}\.xlsx$/);
+  await expect(admin.getByText("Downloaded 1 customer as an Excel file.")).toBeVisible();
+
+  const files = unzipSync(new Uint8Array(await readFile(await download.path())));
+  const text = Object.entries(files)
+    .filter(([name]) => name.startsWith("xl/") && name.endsWith(".xml"))
+    .map(([, bytes]) => strFromU8(bytes))
+    .join("");
+  for (const value of ["Name", "Email", "Priya Shah", "priya@example.com"]) expect(text).toContain(value);
 });
