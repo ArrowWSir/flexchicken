@@ -90,6 +90,48 @@ describe("staff sign-in", () => {
   });
 });
 
+describe("the staff screen's sign-in", () => {
+  const change = (api, cookie, body) => api.handle(post("/api/staff/code", { as: "admin", ...body }, { cookie }));
+
+  test("STAFF_PIN opens the staff screen, which runs orders but not the shop", async () => {
+    const { api } = setup({ ...ENV, STAFF_PIN: "35792468" });
+    const { res, cookie } = await signIn(api, "staff", "35792468");
+    expect(res.status).toBe(200);
+    expect(res.headers.get("set-cookie")).toMatch(/fc_staff=.+HttpOnly/);
+    expect((await (await api.handle(get("/api/staff/me?as=staff", cookie))).json()).data).toMatchObject({ role: "staff", name: "Staff" });
+    const settings = await api.handle(post("/api/shop/call", { method: "saveSettings", args: [{ prepMinutes: 30 }], as: "staff" }, { cookie }));
+    expect(settings.status).toBe(403);
+    // A staff cookie is not an owner's.
+    expect((await (await api.handle(get("/api/staff/me?as=admin", cookie))).json()).data).toBeNull();
+  });
+
+  test("is closed until the owner sets a staff code in the admin", async () => {
+    const { api } = setup();
+    expect((await signIn(api, "staff", "35792468")).res.status).toBe(503);
+    const owner = await signIn(api, "admin", "73519046");
+    expect((await change(api, owner.cookie, { role: "staff", current: "73519046", next: "35792468" })).status).toBe(200);
+    expect((await signIn(api, "staff", "35792468")).res.status).toBe(200);
+  });
+
+  test("the staff code and the owner's code must differ, so staff never learn the owner's", async () => {
+    const { api } = setup({ ...ENV, STAFF_PIN: "35792468" });
+    const owner = await signIn(api, "admin", "73519046");
+    const asStaff = await change(api, owner.cookie, { role: "staff", current: "73519046", next: "73519046" });
+    expect(asStaff.status).toBe(400);
+    expect((await asStaff.json()).error).toMatch(/owner's code/);
+    const asOwner = await change(api, owner.cookie, { role: "admin", current: "73519046", next: "35792468" });
+    expect(asOwner.status).toBe(400);
+    expect((await asOwner.json()).error).toMatch(/staff code/);
+  });
+
+  test("only the owner changes the staff code", async () => {
+    const { api } = setup({ ...ENV, STAFF_PIN: "35792468" });
+    const staff = await signIn(api, "staff", "35792468");
+    const res = await api.handle(post("/api/staff/code", { as: "staff", role: "staff", current: "35792468", next: "12345678" }, { cookie: staff.cookie }));
+    expect(res.status).toBe(403);
+  });
+});
+
 describe("changing a shift code from the admin screen", () => {
   const change = (api, cookie, body, ip) => api.handle(post("/api/staff/code", { as: "admin", ...body }, { cookie, ip }));
 

@@ -6,6 +6,7 @@ import { field } from "./StaffRow";
 
 const KINDS = [
   { id: "admin", label: "Owner's code", hint: "Opens /admin and sets up the clock tablet." },
+  { id: "staff", label: "Staff code", hint: "Opens /staff: orders and cards only." },
   { id: "driver", label: "Driver code", hint: "Opens /driver, for every driver." },
   { id: "list", label: "Order list PIN", hint: "Opens the order list. Starts as 0000." },
 ];
@@ -36,6 +37,7 @@ export default function ShiftCodes() {
         tone: "ok",
         text: {
           admin: "Owner's code changed. Other admin screens and the clock tablet need the new code.",
+          staff: "Staff code changed. Staff open /staff with the new code.",
           driver: "Driver code changed. Drivers sign in again with the new code.",
           list: "Order list PIN changed. Use the new PIN to open the order list.",
         }[kind],
@@ -53,7 +55,7 @@ export default function ShiftCodes() {
         Shift codes
       </h2>
       <form onSubmit={submit} className="grid gap-4 rounded-[22px] bg-roast-900 p-4 ring-1 ring-cream/10 sm:p-5">
-        <fieldset className="grid gap-2 sm:grid-cols-3">
+        <fieldset className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
           <legend className="mb-2 text-[13px] font-semibold">Which code</legend>
           {KINDS.map((k) => (
             <label

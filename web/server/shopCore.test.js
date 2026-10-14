@@ -27,6 +27,7 @@ const PUBLIC = { role: "public", ip: "1.1.1.1" };
 const CLOCK = { role: "clock", id: "clock", name: "Shop clock" };
 const ADMIN = { role: "admin", id: "kitchen", name: "Kitchen" };
 const LIST = { ...ADMIN, hasListKey: true }; // the owner, with the order list PIN typed
+const STAFF = { role: "staff", id: "staff", name: "Staff" };
 const DRIVER = { role: "driver", id: "drv_sam", name: "Sam" };
 const OTHER_DRIVER = { role: "driver", id: "drv_alex", name: "Alex" };
 
@@ -388,5 +389,60 @@ describe("menu photos", () => {
     const { core } = setup();
     const edits = { updated: { 1155: { image: "javascript:alert(1)" } }, added: [], removed: [], soldOut: [] };
     await expect(core.call("saveMenuEdits", [edits], ADMIN)).rejects.toThrow(/photo/);
+  });
+});
+
+describe("the staff screen", () => {
+  test("staff run an order through the kitchen, and can cancel one", async () => {
+    const { core } = setup();
+    const { result } = await collect(core);
+    for (const status of ["accepted", "preparing", "ready", "collected"]) {
+      expect((await core.call("advance", [result.id, status], STAFF)).result.status).toBe(status);
+    }
+    const second = (await collect(core)).result;
+    expect((await core.call("advance", [second.id, "cancelled"], STAFF)).result.status).toBe("cancelled");
+  });
+
+  test("staff print the receipt's stamp code and stamp, unstamp, rename and redeem cards", async () => {
+    const { core } = setup();
+    const { result: order } = await collect(core);
+    await expect(core.call("issueStampToken", [order.id], STAFF)).resolves.toBeTruthy();
+    const { result: card } = await core.call("registerCard", [{ id: "fc_usr_cccccccccccccccccc", name: "Jo" }], PUBLIC);
+    await core.call("stampCard", [card.id, "counter"], STAFF);
+    await core.call("stampCard", [card.id, "counter"], STAFF);
+    await core.call("unstampCard", [card.id, "counter"], STAFF);
+    await core.call("renameCard", [card.id, "Joanne"], STAFF);
+    const [seen] = core.snapshot(["loyalty_cards"], STAFF).loyalty_cards;
+    expect(seen).toMatchObject({ name: "Joanne", stamps: 1 });
+  });
+
+  test("staff cannot change the menu, prices, offers, team or shop settings", async () => {
+    const { core } = setup();
+    const calls = [
+      ["saveSettings", [{ prepMinutes: 5 }]],
+      ["saveMenuEdits", [{}]],
+      ["savePromotion", [{ name: "Free" }]],
+      ["addStaff", [{ name: "New" }]],
+      ["clockOut", ["stf_1"]],
+      ["saveExpenseSheet", [{}]],
+    ];
+    for (const [method, args] of calls) {
+      await expect(core.call(method, args, STAFF)).rejects.toMatchObject({ status: 403, message: expect.stringMatching(/owner/) });
+    }
+  });
+
+  test("staff see orders and cards without customers' emails, and nothing of the back office", async () => {
+    const { core } = setup();
+    await collect(core);
+    await core.call("registerCard", [{ id: "fc_usr_cccccccccccccccccc", name: "Jo", email: "jo@example.com" }], PUBLIC);
+    const view = core.snapshot(["orders", "loyalty_cards", "staff", "shifts", "expense_sheets", "stamp_tokens"], STAFF);
+    expect(view.orders).toHaveLength(1);
+    expect(view.orders[0].customer).toMatchObject({ name: "Jo", email: "", phone: customer.phone });
+    expect(view.loyalty_cards).toHaveLength(1);
+    expect(view.loyalty_cards[0]).toMatchObject({ name: "Jo", email: "" });
+    expect(view.staff).toEqual([]);
+    expect(view.shifts).toEqual([]);
+    expect(view.expense_sheets).toEqual([]);
+    expect(view.stamp_tokens).toEqual([]);
   });
 });

@@ -119,8 +119,9 @@ function CardRow({ card, now, act }) {
 /**
  * The counter's card desk: find a customer by the 4-digit code on their card
  * (or their name), then stamp it, take a stamp back or give the surprise.
+ * The owner also downloads the customer list; staff (/staff) see no emails.
  */
-export default function CardsDesk() {
+export default function CardsDesk({ isOwner = true }) {
   const cards = useCards();
   const now = useNow(CLOCK_MS);
   const [query, setQuery] = useState("");
@@ -166,23 +167,25 @@ export default function CardsDesk() {
         </p>
       </div>
 
-      <button
-        type="button"
-        onClick={downloadCustomers}
-        className="press flex h-11 items-center justify-center gap-2 justify-self-start rounded-xl px-4 text-[14px] font-semibold text-cream ring-1 ring-cream/25 hover:bg-cream/10"
-      >
-        <Download className="size-4" aria-hidden="true" />
-        Download customers (Excel)
-      </button>
+      {isOwner && (
+        <button
+          type="button"
+          onClick={downloadCustomers}
+          className="press flex h-11 items-center justify-center gap-2 justify-self-start rounded-xl px-4 text-[14px] font-semibold text-cream ring-1 ring-cream/25 hover:bg-cream/10"
+        >
+          <Download className="size-4" aria-hidden="true" />
+          Download customers (Excel)
+        </button>
+      )}
 
       <label className="relative">
-        <span className="sr-only">Search by 4-digit card code, name or email</span>
+        <span className="sr-only">{isOwner ? "Search by 4-digit card code, name or email" : "Search by 4-digit card code or name"}</span>
         <Search className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-cream/50" aria-hidden="true" />
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Card code (e.g. 4271), name or email"
+          placeholder={isOwner ? "Card code (e.g. 4271), name or email" : "Card code (e.g. 4271) or name"}
           autoComplete="off"
           className={`${FIELD} h-14 pl-12 text-[18px]`}
         />

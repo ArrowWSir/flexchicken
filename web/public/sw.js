@@ -11,7 +11,9 @@ self.addEventListener("notificationclick", (event) => {
   const target = new URL(event.notification.data?.url || "/admin/orders", self.location.origin).href;
   event.waitUntil(
     self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((windows) => {
-      const open = windows.find((w) => w.url === target) || windows.find((w) => new URL(w.url).pathname.startsWith("/admin"));
+      // The same screen (/admin or /staff) already open somewhere.
+      const screen = new URL(target).pathname.split("/")[1];
+      const open = windows.find((w) => w.url === target) || windows.find((w) => new URL(w.url).pathname.split("/")[1] === screen);
       if (!open) return self.clients.openWindow(target);
       return open.focus().then((w) => (w && w.url !== target && "navigate" in w ? w.navigate(target) : w));
     })

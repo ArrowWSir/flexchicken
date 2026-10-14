@@ -29,11 +29,14 @@ import {
 
 export { ShopError };
 
-// Who may call: customers, the shop's clock tablet, drivers, the owner.
-export const ROLES = Object.freeze(["public", "clock", "driver", "admin"]);
+// Who may call: customers, the shop's clock tablet, drivers, the counter and
+// kitchen staff (orders and cards only), the owner.
+export const ROLES = Object.freeze(["public", "clock", "driver", "staff", "admin"]);
 const EVERYONE = ROLES;
 const CLOCK = ["clock", "admin"];
 const DRIVERS = ["driver", "admin"];
+const SERVICE = ["staff", "admin"];
+const ON_ORDERS = ["driver", "staff", "admin"];
 const OWNER = ["admin"];
 
 // Orders the database keeps; staff screens get the latest of them.
@@ -92,7 +95,7 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
   const advance = ([id, status, extra], actor) => {
     const order = orderFor(id);
     if (typeof status !== "string") throw new Error("Choose what happens next.");
-    if (actor.role === "admin") {
+    if (actor.role === "admin" || actor.role === "staff") {
       const driver = isObject(extra?.driver) ? { id: text(extra.driver.id, 60), name: text(extra.driver.name, 30) } : null;
       return repo.advance(order.id, status, driver ? { driver } : {});
     }
@@ -195,7 +198,7 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
       },
     },
 
-    advance: { allow: DRIVERS, run: advance },
+    advance: { allow: ON_ORDERS, run: advance },
     pushLocation: {
       allow: DRIVERS,
       run: ([orderId, point], actor) => {
@@ -221,11 +224,11 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
     removeStaff: { allow: OWNER, run: ([id]) => repo.removeStaff(requireId(id)) },
     clockOut: { allow: OWNER, run: ([staffId]) => repo.clockOut(requireId(staffId), "manager") },
     correctShift: { allow: OWNER, run: ([shiftId, times]) => repo.correctShift(requireId(shiftId), requireObject(times, "Enter the times.")) },
-    stampCard: { allow: OWNER, run: ([id, who]) => repo.stampCard(requireId(id), by(who)) },
-    unstampCard: { allow: OWNER, run: ([id, who]) => repo.unstampCard(requireId(id), by(who)) },
-    redeemCard: { allow: OWNER, run: ([id, who]) => repo.redeemCard(requireId(id), by(who)) },
-    renameCard: { allow: OWNER, run: ([id, name]) => repo.renameCard(requireId(id), text(name, 60)) },
-    issueStampToken: { allow: OWNER, run: ([orderId]) => repo.issueStampToken(orderFor(orderId).id) },
+    stampCard: { allow: SERVICE, run: ([id, who]) => repo.stampCard(requireId(id), by(who)) },
+    unstampCard: { allow: SERVICE, run: ([id, who]) => repo.unstampCard(requireId(id), by(who)) },
+    redeemCard: { allow: SERVICE, run: ([id, who]) => repo.redeemCard(requireId(id), by(who)) },
+    renameCard: { allow: SERVICE, run: ([id, name]) => repo.renameCard(requireId(id), text(name, 60)) },
+    issueStampToken: { allow: SERVICE, run: ([orderId]) => repo.issueStampToken(orderFor(orderId).id) },
     savePromotion: {
       allow: OWNER,
       // A new offer gets a random id, so two saved in the same instant stay apart.
@@ -251,7 +254,13 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
     const action = actionFor(name);
     if (!action) throw new ShopError(404, "Unknown action.");
     if (!action.allow.includes(actor?.role)) {
-      throw new ShopError(403, CLOCK === action.allow ? "This screen is for the shop's clock tablet. Unlock it with the owner's code." : "Staff only. Sign in again.");
+      const why =
+        CLOCK === action.allow
+          ? "This screen is for the shop's clock tablet. Unlock it with the owner's code."
+          : actor?.role === "staff"
+            ? "Only the owner can do that, from the admin."
+            : "Staff only. Sign in again.";
+      throw new ShopError(403, why);
     }
     if (action.needsListKey && !actor.hasListKey) throw new ShopError(403, "Enter the order list PIN first.");
     if (!Array.isArray(args)) throw new ShopError(400, "That request could not be read.");
@@ -273,6 +282,9 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
 
   const watched = (ids) => new Set((Array.isArray(ids) ? ids : []).filter((id) => typeof id === "string").slice(0, MAX_WATCHED));
 
+  // Drivers and staff see who ordered and how to reach them, but not customers' emails.
+  const withoutEmail = (o) => ({ ...o, customer: { ...o.customer, email: "" } });
+
   // A driver sees what is waiting or on the road, and their own recent drops;
   // the customer's email is not theirs to see.
   const driverOrders = (actor) =>
@@ -285,12 +297,13 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
             o.status === "out_for_delivery" ||
             (o.status === "delivered" && o.driver?.id === actor.id && lastChange(o) > now() - DRIVER_RECENT_MS))
       )
-      .map((o) => ({ ...o, customer: { ...o.customer, email: "" } }));
+      .map(withoutEmail);
 
   // What each role may read of each topic.
   const VIEWS = {
     [TOPICS.orders]: (actor, scope) => {
       if (actor.role === "admin") return repo.listOrders().slice(-STAFF_VIEW_ORDERS);
+      if (actor.role === "staff") return repo.listOrders().slice(-STAFF_VIEW_ORDERS).map(withoutEmail);
       if (actor.role === "driver") return driverOrders(actor);
       const ids = watched(scope.orderIds);
       return repo.listOrders().filter((o) => ids.has(o.id));
@@ -308,6 +321,7 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
       actor.role === "admin" ? repo.listPromotions() : repo.listPromotions().filter((p) => ["live", "scheduled"].includes(promoStatus(p, now()))),
     [TOPICS.cards]: (actor, scope) => {
       if (actor.role === "admin") return repo.listCards();
+      if (actor.role === "staff") return repo.listCards().map((c) => ({ ...c, email: "" }));
       const card = typeof scope.cardId === "string" ? repo.getCard(scope.cardId) : null;
       return card ? [card] : [];
     },

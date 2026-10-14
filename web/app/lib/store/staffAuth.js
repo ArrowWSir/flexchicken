@@ -1,4 +1,4 @@
-// Sign-in for the staff screens (/admin, /driver), and the order list's own
+// Sign-in for the staff screens (/admin, /staff, /driver), and the order list's own
 // PIN inside the admin.
 //
 // Cloud: the shift code is checked by the server, which sets an HttpOnly
@@ -14,12 +14,24 @@ const LOCAL_PINS =
     ? {}
     : {
         admin: process.env.NEXT_PUBLIC_ADMIN_PIN || "2580",
+        staff: process.env.NEXT_PUBLIC_STAFF_PIN || "3690",
         driver: process.env.NEXT_PUBLIC_DRIVER_PIN || "1111",
         list: process.env.NEXT_PUBLIC_LIST_PIN || "0000",
       };
 const KEY = (role) => `fc_staff_${role}`;
 const CODE_KEY = (which) => `fc_local_code_${which}`;
-const codeKind = (role) => (role === "driver" || role === "list" ? role : "admin"); // the clock opens with the owner's code
+const codeKind = (role) => (role === "staff" || role === "driver" || role === "list" ? role : "admin"); // the clock opens with the owner's code
+const SCREEN_CODES = { staff: "staff code", driver: "driver code" };
+const WHO = { staff: { name: "Staff", id: "staff" }, admin: { name: "Kitchen", id: "kitchen" }, clock: { name: "Kitchen", id: "kitchen" } };
+
+// A code that opens a staff screen must never also open the owner's.
+function localClash(role, next) {
+  if (role === "admin") {
+    const other = Object.keys(SCREEN_CODES).find((k) => next === localCode(k));
+    return other ? `That is the ${SCREEN_CODES[other]}. Pick a different owner's code.` : null;
+  }
+  return SCREEN_CODES[role] && next === localCode("admin") ? `That is the owner's code. Pick a different ${SCREEN_CODES[role]}.` : null;
+}
 const CODE_SHAPE = /^\d{4,8}$/;
 
 // Local builds keep a changed code on this device only.
@@ -71,7 +83,7 @@ const localAuth = {
     if (pin !== localCode(role)) throw new Error("That code is not right.");
     const clean = String(name ?? "").trim().slice(0, 30);
     if (role === "driver" && !clean) throw new Error("Enter your name.");
-    const record = role === "driver" ? { role, name: clean, id: `drv_${clean.toLowerCase().replace(/[^a-z0-9]+/g, "-")}` } : { role, name: "Kitchen", id: "kitchen" };
+    const record = role === "driver" ? { role, name: clean, id: `drv_${clean.toLowerCase().replace(/[^a-z0-9]+/g, "-")}` } : { role, ...WHO[role] };
     save(role, record);
     return record;
   },
@@ -88,7 +100,8 @@ const localAuth = {
       throw new Error(role === "list" ? "The current PIN is not right." : "Your current owner's code is not right.");
     }
     if (!CODE_SHAPE.test(next ?? "")) throw new Error("Use 4 to 8 digits for the new code.");
-    if (role !== "list" && next === localCode(role === "admin" ? "driver" : "admin")) throw new Error("The owner's code and the driver code must be different.");
+    const clash = localClash(role, next);
+    if (clash) throw new Error(clash);
     try {
       localStorage.setItem(CODE_KEY(role), next);
     } catch {
@@ -132,7 +145,7 @@ const cloudAuth = {
     await api("/api/staff/list-lock", {}).catch(() => {});
     getRepo().reload(["expenses"]);
   },
-  /** The owner changes the owner's, the drivers' or the order list's code; this device stays signed in. */
+  /** The owner changes the owner's, the staff screen's, the drivers' or the order list's code; this device stays signed in. */
   async changeCode(role, current, next) {
     await api("/api/staff/code", { as: "admin", role, current, next });
   },

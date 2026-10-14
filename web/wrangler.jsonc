@@ -25,6 +25,7 @@
   "dev": { "host": "localhost" },
   // Secrets, set with `npx wrangler secret put NAME` (never in this file):
   //   ADMIN_PIN, DRIVER_PIN  shift codes for /admin and /driver
+  //   STAFF_PIN              optional: /staff's code (or set it in Admin → Staff)
   //   SESSION_SECRET         signs staff cookies (at least 32 characters)
   "observability": {
     "enabled": true

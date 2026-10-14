@@ -13,8 +13,8 @@
 //   GET  /api/staff/me?as=admin
 //   GET  /api/photo/<id>.<ext>
 //
-// `as` names the staff screen asking (admin, driver, or clock: the shop's
-// clock tablet), so the matching cookie is used; without it the caller is a
+// `as` names the staff screen asking (admin, staff: the counter's orders and
+// cards, driver, or clock: the shop's clock tablet), so the matching cookie is used; without it the caller is a
 // customer. The live socket (/api/shop/live) is handled by the Durable Object.
 import { callerKey, codeVersion, cookieFor, createLimiter, createRateLimit, hashCode, newSalt, pinMatches, readCookie, signClaims, verifyClaims } from "./auth.js";
 import { ShopError } from "./checks.js";
@@ -32,7 +32,7 @@ const LIST_COOKIE = "fc_list";
 // The order list PIN until the owner changes it (or sets LIST_PIN).
 const DEFAULT_LIST_CODE = "0000";
 const MIN_SECRET_CHARS = 32;
-const STAFF_ROLES = new Set(["admin", "driver", "clock"]);
+const STAFF_ROLES = new Set(["admin", "staff", "driver", "clock"]);
 const PHOTO_PATH = /^\/api\/photo\/([A-Za-z0-9_-]{1,80})\.(webp|jpeg|png)$/;
 const MINUTE = 60_000;
 // Per caller (IP, or IPv6 /64): a customer orders a few times at most.
@@ -97,14 +97,15 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
   let globalLoginPausedUntil = 0;
   const rateLimits = Object.fromEntries(Object.entries(LIMITS).map(([name, l]) => [name, createRateLimit(l)]));
   const secret = typeof env.SESSION_SECRET === "string" && env.SESSION_SECRET.length >= MIN_SECRET_CHARS ? env.SESSION_SECRET : null;
-  // Three codes: the owner's (admin screens, and unlocking the clock tablet),
-  // the drivers', and the order list's (a second lock inside the admin). One
-  // the owner set in /admin wins; until then the Worker secret stands.
-  const keyOf = (role) => (role === "driver" || role === "list" ? role : "admin");
+  // Four codes: the owner's (admin screens, and unlocking the clock tablet),
+  // the staff screen's (orders and cards), the drivers', and the order list's
+  // (a second lock inside the admin). One the owner set in /admin wins; until
+  // then the Worker secret stands.
+  const keyOf = (role) => (role === "staff" || role === "driver" || role === "list" ? role : "admin");
   const savedCode = (role) => store.read(CODES, {})[keyOf(role)] ?? null;
   const secretCode = (role) => {
     const key = keyOf(role);
-    const code = { driver: env.DRIVER_PIN, list: env.LIST_PIN, admin: env.ADMIN_PIN }[key];
+    const code = { staff: env.STAFF_PIN, driver: env.DRIVER_PIN, list: env.LIST_PIN, admin: env.ADMIN_PIN }[key];
     if (typeof code === "string" && CODE_SHAPE.test(code)) return code;
     return key === "list" ? DEFAULT_LIST_CODE : null;
   };
@@ -210,7 +211,7 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
     if (wrong) return wrong;
     const cleanName = typeof name === "string" ? name.trim().replace(/\s+/g, " ").slice(0, 30) : "";
     if (role === "driver" && !driverId(cleanName).slice(4)) return fail(400, "Enter your name.");
-    const who = { admin: { id: "kitchen", name: "Kitchen" }, clock: { id: "clock", name: "Shop clock" }, driver: { id: driverId(cleanName), name: cleanName } }[role];
+    const who = { admin: { id: "kitchen", name: "Kitchen" }, staff: { id: "staff", name: "Staff" }, clock: { id: "clock", name: "Shop clock" }, driver: { id: driverId(cleanName), name: cleanName } }[role];
     const claims = { role, ...who };
     return ok(claims, { "set-cookie": await issueCookie(claims) });
   }
@@ -233,13 +234,26 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
     return fail(401, wrongMessage);
   }
 
+  // The screens' codes each differ from the owner's code.
+  const NAMES = { staff: "staff code", driver: "driver code" };
+  async function clashingCode(role, next) {
+    if (role === "admin") {
+      for (const other of ["driver", "staff"]) {
+        if (await codeMatches(other, next)) return `That is the ${NAMES[other]}. Pick a different owner's code.`;
+      }
+      return null;
+    }
+    if (NAMES[role] && (await codeMatches("admin", next))) return `That is the owner's code. Pick a different ${NAMES[role]}.`;
+    return null;
+  }
+
   // The owner changes a code, like a password: signed in on an admin screen,
   // with the current owner's code typed again.
   async function changeCode(request) {
     const { body } = await readBody(request, MAX_STAFF_BODY);
     const actor = await actorFor(request, body.as);
     if (actor.role !== "admin") throw new ShopError(403, "Only the owner can change the shift codes. Sign in again.");
-    const role = ["admin", "driver", "list"].includes(body.role) ? body.role : null;
+    const role = ["admin", "staff", "driver", "list"].includes(body.role) ? body.role : null;
     if (!role) throw new ShopError(400, "Choose which code to change.");
     // The order list PIN changes with itself, or with the owner's code when
     // it has been forgotten.
@@ -250,10 +264,9 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
     if (wrong) return wrong;
     const next = body.next;
     if (typeof next !== "string" || !CODE_SHAPE.test(next)) throw new ShopError(400, "Use 4 to 8 digits for the new code.");
-    const other = role === "admin" ? "driver" : "admin";
-    if (role !== "list" && (await codeMatches(other, next))) {
-      throw new ShopError(400, role === "admin" ? "That is the driver code. Pick a different owner's code." : "That is the owner's code. Pick a different driver code.");
-    }
+    // A code that opens a staff screen must never also open the owner's.
+    const clash = await clashingCode(role, next);
+    if (clash) throw new ShopError(400, clash);
     const salt = newSalt();
     const record = { hash: await hashCode(next, salt), salt, changedAt: now() };
     const all = store.read(CODES, {});

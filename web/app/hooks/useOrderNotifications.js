@@ -6,7 +6,6 @@ import { isOrdersLoaded } from "./useShop";
 
 // This device's choice; the browser's permission is asked for separately.
 const PREF_KEY = "fc_admin_notify";
-const ORDERS_URL = "/admin/orders";
 
 const isSupported = () => typeof window !== "undefined" && "Notification" in window;
 
@@ -37,9 +36,9 @@ async function registration() {
   }
 }
 
-async function show(order) {
+async function show(order, ordersUrl) {
   const { title, body, tag } = notificationFor(order);
-  const options = { body, tag, icon: "/brand/icon-192.png", badge: "/brand/icon-192.png", requireInteraction: true, data: { url: ORDERS_URL } };
+  const options = { body, tag, icon: "/brand/icon-192.png", badge: "/brand/icon-192.png", requireInteraction: true, data: { url: ordersUrl } };
   const reg = await registration();
   if (reg) return reg.showNotification(title, options);
   const note = new Notification(title, options);
@@ -51,10 +50,11 @@ async function show(order) {
 }
 
 /**
- * System notifications for new orders while any admin page is open, even in
- * a background tab. `status`: "unsupported" | "default" | "granted" | "denied".
+ * System notifications for new orders while any admin or staff page is open,
+ * even in a background tab; tapping one opens `ordersUrl`.
+ * `status`: "unsupported" | "default" | "granted" | "denied".
  */
-export default function useOrderNotifications(orders) {
+export default function useOrderNotifications(orders, ordersUrl = "/admin/orders") {
   const [state, setState] = useState({ status: "default", isOn: false });
 
   useEffect(() => {
@@ -83,7 +83,7 @@ export default function useOrderNotifications(orders) {
     if (!state.isOn) return;
     // A notification that fails to show leaves the board's own chime and
     // title flash; there is nothing more useful to do with the error.
-    fresh.forEach((order) => show(order).catch(() => {}));
+    fresh.forEach((order) => show(order, ordersUrl).catch(() => {}));
   }, isOrdersLoaded(orders));
 
   return { ...state, turnOn, turnOff };

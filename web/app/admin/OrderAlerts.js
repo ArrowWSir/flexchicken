@@ -5,13 +5,13 @@ import useOrderNotifications from "../hooks/useOrderNotifications";
 
 const HELP = {
   denied: "Notifications are blocked for this site. Allow them in the browser's site settings, then tap the bell again.",
-  unsupported: "This browser can't show notifications. On an iPhone or iPad, add the admin to the Home Screen and open it from there.",
+  unsupported: "This browser can't show notifications. On an iPhone or iPad, add this screen to the Home Screen and open it from there.",
 };
 
-/** The bell in the admin bar: new-order notifications on any admin page. */
-export default function OrderAlerts() {
+/** The bell in the admin and staff bars: new-order notifications on any of their pages. */
+export default function OrderAlerts({ ordersUrl = "/admin/orders" }) {
   const orders = useOrders();
-  const { status, isOn, turnOn, turnOff } = useOrderNotifications(orders);
+  const { status, isOn, turnOn, turnOff } = useOrderNotifications(orders, ordersUrl);
 
   const onClick = () => {
     if (HELP[status]) return window.alert(HELP[status]);
