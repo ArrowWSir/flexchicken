@@ -2,8 +2,7 @@
 import { useMemo, useState } from "react";
 import { Bell, BellOff, Printer } from "lucide-react";
 import { getRepo } from "../../lib/store";
-import { formatPrice } from "../../lib/cart";
-import { formatOrderNumber, isFinished } from "../../lib/orders";
+import { formatOrderNumber } from "../../lib/orders";
 import { printReceipt } from "../../lib/printer";
 import { isOrdersLoaded, useOrders } from "../../hooks/useShop";
 import { useNow } from "../../hooks/useDevice";
@@ -23,13 +22,6 @@ const DONE_SHOWN = 20;
 const REPRINTABLE = new Set(["accepted", "preparing", "ready", "out_for_delivery"]);
 
 const laneOf = (status) => LANES.find((l) => l.statuses.includes(status))?.id ?? "new";
-const startOfDay = (now) => new Date(new Date(now).toDateString()).getTime();
-
-/** Today's orders that were not cancelled, and what they come to. */
-export function dayTotals(orders, now) {
-  const today = orders.filter((o) => o.createdAt >= startOfDay(now) && o.status !== "cancelled");
-  return { count: today.length, pence: today.reduce((sum, o) => sum + o.totals.totalPence, 0) };
-}
 
 // The order's one-time stamp link; a reprint gets the same one. If the code
 // cannot be saved the receipt still prints, just without the QR.
@@ -119,17 +111,11 @@ export default function OrdersBoard() {
     );
   }, [orders]);
 
-  const openCount = orders.filter((o) => !isFinished(o)).length;
-  const today = dayTotals(orders, now);
-
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="font-display text-[24px] font-black uppercase leading-none">Orders</h1>
-          <p className="mt-1 text-[12.5px] text-cream/60">
-            {openCount} open · today {today.count} order{today.count === 1 ? "" : "s"}, {formatPrice(today.pence)} · tickets turn amber at 10 min, red at 20
-          </p>
         </div>
         <button
           type="button"
