@@ -232,6 +232,11 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
       run: ([input]) => repo.savePromotion({ ...requireObject(input, "That offer could not be read."), newId: newId("promo") }),
     },
     removePromotion: { allow: OWNER, run: ([id]) => repo.removePromotion(requireId(id)) },
+    saveExpenseSheet: {
+      allow: OWNER,
+      run: ([input]) => repo.saveExpenseSheet({ ...requireObject(input, "That sheet could not be read."), newId: newId("exp") }),
+    },
+    removeExpenseSheet: { allow: OWNER, run: ([id]) => repo.removeExpenseSheet(requireId(id)) },
   };
 
   const actionFor = (name) => (typeof name === "string" && Object.hasOwn(ACTIONS, name) ? ACTIONS[name] : null);
@@ -313,6 +318,8 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
       if (actor.role !== "clock") return [];
       return repo.listShifts().filter((s) => s.endAt === null).map(({ id, staffId, startAt }) => ({ id, staffId, startAt, endAt: null, closedBy: null }));
     },
+    // What the shop spends is the owner's business only.
+    [TOPICS.expenses]: (actor) => (actor.role === "admin" ? repo.listExpenseSheets() : []),
     [TOPICS.stampTokens]: (actor) => (actor.role === "admin" ? readTokens(store.read(TOPICS.stampTokens, [])) : []),
   };
 

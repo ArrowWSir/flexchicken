@@ -4,10 +4,11 @@ import { UtensilsCrossed } from "lucide-react";
 import { ringFocus, ringOffset, ringVisibility, slotStep } from "../../lib/table";
 import { measureDish } from "../../lib/dishFit";
 
-// A round wooden table seen from above at an angle (the camera of plate 1.jpg).
+// The owner's round travertine table (table.jpg, flattened by
+// assets-src/make_table.py) seen from above at an angle (the camera of plate 1.jpg).
 // Dishes stand on cream plates in a ring near its edge; the plate at the front
 // left is the selected dish. Turning the table turns everything on it: the
-// grain, the plates and the food. It sits at the right of the page and runs
+// stone, the gold birds, the plates and the food. It sits at the right of the page and runs
 // off the frame edge, which crops it.
 //
 // Positions are computed every frame and written straight to `style`; React
@@ -108,14 +109,14 @@ export default function TableStage({ items, activeIndex, onSelect, onStep, isRed
       el.style.height = `${h}px`;
     };
 
-    // Top: a disc of top-down grain, turned, then flattened by the camera.
+    // Top: a top-down disc of the table, turned, then flattened by the camera.
     box(topRef.current, cx - R, cy - R, R * 2, R * 2);
     box(lightRef.current, cx - R, cy - R, R * 2, R * 2);
     // Positive CSS rotation is clockwise on screen, which carries the front of
     // the table to the left: the same way the plates travel round.
     if (topRef.current) topRef.current.style.transform = `scaleY(${TILT}) rotate(${tableAngle}deg)`;
     if (lightRef.current) lightRef.current.style.transform = `scaleY(${TILT})`;
-    // Edge: the band under the front arc; its grain slides as the table turns.
+    // Edge: the brass band under the front arc; it slides as the table turns.
     const edge = width * EDGE_DEPTH;
     const edgeEl = edgeRef.current;
     box(edgeEl, cx - R, cy, R * 2, ry + edge);

@@ -269,6 +269,31 @@ describe("receipt stamp codes", () => {
   });
 });
 
+describe("expense sheets", () => {
+  const draft = { title: "Stock", date: "2026-10-09", lines: [{ item: "Wings", qty: "10 kg", source: "Brakes", price: "45" }] };
+
+  test("the owner saves a sheet, changes it, and every tab sees it", () => {
+    const { kitchen, phone } = setup();
+    const heard = vi.fn();
+    phone.subscribe("expenses", heard);
+    const saved = kitchen.saveExpenseSheet(draft);
+    expect(heard).toHaveBeenCalled();
+    expect(phone.listExpenseSheets()).toHaveLength(1);
+    const edited = kitchen.saveExpenseSheet({ ...draft, id: saved.id, lines: [...draft.lines, { item: "Oil", price: "30" }] });
+    expect(edited.id).toBe(saved.id);
+    expect(edited.createdAt).toBe(saved.createdAt);
+    expect(phone.listExpenseSheets()).toHaveLength(1);
+    expect(phone.listExpenseSheets()[0].lines).toHaveLength(2);
+  });
+
+  test("a sheet can be deleted", () => {
+    const { kitchen } = setup();
+    const { id } = kitchen.saveExpenseSheet(draft);
+    kitchen.removeExpenseSheet(id);
+    expect(kitchen.listExpenseSheets()).toEqual([]);
+  });
+});
+
 describe("promotions", () => {
   test("the owner's offer is saved, priced into orders and removable", () => {
     const { kitchen, phone } = setup();

@@ -40,6 +40,14 @@ async function photo(request, env, ctx) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    // Always the secure address, and one address for the shop: a phone keeps
+    // its loyalty card per address, so www sends everyone to the same one.
+    const isLocal = url.hostname === "localhost" || url.hostname === "127.0.0.1";
+    if (!isLocal && (url.protocol === "http:" || url.hostname === "www.flexchicken.uk")) {
+      url.protocol = "https:";
+      if (url.hostname === "www.flexchicken.uk") url.hostname = "flexchicken.uk";
+      return Response.redirect(url.toString(), 301);
+    }
     if (url.pathname.startsWith("/api/photo/") && request.method === "GET") return withSecurityHeaders(await photo(request, env, ctx));
     if (url.pathname.startsWith("/api/")) return withSecurityHeaders(await shopFor(env).fetch(request));
     return withSecurityHeaders(await nextHandler.fetch(request, env, ctx));

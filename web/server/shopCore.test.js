@@ -216,6 +216,23 @@ describe("what each screen may read", () => {
     expect(core.snapshot(["stamp_tokens"], ADMIN, {}).stamp_tokens).toHaveLength(1);
   });
 
+  test("expense sheets are the owner's alone", async () => {
+    const { core } = setup();
+    const sheet = { date: "2026-10-09", lines: [{ item: "Wings", source: "Brakes", price: "45" }] };
+    for (const actor of [PUBLIC, CLOCK]) {
+      await expect(core.call("saveExpenseSheet", [sheet], actor)).rejects.toMatchObject({ status: 403 });
+    }
+    const { result } = await core.call("saveExpenseSheet", [sheet], ADMIN);
+    expect(result.id).toMatch(/^exp/);
+    expect(result.lines[0].pricePence).toBe(4500);
+    expect(core.snapshot(["expense_sheets"], PUBLIC, {}).expense_sheets).toEqual([]);
+    expect(core.snapshot(["expense_sheets"], CLOCK, {}).expense_sheets).toEqual([]);
+    expect(core.snapshot(["expense_sheets"], ADMIN, {}).expense_sheets).toHaveLength(1);
+    await expect(core.call("saveExpenseSheet", [{ ...sheet, lines: [{ item: "Oil", price: "lots" }] }], ADMIN)).rejects.toMatchObject({ status: 400 });
+    await core.call("removeExpenseSheet", [result.id], ADMIN);
+    expect(core.snapshot(["expense_sheets"], ADMIN, {}).expense_sheets).toEqual([]);
+  });
+
   test("everyone reads the menu, settings and offers", () => {
     const { core } = setup();
     const view = core.snapshot(["settings", "menu_edits", "promotions"], PUBLIC, {});

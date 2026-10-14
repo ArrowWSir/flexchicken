@@ -18,7 +18,7 @@ const poppins = Poppins({
   display: "swap",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://flexchicken.co.uk";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://flexchicken.uk";
 const TITLE = "Flex Chicken | Rainham’s local chicken shop";
 const DESCRIPTION =
   "Crispy fried chicken, loaded burgers and spicy wings from Flex Chicken, 107 Upminster Road South, Rainham. Collect stamps on your Flex card: 8 stamps, and your 9th visit brings a surprise.";

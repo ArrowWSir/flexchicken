@@ -20,6 +20,7 @@ export const ASYNC_ACTIONS = Object.freeze([
   "addStaff", "updateStaff", "removeStaff", "identify", "clockIn", "clockOut", "correctShift",
   "registerCard", "stampCard", "unstampCard", "redeemCard", "renameCard",
   "issueStampToken", "redeemStampToken", "savePromotion", "removePromotion", "pushLocation",
+  "saveExpenseSheet", "removeExpenseSheet",
 ]);
 
 /** The browser-store repo with the cloud repo's shape: actions return promises. */

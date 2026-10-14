@@ -32,6 +32,7 @@ const readStaff = (repo) => repo.listStaff();
 const readShifts = (repo) => repo.listShifts();
 const readCards = (repo) => repo.listCards();
 const readPromotions = (repo) => repo.listPromotions();
+const readExpenseSheets = (repo) => repo.listExpenseSheets();
 
 /** The live menu: generated data with the owner's edits from /admin/menu. */
 export function useMenu() {
@@ -70,6 +71,11 @@ export function useOrder(id) {
     if (id) getRepo().getOrder(id);
   }, [id]);
   return orders.find((o) => o.id === id) ?? null;
+}
+
+/** The owner's expense sheets, newest date first. */
+export function useExpenseSheets() {
+  return useRepoValue("expenses", readExpenseSheets, []);
 }
 
 /** The team, including people who have left (isActive false). */

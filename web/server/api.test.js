@@ -156,6 +156,30 @@ describe("changing a shift code from the admin screen", () => {
   });
 });
 
+describe("moving the shop to another account", () => {
+  test("the owner exports every row and loads it into an empty shop", async () => {
+    const store = { ...memoryStore(), dump: () => ({ version: 1, kv: [{ key: "settings", value: "{}" }], items: [], photos: [] }), restore: vi.fn(() => ({ kv: 1, items: 0, photos: 0 })) };
+    const core = createShopCore({ store, newId: (p) => `${p}_1`, savePhoto: () => "" });
+    const api = createApi({ core, store, env: ENV, broadcast: () => {} });
+    const { cookie } = await signIn(api, "admin", "73519046");
+    const res = await api.handle(get("/api/admin/export?as=admin", cookie));
+    expect(res.status).toBe(200);
+    const { data } = await res.json();
+    expect(data.kv).toHaveLength(1);
+    const loaded = await api.handle(post("/api/admin/import", { as: "admin", dump: data }, { cookie }));
+    expect(loaded.status).toBe(200);
+    expect(store.restore).toHaveBeenCalledWith(data);
+  });
+
+  test("only the owner may export or import", async () => {
+    const { api } = setup();
+    expect((await api.handle(get("/api/admin/export"))).status).toBe(403);
+    const driver = await signIn(api, "driver", "26480157", "Sam");
+    expect((await api.handle(get("/api/admin/export?as=driver", driver.cookie))).status).toBe(403);
+    expect((await api.handle(post("/api/admin/import", { as: "admin", dump: {} }))).status).toBe(403);
+  });
+});
+
 describe("shop calls", () => {
   test("customers are refused staff actions", async () => {
     const { api } = setup();

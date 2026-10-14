@@ -379,11 +379,11 @@ main.page-frame :where([class*="bg-"], [class*="bg-"] *) {
 }
 
 /* ── Turning table (TableStage.js moves everything; CSS only paints) ── */
+/* The owner's travertine table with its brass rim, built from table.jpg by
+   assets-src/make_table.py. The rim is in the image, so no inset ring. */
 .table-top {
-  background: url("/scene/wood-top.webp") center / cover;
-  box-shadow:
-    inset 0 0 0 2px rgb(255 238 214 / 0.35),
-    inset 0 0 40px rgb(60 36 18 / 0.35);
+  background: url("/scene/table-top.webp") center / cover;
+  box-shadow: inset 0 0 40px rgb(60 44 30 / 0.18);
   will-change: transform;
 }
 .table-light {
@@ -395,7 +395,7 @@ main.page-frame :where([class*="bg-"], [class*="bg-"] *) {
 .table-edge {
   background:
     linear-gradient(90deg, rgb(30 16 8 / 0.55), rgb(30 16 8 / 0.05) 25%, rgb(255 236 214 / 0.14) 42%, rgb(30 16 8 / 0.08) 62%, rgb(30 16 8 / 0.6)),
-    url("/scene/wood-edge.webp") repeat-x;
+    url("/scene/table-edge.webp") repeat-x;
   background-size: 100% 100%, auto 100%;
   box-shadow: 0 22px 30px -14px rgb(45 28 21 / 0.45);
 }

@@ -15,6 +15,11 @@
     "bindings": [{ "name": "SHOP", "class_name": "ShopObject" }]
   },
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["ShopObject"] }],
+  // The shop's address. Cloudflare makes the DNS records and certificates.
+  "routes": [
+    { "pattern": "flexchicken.uk", "custom_domain": true },
+    { "pattern": "www.flexchicken.uk", "custom_domain": true }
+  ],
   // Secrets, set with `npx wrangler secret put NAME` (never in this file):
   //   ADMIN_PIN, DRIVER_PIN  shift codes for /admin and /driver
   //   SESSION_SECRET         signs staff cookies (at least 32 characters)

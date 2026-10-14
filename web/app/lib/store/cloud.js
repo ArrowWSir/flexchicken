@@ -10,6 +10,7 @@
 // sign-in until real Google login), through `local`, a browser-store repo.
 import { EMPTY_EDITS } from "../menuEdits";
 import { readCards } from "../loyalty";
+import { readSheets } from "../expenses";
 import { readPromotions } from "../promotions";
 import { readSettings } from "../settings";
 import { TOPICS } from "./repo";
@@ -23,7 +24,7 @@ const FETCH_RETRY_MS = [2000, 5000, 10_000, 30_000];
 const REQUEST_REUSE_MS = 10 * 60_000; // a retried order within this keeps its request id
 const OFFLINE = "We couldn't reach the shop. Check your connection and try again.";
 
-const SERVER_TOPICS = new Set([TOPICS.orders, TOPICS.settings, TOPICS.menu, TOPICS.locations, TOPICS.staff, TOPICS.shifts, TOPICS.cards, TOPICS.promotions, TOPICS.stampTokens]);
+const SERVER_TOPICS = new Set([TOPICS.orders, TOPICS.settings, TOPICS.menu, TOPICS.locations, TOPICS.staff, TOPICS.shifts, TOPICS.cards, TOPICS.promotions, TOPICS.stampTokens, TOPICS.expenses]);
 const topicOf = (name) => TOPICS[name] ?? name;
 
 /**
@@ -311,6 +312,10 @@ export function createCloudRepo({ local, storage, fetcher = fetch, openSocket = 
     listPromotions: () => readPromotions(read(TOPICS.promotions, [])),
     savePromotion: (input) => call("savePromotion", input),
     removePromotion: (id) => call("removePromotion", id),
+
+    listExpenseSheets: () => readSheets(read(TOPICS.expenses, [])),
+    saveExpenseSheet: (input) => call("saveExpenseSheet", input),
+    removeExpenseSheet: (id) => call("removeExpenseSheet", id),
 
     getLocation(orderId) {
       if (typeof orderId === "string" && !watchedOrders.has(orderId) && !myOrders().includes(orderId)) {

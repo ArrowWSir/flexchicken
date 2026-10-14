@@ -18,6 +18,7 @@ export const COLLECTIONS = Object.freeze({
   loyalty_cards: { idOf: (c) => c.id },
   stamp_tokens: { idOf: (t) => t.token },
   promotions: { idOf: (p) => p.id },
+  expense_sheets: { idOf: (s) => s.id },
   driver_locations: { isMap: true },
 });
 
@@ -34,6 +35,15 @@ function decodeBase64(base64) {
   for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
   return bytes;
 }
+
+function encodeBase64(data) {
+  const bytes = data instanceof Uint8Array ? data : new Uint8Array(data);
+  let binary = "";
+  for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  return btoa(binary);
+}
+
+export const DUMP_VERSION = 1;
 
 /** @param {{ sql: { exec: Function }, transactionSync: Function }} storage the Durable Object's ctx.storage */
 export function createSqlStore(storage, now = Date.now) {
@@ -171,5 +181,46 @@ export function createSqlStore(storage, now = Date.now) {
     return row ? { type: row.type, data: row.data } : null;
   }
 
-  return { read, write, subscribe: () => () => {}, transaction, savePhoto, readPhoto, prunePhotos };
+  /** Every row, for moving the shop to another Cloudflare account. */
+  function dump() {
+    return {
+      version: DUMP_VERSION,
+      kv: sql.exec("SELECT key, value FROM kv").toArray().map((r) => ({ key: r.key, value: r.value })),
+      items: sql.exec("SELECT topic, id, seq, value FROM items ORDER BY topic, seq").toArray().map((r) => ({ topic: r.topic, id: r.id, seq: r.seq, value: r.value })),
+      photos: sql.exec("SELECT id, type, data, created_at FROM photos").toArray().map((r) => ({ id: r.id, type: r.type, data: encodeBase64(r.data), createdAt: r.created_at })),
+    };
+  }
+
+  const isEmpty = () =>
+    ["kv", "items", "photos"].every((table) => sql.exec(`SELECT COUNT(*) AS n FROM ${table}`).toArray()[0].n === 0);
+
+  /** Loads a dump into an empty database, all or nothing. */
+  function restore(data) {
+    if (data?.version !== DUMP_VERSION || !Array.isArray(data.kv) || !Array.isArray(data.items) || !Array.isArray(data.photos)) {
+      throw new Error("That export could not be read.");
+    }
+    if (!isEmpty()) throw new Error("This shop already has data. An export only goes into an empty one.");
+    const text = (v) => typeof v === "string";
+    storage.transactionSync(() => {
+      for (const r of data.kv) {
+        if (!text(r.key) || !text(r.value)) throw new Error("That export could not be read.");
+        sql.exec("INSERT INTO kv (key, value) VALUES (?, ?)", r.key, r.value);
+      }
+      for (const r of data.items) {
+        if (!text(r.topic) || !text(r.id) || !Number.isInteger(r.seq) || !text(r.value)) throw new Error("That export could not be read.");
+        sql.exec("INSERT INTO items (topic, id, seq, value) VALUES (?, ?, ?, ?)", r.topic, r.id, r.seq, r.value);
+      }
+      for (const r of data.photos) {
+        if (!text(r.id) || !/^image\/(webp|jpeg|png)$/.test(r.type ?? "") || !text(r.data)) throw new Error("That export could not be read.");
+        sql.exec("INSERT INTO photos (id, type, data, created_at) VALUES (?, ?, ?, ?)", r.id, r.type, decodeBase64(r.data), Number(r.createdAt) || now());
+      }
+    });
+    // The cache knew nothing of these rows; read everything fresh.
+    cache.clear();
+    seqs.clear();
+    saved.clear();
+    return { kv: data.kv.length, items: data.items.length, photos: data.photos.length };
+  }
+
+  return { read, write, subscribe: () => () => {}, transaction, savePhoto, readPhoto, prunePhotos, dump, restore };
 }

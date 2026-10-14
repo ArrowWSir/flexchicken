@@ -125,4 +125,39 @@ describe("sqlStore", () => {
     expect([...new Uint8Array(photo.data)]).toEqual([0, 1, 2]);
     expect(store.readPhoto("nope")).toBeNull();
   });
+
+  test("moves everything to an empty database, photos and order included", () => {
+    const from = createSqlStore(fakeStorage().storage);
+    from.transaction(() => {
+      from.write("orders", [order("a"), order("b")]);
+      from.write("settings", { prepMinutes: 25 });
+      from.write("driver_locations", { a: { latitude: 1 } });
+    });
+    from.savePhoto("data:image/webp;base64,AAEC", "ph_1");
+    const dump = JSON.parse(JSON.stringify(from.dump()));
+    const target = fakeStorage();
+    const to = createSqlStore(target.storage);
+    expect(to.read("orders", [])).toEqual([]);
+    expect(to.restore(dump)).toEqual({ kv: 1, items: 3, photos: 1 });
+    expect(to.read("orders", []).map((o) => o.id)).toEqual(["a", "b"]);
+    expect(to.read("settings", null)).toEqual({ prepMinutes: 25 });
+    expect(to.read("driver_locations", {})).toEqual({ a: { latitude: 1 } });
+    expect([...new Uint8Array(to.readPhoto("ph_1").data)]).toEqual([0, 1, 2]);
+    expect(createSqlStore(target.storage).read("orders", [])).toHaveLength(2);
+  });
+
+  test("never loads an export over a shop that has data", () => {
+    const store = createSqlStore(fakeStorage().storage);
+    store.transaction(() => store.write("settings", { prepMinutes: 25 }));
+    expect(() => store.restore({ version: 1, kv: [], items: [], photos: [] })).toThrow(/already has data/);
+    expect(() => createSqlStore(fakeStorage().storage).restore({ version: 9 })).toThrow(/could not be read/);
+  });
+
+  test("a bad row loads nothing", () => {
+    const target = fakeStorage();
+    const store = createSqlStore(target.storage);
+    const dump = { version: 1, kv: [{ key: "settings", value: "{}" }], items: [{ topic: "orders", id: 5, seq: 0, value: "{}" }], photos: [] };
+    expect(() => store.restore(dump)).toThrow(/could not be read/);
+    expect(store.read("settings", null)).toBeNull();
+  });
 });

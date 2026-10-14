@@ -77,7 +77,7 @@ export default function FullMenu() {
       </div>
 
       <p className="mt-4 border-t border-line pt-3 text-[11.5px] text-muted">
-        Prices and dishes can change. Allergies? Ask us before you order: {BRAND.phone.label}. Order online at flexchicken.co.uk.
+        Prices and dishes can change. Allergies? Ask us before you order: {BRAND.phone.label}. Order online at flexchicken.uk.
       </p>
     </div>
   );

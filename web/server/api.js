@@ -6,6 +6,8 @@
 //   POST /api/staff/login    { role, pin, name }
 //   POST /api/staff/logout   { role }
 //   POST /api/staff/code     { as: "admin", role, current, next }   the owner changes a code
+//   GET  /api/admin/export?as=admin                     every row, to move the shop
+//   POST /api/admin/import   { as: "admin", dump }      into an empty shop only
 //   GET  /api/staff/me?as=admin
 //   GET  /api/photo/<id>.<ext>
 //
@@ -19,6 +21,7 @@ const KB = 1024;
 const MAX_MENU_BODY = 3 * KB * KB; // menu edits carry photos
 const MAX_CALL_BODY = 64 * KB;
 const MAX_STAFF_BODY = 4 * KB;
+const MAX_IMPORT_BODY = 60 * KB * KB;
 const STAFF_MAX_AGE_S = 30 * 24 * 3600;
 const MIN_SECRET_CHARS = 32;
 const STAFF_ROLES = new Set(["admin", "driver", "clock"]);
@@ -253,7 +256,32 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
     });
   }
 
+  // Moving the shop to another Cloudflare account: the owner downloads every
+  // row here and loads it into the new, empty shop. Owner's sign-in only.
+  async function exportAll(request, url) {
+    const actor = await actorFor(request, url.searchParams.get("as"));
+    if (actor.role !== "admin") throw new ShopError(403, "Only the owner can export the shop. Sign in again.");
+    return ok(store.dump(), { "content-disposition": "attachment; filename=flexchicken-export.json" });
+  }
+
+  async function importAll(request) {
+    const { body } = await readBody(request, MAX_IMPORT_BODY);
+    const actor = await actorFor(request, body.as);
+    if (actor.role !== "admin") throw new ShopError(403, "Only the owner can import into the shop. Sign in again.");
+    let counts;
+    try {
+      counts = store.restore(body.dump);
+    } catch (err) {
+      throw new ShopError(400, err.message);
+    }
+    versions.clear(); // codes the owner changed came with the export
+    broadcast(["orders", "settings", "menu_edits", "staff", "shifts", "loyalty_cards", "promotions", "stamp_tokens", "driver_locations", "expense_sheets"]);
+    return ok(counts);
+  }
+
   const ROUTES = {
+    "GET /api/admin/export": exportAll,
+    "POST /api/admin/import": importAll,
     "GET /api/shop/state": shopState,
     "POST /api/shop/call": shopCall,
     "POST /api/staff/login": login,

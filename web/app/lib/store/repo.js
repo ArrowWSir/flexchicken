@@ -7,6 +7,7 @@ import { readSettings } from "../settings";
 import * as clock from "../timeclock";
 import * as loyalty from "../loyalty";
 import * as stampTokens from "../stampTokens";
+import * as expenses from "../expenses";
 import { MAX_PROMOS, readPromotions, validatePromo } from "../promotions";
 
 // Topics a screen can subscribe to.
@@ -21,6 +22,7 @@ export const TOPICS = Object.freeze({
   cards: "loyalty_cards",
   promotions: "promotions",
   stampTokens: "stamp_tokens",
+  expenses: "expense_sheets",
 });
 
 const MAX_KEPT_ORDERS = 300;
@@ -76,6 +78,7 @@ export function createRepo(store, now = Date.now, { newOrderId = null, maxOrders
   };
   const listTokens = () => stampTokens.readTokens(store.read(TOPICS.stampTokens, []));
   const saveTokens = (tokens) => store.write(TOPICS.stampTokens, tokens);
+  const listExpenseSheets = () => expenses.readSheets(store.read(TOPICS.expenses, []));
   const listPromotions = () => readPromotions(store.read(TOPICS.promotions, []));
   const savePromotions = (promos) => store.write(TOPICS.promotions, promos);
 
@@ -223,6 +226,20 @@ export function createRepo(store, now = Date.now, { newOrderId = null, maxOrders
       savePromotions(isNew ? [promo, ...promos] : promos.map((p) => (p.id === promo.id ? promo : p)));
       return promo;
     },
+    // The owner's expense sheets (/admin/expenses, lib/expenses.js).
+    listExpenseSheets,
+    /** Saves a new sheet, or replaces the one with `input.id`. `newId` comes from the server. */
+    saveExpenseSheet(input) {
+      const sheets = listExpenseSheets();
+      const existing = sheets.find((s) => s.id === input?.id);
+      if (!existing && sheets.length >= expenses.MAX_SHEETS) throw new Error(`Up to ${expenses.MAX_SHEETS} sheets. Delete old ones first.`);
+      const id = existing ? existing.id : input?.newId || `exp_${now().toString(36)}`;
+      const sheet = expenses.validateSheet(input, { id, now: now(), createdAt: existing?.createdAt ?? now() });
+      store.write(TOPICS.expenses, existing ? sheets.map((s) => (s.id === id ? sheet : s)) : [sheet, ...sheets]);
+      return sheet;
+    },
+    removeExpenseSheet: (id) => store.write(TOPICS.expenses, listExpenseSheets().filter((s) => s.id !== id)),
+
     removePromotion: (id) => savePromotions(listPromotions().filter((p) => p.id !== id)),
 
     getLocation: (orderId) => store.read(TOPICS.locations, {})[orderId] ?? null,
