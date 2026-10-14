@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import { ArrowRight, Search } from "lucide-react";
+import { ChevronRight, Search } from "lucide-react";
 import { isFinished } from "../lib/orders";
 import { livePromotions } from "../lib/promotions";
 import { openShift } from "../lib/timeclock";
-import { useCards, useMenu, useOrders, usePromotions, useSettings, useShifts, useStaff } from "../hooks/useShop";
+import { useCards, useExpenseSheets, useMenu, useOrders, usePromotions, useSettings, useShifts, useStaff } from "../hooks/useShop";
 import { useNow } from "../hooks/useDevice";
 import { FIELD } from "./ui";
 import { MODES } from "./sections";
@@ -17,39 +17,63 @@ function greeting(now) {
 }
 
 const startOfDay = (now) => new Date(new Date(now).toDateString()).getTime();
+const plural = (n, one, many = `${one}s`) => `${n} ${n === 1 ? one : many}`;
 
-function Stat({ value, label, isLoud = false }) {
+function SectionTitle({ id, children }) {
   return (
-    <div className="min-w-0">
-      <p className={`font-display font-black leading-none ${isLoud ? "text-[40px]" : "text-[28px]"}`}>{value}</p>
-      <p className="mt-1 text-[12px] font-medium opacity-80">{label}</p>
-    </div>
+    <h2 id={id} className="px-1 text-[11.5px] font-bold uppercase tracking-[0.18em] text-cream/55">
+      {children}
+    </h2>
   );
 }
 
-// A room's door: its numbers, then a button for each page inside.
-function Door({ mode, tone, stats }) {
+// A Service page as a big tile: the number that matters on the shift, then
+// one line of context. It turns red when something is waiting on the staff.
+function ServiceTile({ section, value, label, detail, isUrgent = false }) {
+  const { href, label: title, icon: Icon } = section;
   return (
-    <section aria-labelledby={`door-${mode.id}`} className={`relative overflow-hidden rounded-[28px] p-5 sm:p-6 ${tone}`}>
-      <p className="text-[11px] font-bold uppercase tracking-[0.2em] opacity-75">{mode.blurb}</p>
-      <h2 id={`door-${mode.id}`} className="mt-1 font-display text-[clamp(34px,9vw,52px)] font-black uppercase leading-[0.9] tracking-[-0.02em]">
-        {mode.label}
-      </h2>
-      <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">{stats}</div>
-      <div className="mt-6 flex flex-wrap gap-2">
-        {mode.sections.map(({ href, label, icon: Icon }) => (
-          <a key={href} href={href} className="press flex h-11 items-center gap-2 rounded-2xl bg-black/20 px-4 text-[14px] font-semibold ring-1 ring-white/15 hover:bg-black/30">
-            <Icon className="size-4" aria-hidden="true" />
-            {label}
-            <ArrowRight className="size-3.5 opacity-70" aria-hidden="true" />
-          </a>
-        ))}
-      </div>
-    </section>
+    <a
+      href={href}
+      className={`press group flex min-h-[148px] flex-col rounded-3xl p-4 ring-1 ${
+        isUrgent ? "bg-flex text-white ring-white/20" : "bg-roast-800 text-cream ring-cream/10 hover:bg-roast-700"
+      }`}
+    >
+      <span className="flex items-center justify-between">
+        <span className={`flex size-10 items-center justify-center rounded-2xl ${isUrgent ? "bg-black/20" : "bg-flex text-white"}`}>
+          <Icon className="size-5" aria-hidden="true" />
+        </span>
+        <ChevronRight className="size-5 opacity-50 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+      </span>
+      <span className="mt-auto pt-4">
+        <span className="block text-[15px] font-bold">{title}</span>
+        <span className="mt-1.5 block font-display text-[34px] font-black leading-none">{value}</span>
+        <span className="mt-1 block truncate text-[13px] font-medium opacity-85">{label}</span>
+        <span className="block truncate text-[12.5px] opacity-65">{detail}</span>
+      </span>
+    </a>
   );
 }
 
-/** The admin's front page: two rooms and a quick card lookup. */
+// A Studio page as one row of a grouped list, like a phone's settings.
+function StudioRow({ section, detail }) {
+  const { href, label, icon: Icon } = section;
+  return (
+    <li>
+      <a href={href} className="press group flex min-h-[60px] items-center gap-3 px-4 py-2.5 hover:bg-cream/5 active:bg-cream/8">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-flame-light text-roast-950">
+          <Icon className="size-[18px]" aria-hidden="true" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-[15px] font-semibold">{label}</span>
+          <span className="block truncate text-[12.5px] text-cream/60">{detail}</span>
+        </span>
+        <ChevronRight className="size-5 shrink-0 text-cream/35 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+      </a>
+    </li>
+  );
+}
+
+/** The admin's front page: shop status, card lookup, then every page with its live numbers. */
 export default function AdminHome() {
   const now = useNow(CLOCK_MS);
   const orders = useOrders();
@@ -58,6 +82,7 @@ export default function AdminHome() {
   const promotions = usePromotions();
   const staff = useStaff();
   const shifts = useShifts();
+  const sheets = useExpenseSheets();
   const settings = useSettings();
   const [query, setQuery] = useState("");
 
@@ -67,19 +92,34 @@ export default function AdminHome() {
   const stampsToday = cards.reduce((n, c) => n + c.history.filter((h) => h.type === "stamp" && h.at >= today).length, 0);
   const items = all.flatMap((c) => c.items);
   const soldOut = items.filter((i) => i.isSoldOut).length;
-  const onShift = staff.filter((s) => s.isActive && openShift(shifts, s.id)).length;
+  const liveOffers = livePromotions(promotions, now).length;
+  const team = staff.filter((s) => s.isActive);
+  const onShift = team.filter((s) => openShift(shifts, s.id)).length;
   const [service, studio] = MODES;
+  const [ordersPage, cardsPage] = service.sections;
+
+  const studioDetail = {
+    "/admin/menu": soldOut ? `${plural(items.length, "dish", "dishes")} · ${soldOut} sold out` : `${plural(items.length, "dish", "dishes")}, none sold out`,
+    "/admin/offers": liveOffers ? `${plural(liveOffers, "offer")} live now` : "No offers live",
+    "/admin/shop": settings.isTakingOrders ? "Taking orders · hours, delivery, prices" : "Orders paused · hours, delivery, prices",
+    "/admin/staff": team.length ? `${onShift} of ${plural(team.length, "person", "people")} on shift` : "No staff added yet",
+    "/admin/expenses": sheets.length ? `${plural(sheets.length, "sheet")} kept` : "No sheets yet",
+  };
 
   return (
-    <div className="grid grid-cols-1 gap-4">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
+    <div className="mx-auto grid max-w-[1100px] grid-cols-1 gap-5">
+      <div className="grid gap-1.5">
+        <div className="flex items-center justify-between gap-3">
           <p className="text-[13px] text-cream/60">{new Date(now).toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" })}</p>
-          <h1 className="font-display text-[26px] font-black uppercase leading-none">{greeting(now)}</h1>
+          <a
+            href="/admin/shop"
+            className={`press flex h-8 shrink-0 items-center gap-2 rounded-full px-3.5 text-[12.5px] font-semibold text-white ${settings.isTakingOrders ? "bg-go" : "bg-flex"}`}
+          >
+            <span className={`size-2 rounded-full bg-white ${settings.isTakingOrders ? "motion-safe:animate-pulse" : ""}`} aria-hidden="true" />
+            {settings.isTakingOrders ? "Taking orders" : "Orders paused"}
+          </a>
         </div>
-        <p className={`rounded-full px-3 py-1.5 text-[12.5px] font-semibold ${settings.isTakingOrders ? "bg-go text-white" : "bg-flex text-white"}`}>
-          {settings.isTakingOrders ? "Taking orders" : "Orders paused"}
-        </p>
+        <h1 className="font-display text-[26px] font-black uppercase leading-none">{greeting(now)}</h1>
       </div>
 
       <form
@@ -93,38 +133,36 @@ export default function AdminHome() {
         <label className="relative min-w-0 flex-1">
           <span className="sr-only">Find a loyalty card by its 4-digit code or the customer’s name</span>
           <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-cream/50" aria-hidden="true" />
-          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Card code or name, to stamp" className={`${FIELD} h-12 pl-10 text-[16px]`} />
+          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Card code or name" className={`${FIELD} h-12 pl-10 text-[16px]`} />
         </label>
         <button type="submit" className="press h-12 shrink-0 rounded-xl bg-cream px-4 text-[14px] font-semibold text-roast-900">
           Find card
         </button>
       </form>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <Door
-          mode={service}
-          tone="bg-[linear-gradient(150deg,#b81f22,#7d1416)] text-white"
-          stats={
-            <>
-              <Stat value={waiting} label={waiting === 1 ? "order waiting" : "orders waiting"} isLoud />
-              <Stat value={open.length - waiting} label="in progress" />
-              <Stat value={stampsToday} label="stamps today" />
-              <Stat value={cards.length} label="cards issued" />
-            </>
-          }
-        />
-        <Door
-          mode={studio}
-          tone="bg-[linear-gradient(150deg,#fcc282,#f5845c)] text-roast-950"
-          stats={
-            <>
-              <Stat value={items.length} label="dishes on the menu" isLoud />
-              <Stat value={soldOut} label="sold out" />
-              <Stat value={livePromotions(promotions, now).length} label="offers live" />
-              <Stat value={onShift} label="staff on shift" />
-            </>
-          }
-        />
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <section aria-labelledby="home-service" className="grid content-start gap-2.5">
+          <SectionTitle id="home-service">Service · on the shift</SectionTitle>
+          <div className="grid grid-cols-2 gap-2.5">
+            <ServiceTile
+              section={ordersPage}
+              value={waiting}
+              label="waiting"
+              detail={`${open.length - waiting} in progress`}
+              isUrgent={waiting > 0}
+            />
+            <ServiceTile section={cardsPage} value={stampsToday} label={stampsToday === 1 ? "stamp today" : "stamps today"} detail={`${plural(cards.length, "card")} issued`} />
+          </div>
+        </section>
+
+        <section aria-labelledby="home-studio" className="grid content-start gap-2.5">
+          <SectionTitle id="home-studio">Studio · back office</SectionTitle>
+          <ul className="divide-y divide-cream/8 overflow-hidden rounded-3xl bg-roast-900 ring-1 ring-cream/10">
+            {studio.sections.map((section) => (
+              <StudioRow key={section.href} section={section} detail={studioDetail[section.href]} />
+            ))}
+          </ul>
+        </section>
       </div>
     </div>
   );
