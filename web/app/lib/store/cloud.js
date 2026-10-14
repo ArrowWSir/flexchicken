@@ -13,6 +13,7 @@ import { readCards } from "../loyalty";
 import { readSheets } from "../expenses";
 import { readPromotions } from "../promotions";
 import { readSettings } from "../settings";
+import { readPrinter } from "../receiptPrinter";
 import { TOPICS } from "./repo";
 
 const MY_ORDERS_KEY = "fc_my_orders";
@@ -24,7 +25,7 @@ const FETCH_RETRY_MS = [2000, 5000, 10_000, 30_000];
 const REQUEST_REUSE_MS = 10 * 60_000; // a retried order within this keeps its request id
 const OFFLINE = "We couldn't reach the shop. Check your connection and try again.";
 
-const SERVER_TOPICS = new Set([TOPICS.orders, TOPICS.settings, TOPICS.menu, TOPICS.locations, TOPICS.staff, TOPICS.shifts, TOPICS.cards, TOPICS.promotions, TOPICS.stampTokens, TOPICS.expenses]);
+const SERVER_TOPICS = new Set([TOPICS.orders, TOPICS.settings, TOPICS.menu, TOPICS.locations, TOPICS.staff, TOPICS.shifts, TOPICS.cards, TOPICS.promotions, TOPICS.stampTokens, TOPICS.expenses, TOPICS.printer]);
 const topicOf = (name) => TOPICS[name] ?? name;
 
 /**
@@ -258,6 +259,13 @@ export function createCloudRepo({ local, storage, fetcher = fetch, openSocket = 
 
     getSettings: () => readSettings(read(TOPICS.settings, null)),
     saveSettings: (patch) => call("saveSettings", patch),
+
+    // The network receipt printer, which only the shop's server talks to.
+    getPrinter: () => readPrinter(read(TOPICS.printer, null)),
+    printReceipt: (orderId) => call("printReceipt", orderId),
+    printTestReceipt: () => call("printTestReceipt"),
+    printerLink: () => call("printerLink"),
+    resetPrinterLink: () => call("resetPrinterLink"),
     getMenuEdits: () => ({ ...EMPTY_EDITS, ...read(TOPICS.menu, {}) }),
     async saveMenuEdits(edits) {
       // The server answers with the edits as saved: show them at once, so the

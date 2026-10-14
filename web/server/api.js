@@ -12,6 +12,7 @@
 //   POST /api/admin/import   { as: "admin", dump }      into an empty shop only
 //   GET  /api/staff/me?as=admin
 //   GET  /api/photo/<id>.<ext>
+//   POST /api/printer?key=..  form data from the Epson network printer (server/printQueue.js)
 //
 // `as` names the staff screen asking (admin, staff: the counter's orders and
 // cards, driver, or clock: the shop's clock tablet), so the matching cookie is used; without it the caller is a
@@ -24,6 +25,7 @@ const MAX_MENU_BODY = 3 * KB * KB; // menu edits carry photos
 const MAX_CALL_BODY = 64 * KB;
 const MAX_STAFF_BODY = 4 * KB;
 const MAX_IMPORT_BODY = 60 * KB * KB;
+const MAX_PRINTER_BODY = 32 * KB; // a print result is a few hundred bytes
 const STAFF_MAX_AGE_S = 30 * 24 * 3600;
 // The order list's own PIN opens it for one working day at most; the screen
 // asks for it again on every visit anyway.
@@ -92,6 +94,7 @@ async function readLimited(request, max) {
  */
 export function createApi({ core, store, env, broadcast, now = Date.now }) {
   const pinLimiter = createLimiter({ maxFails: 5, lockMs: 30_000 });
+  const printerLimiter = createLimiter({ maxFails: 10, lockMs: 5 * MINUTE });
   const loginLimiter = createLimiter({ maxFails: 5, lockMs: 60_000 });
   const globalLoginFails = createRateLimit(GLOBAL_LOGIN_FAILS);
   let globalLoginPausedUntil = 0;
@@ -338,7 +341,30 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
     return ok(counts);
   }
 
+  // The Epson printer asking for receipts, or reporting one it printed. It
+  // cannot send the screens' CSRF header or cookie, so it proves itself with
+  // the key in its URL (or as its ID, if pasted there instead).
+  const xml = (body) =>
+    new Response(body, { headers: { "content-type": "text/xml; charset=utf-8", "cache-control": "no-store", "x-content-type-options": "nosniff" } });
+  async function printer(request, url) {
+    const caller = callerOf(request);
+    const form = new URLSearchParams(await readLimited(request, MAX_PRINTER_BODY));
+    // The right key always gets in, so guesses from the shop's own address
+    // (guest Wi-Fi) can never lock its printer out.
+    if (!core.printer.keyMatches(url.searchParams.get("key")) && !core.printer.keyMatches(form.get("ID"))) {
+      if (printerLimiter.waitMs(caller, now()) > 0) return fail(429, "Too many wrong printer keys.");
+      printerLimiter.fail(caller, now());
+      return fail(403, "That printer link is not right. Copy it again from Admin → Shop.");
+    }
+    const type = form.get("ConnectionType");
+    if (type !== "GetRequest" && type !== "SetResponse") return fail(400, "Unknown printer request.");
+    const { result, changed } = type === "GetRequest" ? core.printer.poll(url.origin) : core.printer.result(form.get("ResponseFile"));
+    if (changed.length) broadcast(changed);
+    return xml(type === "GetRequest" ? result ?? "" : "");
+  }
+
   const ROUTES = {
+    "POST /api/printer": printer,
     "GET /api/admin/export": exportAll,
     "POST /api/admin/import": importAll,
     "GET /api/shop/state": shopState,

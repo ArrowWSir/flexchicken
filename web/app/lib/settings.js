@@ -15,14 +15,21 @@ export const DEFAULT_SETTINGS = Object.freeze({
   prepMinutes: 20,
   // Opening hours, Europe/London; a day is ["12:00", "23:00"] or null (closed).
   hours: BRAND.hours.schedule,
+  // How the receipt prints when an order is accepted: "screen" is the till
+  // browser's own print (lib/printer.js); "network" is the Epson printer that
+  // collects receipts from the website (server/printQueue.js).
+  receiptPrinter: "screen",
 });
+
+export const RECEIPT_PRINTERS = Object.freeze(["screen", "network"]);
 
 /** Merge saved settings over the defaults, dropping anything malformed. */
 export function readSettings(saved) {
   const out = { ...DEFAULT_SETTINGS };
   if (!saved || typeof saved !== "object") return out;
+  if (RECEIPT_PRINTERS.includes(saved.receiptPrinter)) out.receiptPrinter = saved.receiptPrinter;
   for (const key of Object.keys(DEFAULT_SETTINGS)) {
-    if (key === "deliveryZones" || key === "hours") continue;
+    if (key === "deliveryZones" || key === "hours" || key === "receiptPrinter") continue;
     const value = saved[key];
     if (typeof value === typeof DEFAULT_SETTINGS[key] && (typeof value !== "number" || (Number.isFinite(value) && value >= 0))) {
       out[key] = value;

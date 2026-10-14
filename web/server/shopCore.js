@@ -13,6 +13,7 @@ import { promoStatus } from "../app/lib/promotions.js";
 import { repriceCart } from "../app/lib/reprice.js";
 import { TOPICS, createRepo } from "../app/lib/store/repo.js";
 import { readTokens } from "../app/lib/stampTokens.js";
+import { JOBS, KEY, PRINTER_TOPIC, STATUS, createPrintQueue } from "./printQueue.js";
 import {
   ShopError,
   cleanCardId,
@@ -78,6 +79,7 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
     subscribe: () => () => {},
   };
   const repo = createRepo(tracked, now, { newOrderId: () => newId("ord"), maxOrders: MAX_ORDERS });
+  const printQueue = createPrintQueue({ store: tracked, repo, now, newId });
 
   const orderFor = (id) => {
     const order = repo.getOrder(requireId(id));
@@ -92,7 +94,15 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
     }
   };
 
-  const advance = ([id, status, extra], actor) => {
+  // Accepting prints the kitchen's ticket on the network printer, when the
+  // owner has chosen it; otherwise the till's screen prints it (lib/printer.js).
+  const advance = (args, actor) => {
+    const updated = advanceAs(args, actor);
+    if (updated.status === "accepted" && args[1] === "accepted" && printQueue.isOn()) printQueue.enqueue(updated, "accepted");
+    return updated;
+  };
+
+  const advanceAs = ([id, status, extra], actor) => {
     const order = orderFor(id);
     if (typeof status !== "string") throw new Error("Choose what happens next.");
     if (actor.role === "admin" || actor.role === "staff") {
@@ -243,7 +253,35 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
       run: ([input]) => repo.saveExpenseSheet({ ...requireObject(input, "That sheet could not be read."), newId: newId("exp") }),
     },
     removeExpenseSheet: { allow: OWNER, needsListKey: true, run: ([id]) => repo.removeExpenseSheet(requireId(id)) },
+
+    // The network receipt printer (server/printQueue.js).
+    printReceipt: {
+      allow: SERVICE,
+      run: ([orderId]) => {
+        if (!printQueue.isOn()) throw new Error("The receipt printer is not set up. The owner chooses it in Admin → Shop.");
+        return printQueue.enqueue(orderFor(orderId), "reprint");
+      },
+    },
+    printTestReceipt: { allow: OWNER, run: () => printQueue.enqueue(null, "test") },
+    printerLink: { allow: OWNER, run: () => ({ key: printQueue.ensureKey() }) },
+    resetPrinterLink: { allow: OWNER, run: () => ({ key: printQueue.resetKey() }) },
   };
+
+  // The topics screens know: the printer's two stores are one topic to them,
+  // and some stores are never sent at all.
+  const HIDDEN = new Set([REQUESTS, KEY]);
+  const screenTopics = (written) => [...new Set([...written].filter((t) => !HIDDEN.has(t)).map((t) => (t === JOBS || t === STATUS ? PRINTER_TOPIC : t)))];
+
+  /** Runs `fn` as one transaction; the screen topics it changed come back with its result. */
+  function tracking(fn) {
+    changed = new Set();
+    try {
+      const result = transact(fn);
+      return { result: result ?? null, changed: screenTopics(changed) };
+    } finally {
+      changed = null;
+    }
+  }
 
   const actionFor = (name) => (typeof name === "string" && Object.hasOwn(ACTIONS, name) ? ACTIONS[name] : null);
 
@@ -267,17 +305,13 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
     if (!Array.isArray(args)) throw new ShopError(400, "That request could not be read.");
     try {
       const prepared = action.prepare ? await action.prepare(args, actor) : {};
-      changed = new Set();
-      const result = transact(() => action.run(args, actor, prepared));
-      return { result: result ?? null, changed: [...changed].filter((t) => t !== REQUESTS) };
+      return tracking(() => action.run(args, actor, prepared));
     } catch (err) {
       // The shop's own rules throw plain Errors written for the person using
       // the screen; anything else is a fault and keeps its details server-side.
       if (err instanceof ShopError) throw err;
       if (err?.constructor === Error) throw new ShopError(400, err.message);
       throw err;
-    } finally {
-      changed = null;
     }
   }
 
@@ -339,6 +373,7 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
     // The order list: the owner's sign-in and the order list PIN.
     [TOPICS.expenses]: (actor) => (actor.role === "admin" && actor.hasListKey ? repo.listExpenseSheets() : []),
     [TOPICS.stampTokens]: (actor) => (actor.role === "admin" ? readTokens(store.read(TOPICS.stampTokens, [])) : []),
+    [TOPICS.printer]: (actor) => (SERVICE.includes(actor.role) ? printQueue.view() : null),
   };
 
   /**
@@ -357,6 +392,12 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
   return {
     call,
     snapshot,
+    /** The network printer's own calls (api.js, /api/printer); each returns { result, changed }. */
+    printer: {
+      keyMatches: (given) => printQueue.keyMatches(given),
+      poll: (origin) => tracking(() => printQueue.poll(origin)),
+      result: (responseFile) => tracking(() => printQueue.result(responseFile)),
+    },
     usesPin: (name) => Boolean(actionFor(name)?.usesPin),
     /** Which per-caller limit this call counts against, if any. */
     rateLimitOf(name, args) {

@@ -9,6 +9,7 @@ import * as loyalty from "../loyalty";
 import * as stampTokens from "../stampTokens";
 import * as expenses from "../expenses";
 import { MAX_PROMOS, readPromotions, validatePromo } from "../promotions";
+import { readPrinter } from "../receiptPrinter";
 
 // Topics a screen can subscribe to.
 export const TOPICS = Object.freeze({
@@ -23,6 +24,9 @@ export const TOPICS = Object.freeze({
   promotions: "promotions",
   stampTokens: "stamp_tokens",
   expenses: "expense_sheets",
+  // The network receipt printer: its queue and when it last checked in
+  // (server/printQueue.js). Only the server writes it.
+  printer: "printer",
 });
 
 const MAX_KEPT_ORDERS = 300;
@@ -113,6 +117,7 @@ export function createRepo(store, now = Date.now, { newOrderId = null, maxOrders
     },
 
     getSettings,
+    getPrinter: () => readPrinter(store.read(TOPICS.printer, null)),
     saveSettings: (patch) => store.write(TOPICS.settings, readSettings({ ...getSettings(), ...patch })),
 
     getMenuEdits: () => ({ ...EMPTY_EDITS, ...store.read(TOPICS.menu, {}) }),

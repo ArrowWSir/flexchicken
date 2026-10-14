@@ -371,3 +371,67 @@ describe("reading the shop", () => {
     expect((await api.handle(get("/api/other"))).status).toBe(404);
   });
 });
+
+describe("the network receipt printer", () => {
+  const form = (key, body, { ip = "7.7.7.7", id = "" } = {}) =>
+    new Request(`${ORIGIN}/api/printer${key === null ? "" : `?key=${encodeURIComponent(key)}`}`, {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded", "cf-connecting-ip": ip },
+      body: new URLSearchParams({ ID: id, ...body }).toString(),
+    });
+
+  async function printerKey(api) {
+    const { cookie } = await signIn(api, "admin", "73519046");
+    const res = await api.handle(post("/api/shop/call", { method: "printerLink", args: [], as: "admin" }, { cookie }));
+    return { key: (await res.json()).data.key, cookie };
+  }
+
+  test("with the right key, an empty answer means nothing to print", async () => {
+    const { api } = setup();
+    const { key } = await printerKey(api);
+    const res = await api.handle(form(key, { ConnectionType: "GetRequest" }));
+    expect(res.status).toBe(200);
+    expect(res.headers.get("content-type")).toBe("text/xml; charset=utf-8");
+    expect(await res.text()).toBe("");
+  });
+
+  test("the key also works pasted as the printer's ID", async () => {
+    const { api } = setup();
+    const { key } = await printerKey(api);
+    expect((await api.handle(form(null, { ConnectionType: "GetRequest" }, { id: key }))).status).toBe(200);
+  });
+
+  test("hands the owner's test slip over, then takes the result", async () => {
+    const { api, broadcast } = setup();
+    const { key, cookie } = await printerKey(api);
+    await api.handle(post("/api/shop/call", { method: "printTestReceipt", args: [], as: "admin" }, { cookie }));
+    const slip = await (await api.handle(form(key, { ConnectionType: "GetRequest" }))).text();
+    expect(slip).toContain("<PrintRequestInfo>");
+    expect(slip).toContain("PRINTER TEST");
+    expect(broadcast).toHaveBeenCalledWith(["printer"]);
+    const result = '<PrintResponseInfo><response success="true" code="" status="1"/></PrintResponseInfo>';
+    const res = await api.handle(form(key, { ConnectionType: "SetResponse", ResponseFile: result }));
+    expect(res.status).toBe(200);
+  });
+
+  test("refuses a wrong key and slows a caller who keeps guessing, but never the real printer", async () => {
+    const { api } = setup();
+    const { key } = await printerKey(api);
+    expect((await api.handle(form("wrong", { ConnectionType: "GetRequest" }))).status).toBe(403);
+    for (let i = 0; i < 9; i += 1) await api.handle(form("wrong", { ConnectionType: "GetRequest" }));
+    expect((await api.handle(form("wrong", { ConnectionType: "GetRequest" }))).status).toBe(429);
+    // Same address (the shop's guest Wi-Fi, say): the printer's key still works.
+    expect((await api.handle(form(key, { ConnectionType: "GetRequest" }))).status).toBe(200);
+  });
+
+  test("refuses everything before the owner has made a link", async () => {
+    const { api } = setup();
+    expect((await api.handle(form("", { ConnectionType: "GetRequest" }))).status).toBe(403);
+  });
+
+  test("refuses a request it does not know", async () => {
+    const { api } = setup();
+    const { key } = await printerKey(api);
+    expect((await api.handle(form(key, { ConnectionType: "Status" }))).status).toBe(400);
+  });
+});

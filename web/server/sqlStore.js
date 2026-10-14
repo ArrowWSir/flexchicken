@@ -19,6 +19,7 @@ export const COLLECTIONS = Object.freeze({
   stamp_tokens: { idOf: (t) => t.token },
   promotions: { idOf: (p) => p.id },
   expense_sheets: { idOf: (s) => s.id },
+  print_jobs: { idOf: (j) => j.id },
   driver_locations: { isMap: true },
 });
 

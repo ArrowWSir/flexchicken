@@ -1,5 +1,5 @@
 "use client";
-import { Clock, MapPin, Power } from "lucide-react";
+import { Clock, MapPin, Power, Printer } from "lucide-react";
 import { getRepo } from "../../lib/store";
 import { openStatus } from "../../lib/hours";
 import { useSettings } from "../../hooks/useShop";
@@ -7,12 +7,14 @@ import { useNow } from "../../hooks/useDevice";
 import { NumberSetting, Toggle } from "../ui";
 import DeliveryZones from "./DeliveryZones";
 import OpeningHoursEditor from "./OpeningHoursEditor";
+import ReceiptPrinter from "./ReceiptPrinter";
 
 const CLOCK_MS = 60_000;
 const SECTIONS = [
   { id: "now", label: "Right now", icon: Power },
   { id: "hours", label: "Opening hours", icon: Clock },
   { id: "zones", label: "Delivery zones", icon: MapPin },
+  { id: "printer", label: "Receipt printer", icon: Printer },
 ];
 
 function Panel({ id, title, hint, children }) {
@@ -89,6 +91,10 @@ export default function ShopSettings() {
 
       <Panel id="zones" title="Delivery zones">
         <DeliveryZones zones={settings.deliveryZones} onSave={(deliveryZones) => save({ deliveryZones })} />
+      </Panel>
+
+      <Panel id="printer" title="Receipt printer" hint="Where the kitchen's ticket prints when an order is accepted. Staff can always print another copy from the order.">
+        <ReceiptPrinter settings={settings} now={now} onSave={save} />
       </Panel>
     </div>
   );

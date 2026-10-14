@@ -5,9 +5,11 @@ import { getRepo } from "../../lib/store";
 import { formatOrderNumber } from "../../lib/orders";
 import { printReceipt } from "../../lib/printer";
 import { isOrdersLoaded, useOrders } from "../../hooks/useShop";
+import { useIsNetworkPrinter } from "../../hooks/usePrinter";
 import { useNow } from "../../hooks/useDevice";
 import useNewOrderAlert from "../../hooks/useNewOrderAlert";
 import OrderTicket from "../../components/staff/OrderTicket";
+import PrinterStatus from "../../components/staff/PrinterStatus";
 
 const LANES = [
   { id: "new", label: "New", statuses: ["placed"] },
@@ -41,12 +43,15 @@ async function printOrWarn(order) {
   });
 }
 
-function reprintButton(order) {
+// The network printer's copy goes in its queue on the server.
+const queueReprint = (order) => getRepo().printReceipt(order.id).catch((err) => window.alert(err.message));
+
+function reprintButton(order, isNetworkPrinter) {
   if (!REPRINTABLE.has(order.status)) return null;
   return (
     <button
       type="button"
-      onClick={() => printOrWarn(order)}
+      onClick={() => (isNetworkPrinter ? queueReprint(order) : printOrWarn(order))}
       className="press mt-2 flex h-10 w-full items-center justify-center gap-2 rounded-xl text-[13px] font-semibold text-muted ring-1 ring-line hover:bg-surface"
     >
       <Printer className="size-4" aria-hidden="true" />
@@ -57,13 +62,14 @@ function reprintButton(order) {
 
 // The next action for each step, as one big button: a bump bar on glass.
 // `onMoved` lets a phone follow the ticket into its next lane.
-function actionsFor(order, onMoved) {
+function actionsFor(order, onMoved, isNetworkPrinter) {
   const act = async (status) => {
     try {
       const updated = await getRepo().advance(order.id, status);
       onMoved(laneOf(status));
-      // Accepting sends the ticket to the kitchen on paper, from the till.
-      if (status === "accepted") printOrWarn(updated);
+      // Accepting sends the ticket to the kitchen on paper: from the till's
+      // screen, or, with the network printer, the server has queued it already.
+      if (status === "accepted" && !isNetworkPrinter) printOrWarn(updated);
     } catch (err) {
       window.alert(err.message);
     }
@@ -99,6 +105,7 @@ export default function OrdersBoard() {
   const now = useNow(1000);
   const [isSoundOn, setIsSoundOn] = useState(false);
   const [lane, setLane] = useState("new");
+  const isNetworkPrinter = useIsNetworkPrinter();
   useNewOrderAlert(orders, { isSoundOn, label: "New order", isLoaded: isOrdersLoaded(orders) });
 
   const byLane = useMemo(() => {
@@ -129,6 +136,8 @@ export default function OrdersBoard() {
           {isSoundOn ? "Sound on" : "Tap to turn sound on"}
         </button>
       </div>
+
+      {isNetworkPrinter && <PrinterStatus now={now} />}
 
       {/* Phones: one lane at a time. */}
       <div role="tablist" aria-label="Order lanes" className="no-scrollbar scroll-row mb-4 flex gap-1.5 overflow-x-auto lg:hidden">
@@ -166,7 +175,7 @@ export default function OrdersBoard() {
                   {l.id === "new" ? "No new orders" : "Nothing here"}
                 </p>
               ) : (
-                byLane[l.id].map((order) => <OrderTicket key={order.id} order={order} now={now} actions={actionsFor(order, setLane)} footer={reprintButton(order)} />)
+                byLane[l.id].map((order) => <OrderTicket key={order.id} order={order} now={now} actions={actionsFor(order, setLane, isNetworkPrinter)} footer={reprintButton(order, isNetworkPrinter)} />)
               )}
             </div>
           </section>

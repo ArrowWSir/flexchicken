@@ -57,7 +57,7 @@ Clock records are kept in the tablet's browser, not on the computer, so open `/a
 | `/admin/cards` | Service | Find a loyalty card by its 4-digit code, name or email; add a stamp, take one back, give the 9th-visit surprise; each card's history; download every signed-in customer's name, email and card code as an Excel file |
 | `/admin/menu` | Studio | Search every dish, list what is sold out, edit, add and remove dishes, options, photos |
 | `/admin/offers` | Studio | Offers on the website: percent off (order or chosen dishes), buy one get one free, or an announcement; start and end times, minimum order, pause. Money offers are applied to the Box (best one per order) |
-| `/admin/shop` | Studio | Three panels. Right now: what customers see this minute, taking orders on/off, delivery on/off, delivery minimum, prep time. Opening hours: per day, closed days, closing after midnight (drive the "Open now" pill, footer and checkout). Delivery zones (name, fee, postcode list, and a distance that covers unlisted postcodes in the same districts) |
+| `/admin/shop` | Studio | Three panels. Right now: what customers see this minute, taking orders on/off, delivery on/off, delivery minimum, prep time. Opening hours: per day, closed days, closing after midnight (drive the "Open now" pill, footer and checkout). Delivery zones (name, fee, postcode list, and a distance that covers unlisted postcodes in the same districts). Receipt printer: the till's print dialog or the Epson network printer, its private link, setup steps and a test slip (see "Receipt printer") |
 | `/admin/staff` | Studio | Add, edit and remove staff and their clock PINs; clock someone out; correct a shift's times (forgotten clock-out), marked "corrected" in the CSV; weekly hours with a CSV for payroll |
 | `/admin/order-list` | Studio | Behind its own PIN (0000 until changed): lists of what to buy, item and quantity only; preview the A4 PDF, then download, share or open it; change the PIN (current, new, confirm) |
 | `/staff` | Staff | The orders board from `/admin/orders`, behind the staff code: accept, cook, ready, collected or sent out, cancel, reprint receipts, new-order bell. No menu, prices, offers, team or shop settings |
@@ -81,6 +81,17 @@ On the live site the shift codes are Worker secrets (see "Where the data lives")
 - **Staff accounts:** one shared shift code per screen (admin, driver) stands in for personal logins.
 - **Card payment through Teya:** the checkout says to pay on delivery or at collection until it is connected.
 - **Push notifications with the site closed:** need Web Push from the server.
+
+## Receipt printer
+
+Accepting an order prints the kitchen's ticket. Admin → Shop → Receipt printer picks how:
+
+- **This screen's print dialog** (the default): the browser that tapped Accept prints the page (`app/lib/printer.js`). Run the till's Chrome with `--kiosk-printing` to skip the dialog.
+- **Epson printer on the network** (live site only): an Epson TM-m30II or TM-m30III on the shop's network, set to **Server Direct Print**. Every 5 seconds the printer POSTs to `/api/printer?key=…`. The server answers with one queued receipt in ePOS-Print XML (`app/lib/receiptEpos.js`), and the printer reports back whether it printed (`server/printQueue.js`). Accept queues the ticket on the server, whatever screen tapped it. Nothing is paired with the till, and printing carries on while the till is locked.
+  - The key in the link is random and only the owner sees it. A wrong key gets 403, and repeated wrong keys lock that address out for 5 minutes. **New link** replaces it, and the old link stops working.
+  - Staff screens show "Printer ready", or a red notice when the printer has been silent for a minute or a receipt failed (out of paper, cover open...). Each failed receipt has a **Print again** button. Receipts wait while the printer is offline and are dropped after an hour. A receipt the printer took but never reported on is flagged after 90 seconds.
+  - Setup steps are on the panel. If the test slip never prints, the printer may not trust the site's certificate: run **Root Certificate Update** in the printer's own settings page. Use `https://` in the link, because the site redirects `http`.
+  - `e2e/printer.spec.mjs` plays the printer against `npm run preview`.
 
 ## Delivery tracking, for drivers
 
