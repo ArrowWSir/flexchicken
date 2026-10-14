@@ -65,6 +65,12 @@ function OptionGroup({ option, value, onChange }) {
 export function OptionsDrawer({ item, startQty = 1, actionLabel, onConfirm, onClose }) {
   const [selections, setSelections] = useState({});
   const [qty, setQty] = useState(1);
+  // The sheet keeps its last dish while it slides away. Emptied mid-close,
+  // vaul never finished closing and left the page hidden from screen readers.
+  const [shown, setShown] = useState(item);
+  useEffect(() => {
+    if (item) setShown(item);
+  }, [item]);
 
   useEffect(() => {
     if (!item) return;
@@ -72,8 +78,8 @@ export function OptionsDrawer({ item, startQty = 1, actionLabel, onConfirm, onCl
     setQty(startQty);
   }, [item, startQty]);
 
-  const missing = item ? missingRequired(item, selections) : [];
-  const total = item ? (unitPence(item, selections) * qty) / 100 : 0;
+  const missing = shown ? missingRequired(shown, selections) : [];
+  const total = shown ? (unitPence(shown, selections) * qty) / 100 : 0;
 
   return (
     <Drawer.Root open={Boolean(item)} onOpenChange={(open) => !open && onClose()}>
@@ -81,16 +87,16 @@ export function OptionsDrawer({ item, startQty = 1, actionLabel, onConfirm, onCl
         <Drawer.Overlay className="fixed inset-0 z-50 bg-roast-950/45 backdrop-blur-[2px]" />
         <Drawer.Content className="fixed inset-x-0 bottom-0 z-50 mx-auto flex max-h-[88dvh] max-w-[560px] flex-col rounded-t-[28px] bg-ground outline-none">
           <Drawer.Handle className="mt-3 !w-12 !bg-line" />
-          {item && (
+          {shown && (
             <>
               <div className="overflow-y-auto px-5 pb-4 pt-4">
                 <Drawer.Title className="font-display text-[24px] font-black uppercase leading-none tracking-[-0.01em]">
-                  {item.name}
+                  {shown.name}
                 </Drawer.Title>
                 <Drawer.Description className="mt-1.5 text-[13.5px] text-muted">
-                  {item.description || "Make it how you like it."}
+                  {shown.description || "Make it how you like it."}
                 </Drawer.Description>
-                {item.options.map((option) => (
+                {shown.options.map((option) => (
                   <OptionGroup
                     key={option.label}
                     option={option}
@@ -101,7 +107,7 @@ export function OptionsDrawer({ item, startQty = 1, actionLabel, onConfirm, onCl
               </div>
               <div className="border-t border-line bg-ground-raised px-5 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4">
                 <div className="flex items-center justify-between">
-                  <QtyStepper value={qty} onChange={setQty} label={item.name} />
+                  <QtyStepper value={qty} onChange={setQty} label={shown.name} />
                   <span className="font-display text-[22px] font-extrabold">
                     <NumberFlow value={total} format={GBP} locales="en-GB" />
                   </span>

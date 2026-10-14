@@ -27,6 +27,8 @@ test("several dishes, one with a choice, go into the Box together and on to chec
   await expect(sheet.getByRole("button", { name: /Choose drink/i })).toBeDisabled();
   await sheet.getByText("Coca Cola").click();
   await sheet.getByRole("button", { name: "Add to my picks" }).click();
+  // The page behind a sheet is hidden from the accessibility tree until it has closed.
+  await expect(sheet).toBeHidden();
   await expect(page.getByRole("list", { name: "Hot Honey Burger Meal as you made it" }).getByText(/Coca Cola/)).toBeVisible();
 
   // Nothing is in the Box until the picks are added together.
