@@ -5,7 +5,7 @@ import { STAMPS_PER_CARD } from "../../lib/card";
 import { downloadCustomersXlsx } from "../../lib/customersXlsx";
 import { findCards } from "../../lib/loyalty";
 import { getRepo } from "../../lib/store";
-import { isOrdersLoaded, useCards, useOrders } from "../../hooks/useShop";
+import { useCards } from "../../hooks/useShop";
 import { useNow } from "../../hooks/useDevice";
 import { FIELD } from "../ui";
 
@@ -122,7 +122,6 @@ function CardRow({ card, now, act }) {
  */
 export default function CardsDesk() {
   const cards = useCards();
-  const orders = useOrders();
   const now = useNow(CLOCK_MS);
   const [query, setQuery] = useState("");
   const [note, setNote] = useState(null); // { tone: "ok" | "error", text }
@@ -150,7 +149,7 @@ export default function CardsDesk() {
 
   const downloadCustomers = async () => {
     try {
-      const count = await downloadCustomersXlsx(cards, orders);
+      const count = await downloadCustomersXlsx(cards);
       setNote({ tone: "ok", text: `Downloaded ${count} customer${count === 1 ? "" : "s"} as an Excel file.` });
     } catch (err) {
       setNote({ tone: "error", text: `Couldn’t make the Excel file: ${err.message}` });
@@ -169,9 +168,8 @@ export default function CardsDesk() {
 
       <button
         type="button"
-        disabled={!isOrdersLoaded(orders)}
         onClick={downloadCustomers}
-        className="press flex h-11 items-center justify-center gap-2 justify-self-start rounded-xl px-4 text-[14px] font-semibold text-cream ring-1 ring-cream/25 hover:bg-cream/10 disabled:opacity-50"
+        className="press flex h-11 items-center justify-center gap-2 justify-self-start rounded-xl px-4 text-[14px] font-semibold text-cream ring-1 ring-cream/25 hover:bg-cream/10"
       >
         <Download className="size-4" aria-hidden="true" />
         Download customers (Excel)

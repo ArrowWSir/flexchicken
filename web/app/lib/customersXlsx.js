@@ -6,8 +6,8 @@
 import { CUSTOMER_COLUMNS, customerList, customerSheet, customersFileName } from "./customers";
 
 /** @returns {Promise<number>} how many customers went in the file */
-export async function downloadCustomersXlsx(cards, orders, now = Date.now()) {
-  const customers = customerList(cards, orders);
+export async function downloadCustomersXlsx(cards, now = Date.now()) {
+  const customers = customerList(cards);
   const { default: writeExcelFile } = await import("write-excel-file/universal");
   const blob = await writeExcelFile(customerSheet(customers), { columns: CUSTOMER_COLUMNS, sheet: "Customers" }).toBlob();
   const url = URL.createObjectURL(blob);

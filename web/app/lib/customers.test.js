@@ -1,66 +1,55 @@
 import { describe, expect, test } from "vitest";
 import { customerList, customerSheet, customersFileName } from "./customers";
 
-const card = (over) => ({ id: "c1", code: "4271", name: "", email: "", createdAt: 100, lastStampAt: null, ...over });
-const order = (over) => ({ id: "o1", createdAt: 200, customer: { id: "u1", name: "Sam Ali", email: "sam@example.com", phone: "" }, ...over });
+const card = (over) => ({ id: "c1", code: "4271", name: "", email: "", ...over });
 
 describe("customerList", () => {
-  test("returns no one when there are no cards or orders", () => {
-    expect(customerList([], [])).toEqual([]);
+  test("returns no one when there are no cards", () => {
+    expect(customerList([])).toEqual([]);
   });
 
   test("leaves out cards with no email, as they never signed in", () => {
-    expect(customerList([card({ name: "Walk-in" })], [])).toEqual([]);
+    expect(customerList([card({ name: "Walk-in" })])).toEqual([]);
   });
 
-  test("joins a customer's card and orders by email, ignoring case", () => {
-    const cards = [card({ name: "Sam", email: "sam@example.com", createdAt: 50 })];
-    const orders = [order({ createdAt: 200 }), order({ id: "o2", createdAt: 300, customer: { name: "Sam Ali", email: "SAM@example.com " } })];
-
-    expect(customerList(cards, orders)).toEqual([
-      { name: "Sam Ali", email: "sam@example.com", orders: 2, cardCode: "4271", firstSeen: 50, lastSeen: 300 },
+  test("gives the name, email and card code of each signed-in card", () => {
+    expect(customerList([card({ name: " Sam Ali ", email: "Sam@Example.com " })])).toEqual([
+      { name: "Sam Ali", email: "sam@example.com", cardCode: "4271" },
     ]);
   });
 
-  test("uses the name from the most recent order or card", () => {
-    const orders = [order({ createdAt: 300, customer: { name: "Samuel Ali", email: "sam@example.com" } }), order({ createdAt: 200 })];
-    expect(customerList([], orders)[0].name).toBe("Samuel Ali");
-  });
-
-  test("keeps a customer who has ordered but has no card", () => {
-    expect(customerList([], [order()])).toEqual([
-      { name: "Sam Ali", email: "sam@example.com", orders: 1, cardCode: "", firstSeen: 200, lastSeen: 200 },
-    ]);
-  });
-
-  test("counts a stamp as the customer being seen", () => {
-    const cards = [card({ email: "a@example.com", name: "A", createdAt: 100, lastStampAt: 900 })];
-    expect(customerList(cards, [])[0].lastSeen).toBe(900);
+  test("keeps both cards of a customer on two devices", () => {
+    const cards = [card({ id: "1", email: "sam@example.com", name: "Sam" }), card({ id: "2", email: "sam@example.com", name: "Sam", code: "1234" })];
+    expect(customerList(cards).map((c) => c.cardCode)).toEqual(["1234", "4271"]);
   });
 
   test("sorts by name, A to Z", () => {
     const cards = [card({ id: "1", email: "z@example.com", name: "zara" }), card({ id: "2", email: "a@example.com", name: "Adam", code: "1111" })];
-    expect(customerList(cards, []).map((c) => c.name)).toEqual(["Adam", "zara"]);
+    expect(customerList(cards).map((c) => c.name)).toEqual(["Adam", "zara"]);
   });
 
-  test("does not change the cards or orders it is given", () => {
+  test("does not change the cards it is given", () => {
     const cards = Object.freeze([Object.freeze(card({ email: "a@example.com", name: "A" }))]);
-    const orders = Object.freeze([Object.freeze(order())]);
-    expect(() => customerList(cards, orders)).not.toThrow();
+    expect(() => customerList(cards)).not.toThrow();
   });
 });
 
 describe("customerSheet", () => {
   test("has a bold header row, then one row per customer", () => {
-    const rows = customerSheet([{ name: "Sam Ali", email: "sam@example.com", orders: 2, cardCode: "4271", firstSeen: 50, lastSeen: 300 }]);
+    const rows = customerSheet([{ name: "Sam Ali", email: "sam@example.com", cardCode: "4271" }]);
 
-    expect(rows[0].map((c) => c.value)).toEqual(["Name", "Email", "Orders", "Loyalty card", "First seen", "Last seen"]);
+    expect(rows[0].map((c) => c.value)).toEqual(["Name", "Email", "Card code"]);
     expect(rows[0].every((c) => c.fontWeight === "bold")).toBe(true);
-    expect(rows[1].map((c) => c.value)).toEqual(["Sam Ali", "sam@example.com", 2, "4271", new Date(50), new Date(300)]);
+    expect(rows[1].map((c) => c.value)).toEqual(["Sam Ali", "sam@example.com", "4271"]);
+  });
+
+  test("writes the card code as text, so 0042 keeps its zeros", () => {
+    const [, row] = customerSheet([{ name: "A", email: "a@example.com", cardCode: "0042" }]);
+    expect(row[2]).toMatchObject({ type: String, value: "0042" });
   });
 
   test("writes names as plain text, so a name starting with = is never a formula", () => {
-    const [, row] = customerSheet([{ name: "=HYPERLINK(1)", email: "x@example.com", orders: 0, cardCode: "", firstSeen: 1, lastSeen: 1 }]);
+    const [, row] = customerSheet([{ name: "=HYPERLINK(1)", email: "x@example.com", cardCode: "1000" }]);
     expect(row[0]).toMatchObject({ type: String, value: "=HYPERLINK(1)" });
   });
 });

@@ -54,7 +54,7 @@ Clock records are kept in the tablet's browser, not on the computer, so open `/a
 | `/account` | Customers | Their orders |
 | `/admin` | Owner | Home: two rooms, **Service** (orders, cards) and **Studio** (menu, offers, shop, staff), with live numbers and a card search |
 | `/admin/orders` | Service | Order tickets in lanes: New, Kitchen, Ready, On the way, Done; today's order count and takings; "Sent out" for a driver without the app |
-| `/admin/cards` | Service | Find a loyalty card by its 4-digit code, name or email; add a stamp, take one back, give the 9th-visit surprise; each card's history; download every signed-in customer's name and email as an Excel file |
+| `/admin/cards` | Service | Find a loyalty card by its 4-digit code, name or email; add a stamp, take one back, give the 9th-visit surprise; each card's history; download every signed-in customer's name, email and card code as an Excel file |
 | `/admin/menu` | Studio | Search every dish, list what is sold out, edit, add and remove dishes, options, photos |
 | `/admin/offers` | Studio | Offers on the website: percent off (order or chosen dishes), buy one get one free, or an announcement; start and end times, minimum order, pause. Money offers are applied to the Box (best one per order) |
 | `/admin/shop` | Studio | Three panels. Right now: what customers see this minute, taking orders on/off, delivery on/off, delivery minimum, prep time. Opening hours: per day, closed days, closing after midnight (drive the "Open now" pill, footer and checkout). Delivery zones (name, fee, postcode list, and a distance that covers unlisted postcodes in the same districts) |

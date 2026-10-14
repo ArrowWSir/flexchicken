@@ -103,8 +103,9 @@ test("the owner changes the driver code, like a password, and the driver screen 
   await expect(driver.getByRole("tablist", { name: "Deliveries" })).toBeVisible();
 });
 
-test("the owner downloads signed-in customers' names and emails as an Excel file", async ({ browser }) => {
+test("the owner downloads signed-in customers' names, emails and card codes as an Excel file", async ({ browser }) => {
   const { shop, admin } = await shopAndAdmin(browser, "/admin/cards");
+  const code = (await shop.getByText(/^#\d{4}$/).first().textContent()).replace("#", "");
   await shop.goto("/account");
   await shop.getByRole("button", { name: "Sign in", exact: true }).click();
   await shop.getByRole("button", { name: "Continue with Google" }).click();
@@ -122,5 +123,5 @@ test("the owner downloads signed-in customers' names and emails as an Excel file
     .filter(([name]) => name.startsWith("xl/") && name.endsWith(".xml"))
     .map(([, bytes]) => strFromU8(bytes))
     .join("");
-  for (const value of ["Name", "Email", "Priya Shah", "priya@example.com"]) expect(text).toContain(value);
+  for (const value of ["Name", "Email", "Card code", "Priya Shah", "priya@example.com", code]) expect(text).toContain(value);
 });
