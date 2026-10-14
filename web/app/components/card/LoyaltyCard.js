@@ -142,7 +142,7 @@ export default function LoyaltyCard({ customer }) {
           setIsRevealed(true);
         }}
         onPointerMove={trackPointer}
-        className="card-scene card-sheen press relative block aspect-[1.586] w-full cursor-pointer rounded-[20px]"
+        className="card-scene card-sheen press relative mx-auto block aspect-[1.586] w-[86%] max-w-[360px] cursor-pointer rounded-[20px]"
         aria-label={isFlipped ? "Turn the card over to see your stamps" : "Turn the card over"}
       >
         <span className="card-inner" data-flipped={isFlipped} data-revealed={isRevealed}>
