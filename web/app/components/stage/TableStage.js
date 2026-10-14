@@ -12,16 +12,24 @@ import { measureDish } from "../../lib/dishFit";
 // camera is the chosen dish. Turning the table turns everything on it.
 //
 // Positions are computed every frame and written straight to `style`; React
-// does not re-render while the table turns.
+// does not re-render while the table turns. To hold 60 frames a second a
+// frame only moves things:
+// - each place setting (mat, shadows, plate, food) is one group, sized once
+//   for the front of the table, then placed and scaled with `transform`,
+//   which the graphics chip does without repainting;
+// - styles are written only when they change (see `put`), and the depth cues
+//   change in steps, so a turn repaints a setting a few times, not every frame;
+// - the specks of seasoning hang still in the light while the table turns.
 
 // Geometry, as fractions of the stage width.
 const TABLE_X = 0.76;
-const FRONT_Y = 0.74; // x stage height: where the front plate stands
+const FRONT_Y = 0.76; // x stage height: where the front plate stands
 const DESIGN_ASPECT = 0.8; // stage height / width the sizes below were set for
+const SIZE = 1.12; // the table and everything on it, x the size that just fits the card
 const RING = 0.44; // radius of the ring of plates
 const OVERHANG = 0.13; // table top beyond the ring
-// The camera: table top height / width. table.jpg's brass rim measures
-// 1019 x 1556 px (make_table.py RIM), so 0.655 is the owner's own photo.
+// The camera: table top height / width. Lower than table.jpg (0.655) so the
+// dishes stand on the table, as in a shop window.
 const TILT = 0.42;
 // The plate and mat photos were taken lower (plate 1.jpg: 516 x 276 px); they
 // are stretched to the table's tilt.
@@ -33,11 +41,9 @@ const PLATE = 0.5; // nearest plate's width
 const MAT = 1.16; // x plate width: a band of jute round the plate
 const MAT_ASPECT = 0.547; // the mat image's height / width (scene.json matAspect)
 const CAMERA_DISTANCE = 2.4; // x ring radius; closer = stronger perspective
-// Depth: nearer settings draw over farther ones; within one setting the mat
-// is lowest, then the plate's shadow, the plate, the food's shadow and the food.
+// Nearer settings draw over farther ones; inside a setting the order is the
+// markup's: mat, plate shadow, plate, food shadow, food.
 const DEPTH_STEPS = 200;
-const LAYERS = { mat: 0, plateShadow: 1, plate: 2, dishShadow: 3, dish: 4 };
-const LAYER_COUNT = 5;
 // Food is sized from where it really is in its photo (lib/dishFit), so every
 // dish sits on its plate at the same scale whatever the photo's framing.
 const FOOD_FILL = 0.72; // food width, x plate width
@@ -52,8 +58,7 @@ const PLACEHOLDER_FILL = 0.4;
 const FAR_DIM = 0.16;
 const FAR_DESATURATE = 0.1;
 const DEPTH_BLUR_PX = 2;
-const MOTION_BLUR_PX = 2.4;
-const MOTION_BLUR_AT = 6; // dishes/second that reaches full blur
+const DEPTH_CUE_STEPS = 6; // nearness is rounded to this many steps for the filters
 
 // Spotlight specks: seasoning in the light. Seeded, so server and client agree.
 const SPECK_COUNT = 22;
@@ -68,6 +73,25 @@ const ARRIVE_FROM = 2.4; // a new category's plates roll in from this far round
 
 const toRad = (deg) => (deg * Math.PI) / 180;
 
+// Writes a style only when it changed: even an unchanged write makes the
+// browser recheck the element, and a changed filter or size repaints it.
+function put(el, prop, value) {
+  if (!el) return;
+  const last = (el.__tableStyle ??= {});
+  if (last[prop] === value) return;
+  last[prop] = value;
+  if (prop.startsWith("--")) el.style.setProperty(prop, value);
+  else el.style[prop] = value;
+}
+
+/** Sets an element's box, in px, relative to its positioned parent. */
+function box(el, left, top, w, h) {
+  put(el, "left", `${left}px`);
+  put(el, "top", `${top}px`);
+  put(el, "width", `${w}px`);
+  put(el, "height", `${h}px`);
+}
+
 function seeded(seed) {
   let s = seed;
   return () => {
@@ -78,8 +102,7 @@ function seeded(seed) {
   };
 }
 
-// Specks live in the table's space (angle, reach, height above the top), so
-// they turn with it and pass behind or in front of dishes by depth.
+// Specks hang in the air over the table (angle, reach, height above the top).
 const SPECKS = (() => {
   const rand = seeded(11);
   return Array.from({ length: SPECK_COUNT }, () => ({
@@ -92,6 +115,36 @@ const SPECKS = (() => {
   }));
 })();
 
+/**
+ * Sizes one place setting's pieces for the front of the table, around the
+ * point the setting stands on (the group's origin). Only runs when the card
+ * resizes or a photo is measured; `put` skips it otherwise.
+ */
+function sizeSetting(parts, plateW, fit, hasImage) {
+  const ph = plateW * TILT;
+  const mw = plateW * MAT;
+  box(parts.mat, -mw / 2, -(mw * TILT) / 2, mw, mw * MAT_ASPECT * (TILT / PHOTO_TILT));
+  const sw = plateW * 1.12;
+  box(parts.plateShadow, -sw / 2 + plateW * 0.06, -(sw * TILT) / 2 + ph * 0.12, sw, sw * TILT);
+  box(parts.plate, -plateW / 2, -ph / 2, plateW, ph);
+
+  // Until its photo is measured the food stays hidden; the plate shows.
+  const foodW = fit ? fit.right - fit.left : 1;
+  const foodH = fit ? fit.bottom - fit.top : 1;
+  const fill = hasImage ? FOOD_FILL : PLACEHOLDER_FILL;
+  const dw = Math.min((plateW * fill) / foodW, (plateW * FOOD_MAX_HEIGHT) / foodH);
+  const base = ph * FOOD_BASE;
+  const centre = fit ? (fit.left + fit.right) / 2 : 0.5;
+  box(parts.dish, -centre * dw, base - (fit?.bottom ?? 1) * dw, dw, dw);
+  put(parts.dish, "--dw", String(dw));
+  put(parts.dish, "opacity", fit ? "1" : "0");
+  const dsw = Math.min(foodW * dw, plateW * 0.86) * CONTACT_SHADOW;
+  const dsh = dsw * TILT * 0.5;
+  box(parts.dishShadow, -dsw / 2 + dsw * LIGHT_OFFSET, base - dsh * 0.62, dsw, dsh);
+  put(parts.dishShadow, "opacity", fit && hasImage ? "1" : "0");
+  return foodH * dw;
+}
+
 export default function TableStage({ items, activeIndex, onSelect, onStep, isReducedMotion, label }) {
   const stageRef = useRef(null);
   const pedestalRef = useRef(null);
@@ -100,11 +153,7 @@ export default function TableStage({ items, activeIndex, onSelect, onStep, isRed
   const lightRef = useRef(null);
   const beamRef = useRef(null);
   const poolRef = useRef(null);
-  const plateRefs = useRef([]);
-  const plateShadowRefs = useRef([]);
-  const matRefs = useRef([]);
-  const dishRefs = useRef([]);
-  const dishShadowRefs = useRef([]);
+  const settingRefs = useRef([]); // per dish: { group, mat, plateShadow, plate, dishShadow, dish }
   const speckRefs = useRef([]);
   const fits = useRef(new Map()); // image src -> measured food bounds
   const placed = useRef([]);
@@ -115,12 +164,16 @@ export default function TableStage({ items, activeIndex, onSelect, onStep, isRed
   const count = items.length;
   const step = slotStep(count);
 
+  const part = (i, name) => (el) => {
+    settingRefs.current[i] = { ...settingRefs.current[i], [name]: el };
+  };
+
   const layout = useCallback(() => {
     const { width, height } = size.current;
     if (!width) return;
-    const { position, velocity } = motion.current;
-    // In a card shorter than the one this was drawn for, the whole table shrinks to fit.
-    const unit = width * Math.min(1, height / (width * DESIGN_ASPECT));
+    const { position } = motion.current;
+    // Sized to the card: in one shorter than the design, the whole table shrinks to fit.
+    const unit = width * Math.min(1, height / (width * DESIGN_ASPECT)) * SIZE;
     const ring = unit * RING;
     const ringRy = ring * TILT;
     const cx = width * TABLE_X;
@@ -130,31 +183,20 @@ export default function TableStage({ items, activeIndex, onSelect, onStep, isRed
     const rim = unit * RIM_DEPTH;
     const focal = ring * CAMERA_DISTANCE;
     const plateW = unit * PLATE;
-    const motionBlur = Math.min(MOTION_BLUR_PX, (Math.abs(velocity) / MOTION_BLUR_AT) * MOTION_BLUR_PX);
     const tableAngle = position * step;
-
-    const box = (el, left, top, w, h) => {
-      if (!el) return;
-      el.style.left = `${left}px`;
-      el.style.top = `${top}px`;
-      el.style.width = `${w}px`;
-      el.style.height = `${h}px`;
-    };
 
     // Top: a top-down disc of the table, turned, then flattened by the camera.
     box(topRef.current, cx - R, cy - R, R * 2, R * 2);
     box(lightRef.current, cx - R, cy - R, R * 2, R * 2);
     // Positive CSS rotation is clockwise on screen, which carries the front of
     // the table to the left: the same way the plates travel round.
-    if (topRef.current) topRef.current.style.transform = `scaleY(${TILT}) rotate(${tableAngle}deg)`;
-    if (lightRef.current) lightRef.current.style.transform = `scaleY(${TILT})`;
+    put(topRef.current, "transform", `scaleY(${TILT}) rotate(${tableAngle.toFixed(3)}deg)`);
+    put(lightRef.current, "transform", `scaleY(${TILT})`);
     // Rim: the brass band under the front arc; it slides as the table turns.
     const rimEl = rimRef.current;
     box(rimEl, cx - R, cy, R * 2, ry + rim);
-    if (rimEl) {
-      rimEl.style.borderRadius = `0 0 ${R}px ${R}px / 0 0 ${ry}px ${ry}px`;
-      rimEl.style.backgroundPosition = `0 0, ${-toRad(tableAngle) * R}px 0`;
-    }
+    put(rimEl, "borderRadius", `0 0 ${R}px ${R}px / 0 0 ${ry}px ${ry}px`);
+    put(rimEl, "backgroundPosition", `0 0, ${(-toRad(tableAngle) * R).toFixed(1)}px 0`);
     // Pedestal: a narrower drum under the table, fading into the dark.
     const pw = R * 2 * PEDESTAL_WIDTH;
     box(pedestalRef.current, cx - pw / 2, cy + ry * 0.6, pw, width * PEDESTAL_HEIGHT);
@@ -163,12 +205,11 @@ export default function TableStage({ items, activeIndex, onSelect, onStep, isRed
     box(poolRef.current, cx - R * 0.7, cy - ry * 0.2, R * 1.4, ry * 1.4);
 
     items.forEach((item, i) => {
-      const plate = plateRefs.current[i];
-      const dish = dishRefs.current[i];
-      const dishShadow = dishShadowRefs.current[i];
-      const plateShadow = plateShadowRefs.current[i];
-      const mat = matRefs.current[i];
-      if (!plate) return;
+      const parts = settingRefs.current[i];
+      if (!parts?.group) return;
+      const fit = item.image ? fits.current.get(item.image) : PLACEHOLDER_FIT;
+      const foodH = sizeSetting(parts, plateW, fit, Boolean(item.image));
+
       const offset = ringOffset(i, position, count);
       const a = toRad(offset * step);
       const z = Math.cos(a); // 1 = nearest the camera
@@ -177,79 +218,30 @@ export default function TableStage({ items, activeIndex, onSelect, onStep, isRed
       const y = cy + z * ringRy;
       const visible = ringVisibility(offset, count);
       const near = (z + 1) / 2;
-      const depth = 10 + Math.round(near * DEPTH_STEPS) * LAYER_COUNT;
-      const layer = (name) => String(depth + LAYERS[name]);
-      const blur = DEPTH_BLUR_PX * (1 - near) ** 1.6 + motionBlur;
-      const brightness = 1 - FAR_DIM * (1 - near);
-      const saturation = 1 - FAR_DESATURATE * (1 - near);
-      const filter = `brightness(${brightness.toFixed(3)}) saturate(${saturation.toFixed(3)})${blur > 0.15 ? ` blur(${blur.toFixed(2)}px)` : ""}`;
-
-      const pw2 = plateW * scale;
-      const ph = pw2 * TILT;
-      plate.style.transform = `translate3d(${x - pw2 / 2}px, ${y - ph / 2}px, 0)`;
-      plate.style.width = `${pw2}px`;
-      plate.style.height = `${ph}px`;
-      plate.style.zIndex = layer("plate");
-      plate.style.opacity = String(visible);
-      plate.style.filter = filter;
-
-      if (plateShadow) {
-        const sw = pw2 * 1.12;
-        plateShadow.style.transform = `translate3d(${x - sw / 2 + pw2 * 0.06}px, ${y - (sw * TILT) / 2 + ph * 0.12}px, 0)`;
-        plateShadow.style.width = `${sw}px`;
-        plateShadow.style.height = `${sw * TILT}px`;
-        plateShadow.style.opacity = String(visible * 0.9);
-        plateShadow.style.zIndex = layer("plateShadow");
-      }
-      if (mat) {
-        const mw = pw2 * MAT;
-        mat.style.transform = `translate3d(${x - mw / 2}px, ${y - (mw * TILT) / 2}px, 0)`;
-        mat.style.width = `${mw}px`;
-        mat.style.height = `${mw * MAT_ASPECT * (TILT / PHOTO_TILT)}px`;
-        mat.style.zIndex = layer("mat");
-        mat.style.opacity = String(visible);
-        mat.style.filter = filter;
-      }
-
-      // Until its photo is measured the food stays hidden; the plate shows.
-      const fit = item.image ? fits.current.get(item.image) : PLACEHOLDER_FIT;
-      const foodW = fit ? fit.right - fit.left : 1;
-      const foodH = fit ? fit.bottom - fit.top : 1;
-      const fill = item.image ? FOOD_FILL : PLACEHOLDER_FILL;
-      const dw = Math.min((pw2 * fill) / foodW, (pw2 * FOOD_MAX_HEIGHT) / foodH);
-      const base = y + ph * FOOD_BASE;
-      if (dish) {
-        const centre = fit ? (fit.left + fit.right) / 2 : 0.5;
-        dish.style.transform = `translate3d(${x - centre * dw}px, ${base - (fit?.bottom ?? 1) * dw}px, 0)`;
-        dish.style.width = `${dw}px`;
-        dish.style.height = `${dw}px`;
-        dish.style.zIndex = layer("dish");
-        dish.style.opacity = String(fit ? visible : 0);
-        dish.style.filter = filter;
-        dish.style.setProperty("--dw", String(dw));
-      }
-      if (dishShadow) {
-        const sw = Math.min(foodW * dw, pw2 * 0.86) * CONTACT_SHADOW;
-        const sh = sw * TILT * 0.5;
-        dishShadow.style.transform = `translate3d(${x - sw / 2 + sw * LIGHT_OFFSET}px, ${base - sh * 0.62}px, 0)`;
-        dishShadow.style.width = `${sw}px`;
-        dishShadow.style.height = `${sh}px`;
-        dishShadow.style.zIndex = layer("dishShadow");
-        dishShadow.style.opacity = String(fit && item.image ? visible : 0);
-      }
-      placed.current[i] = { x, y, w: pw2, h: foodH * dw, near, visible };
+      // In steps, so a setting is repainted a few times per turn, not every frame.
+      const cue = 1 - Math.round(near * DEPTH_CUE_STEPS) / DEPTH_CUE_STEPS;
+      const blur = DEPTH_BLUR_PX * cue ** 1.6;
+      put(parts.group, "transform", `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`);
+      put(parts.group, "zIndex", String(10 + Math.round(near * DEPTH_STEPS)));
+      put(parts.group, "opacity", visible.toFixed(3));
+      put(
+        parts.group,
+        "filter",
+        `brightness(${(1 - FAR_DIM * cue).toFixed(3)}) saturate(${(1 - FAR_DESATURATE * cue).toFixed(3)})${blur > 0.15 ? ` blur(${blur.toFixed(2)}px)` : ""}`
+      );
+      placed.current[i] = { x, y, w: plateW * scale, h: foodH * scale, near, visible };
     });
 
     SPECKS.forEach((p, i) => {
       const el = speckRefs.current[i];
       if (!el) return;
-      const a = toRad(p.theta + tableAngle);
+      const a = toRad(p.theta);
       const z = Math.cos(a);
       const r = p.reach * R;
       const scale = focal / (focal + (1 - z) * r);
-      el.style.transform = `translate3d(${cx + Math.sin(a) * r}px, ${cy + z * r * TILT - p.height * width}px, 0) scale(${scale})`;
-      el.style.zIndex = String(11 + Math.round(((z + 1) / 2) * DEPTH_STEPS) * LAYER_COUNT);
-      el.style.opacity = String(0.35 + 0.65 * ((z + 1) / 2));
+      put(el, "transform", `translate3d(${(cx + Math.sin(a) * r).toFixed(2)}px, ${(cy + z * r * TILT - p.height * width).toFixed(2)}px, 0) scale(${scale.toFixed(4)})`);
+      put(el, "zIndex", String(11 + Math.round(((z + 1) / 2) * DEPTH_STEPS)));
+      put(el, "opacity", (0.35 + 0.65 * ((z + 1) / 2)).toFixed(2));
     });
   }, [items, count, step]);
 
@@ -436,31 +428,20 @@ export default function TableStage({ items, activeIndex, onSelect, onStep, isRed
 
       <div key={items[0]?.categoryId} className="dish-layer" aria-hidden="true">
         {items.map((item, i) => (
-          <div key={`mat-${item.id}`} ref={(el) => (matRefs.current[i] = el)} className="table-mat table-piece pointer-events-none absolute left-0 top-0" />
-        ))}
-        {items.map((item, i) => (
-          <div key={`shadow-${item.id}`} ref={(el) => (plateShadowRefs.current[i] = el)} className="plate-shadow table-piece pointer-events-none absolute left-0 top-0" />
-        ))}
-        {items.map((item, i) => (
-          <div key={`plate-${item.id}`} ref={(el) => (plateRefs.current[i] = el)} className="plate table-piece pointer-events-none absolute left-0 top-0" />
-        ))}
-        {items.map((item, i) => (
-          <div key={`dish-shadow-${item.id}`} ref={(el) => (dishShadowRefs.current[i] = el)} className="dish-shadow table-piece pointer-events-none absolute left-0 top-0" />
-        ))}
-        {items.map((item, i) => (
-          <div
-            key={`dish-${item.id}`}
-            ref={(el) => (dishRefs.current[i] = el)}
-            data-fly-source={item.id}
-            className="table-piece pointer-events-none absolute left-0 top-0 flex items-end justify-center"
-          >
-            {item.image ? (
-              <img src={item.image} alt="" width={720} height={720} draggable={false} className="dish-img size-full object-contain" />
-            ) : (
-              <span className="mb-[10%] flex size-[34%] items-center justify-center rounded-full bg-cream/15 text-cream/60">
-                <UtensilsCrossed className="size-1/2" strokeWidth={1.6} />
-              </span>
-            )}
+          <div key={item.id} ref={part(i, "group")} className="table-setting pointer-events-none absolute left-0 top-0">
+            <div ref={part(i, "mat")} className="table-mat absolute" />
+            <div ref={part(i, "plateShadow")} className="plate-shadow absolute" />
+            <div ref={part(i, "plate")} className="plate absolute" />
+            <div ref={part(i, "dishShadow")} className="dish-shadow absolute" />
+            <div ref={part(i, "dish")} data-fly-source={item.id} className="absolute flex items-end justify-center opacity-0">
+              {item.image ? (
+                <img src={item.image} alt="" width={720} height={720} draggable={false} className="dish-img size-full object-contain" />
+              ) : (
+                <span className="mb-[10%] flex size-[34%] items-center justify-center rounded-full bg-cream/15 text-cream/60">
+                  <UtensilsCrossed className="size-1/2" strokeWidth={1.6} />
+                </span>
+              )}
+            </div>
           </div>
         ))}
       </div>

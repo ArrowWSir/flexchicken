@@ -380,8 +380,8 @@ main.page-frame :where([class*="bg-"], [class*="bg-"] *) {
 
 /* ── Menu card and turning table (TableStage.js moves everything; CSS only paints) ── */
 /* The menu card: a shop window in the brand's roast brown, lit from inside.
-   The dark is what lets the spotlight read as light (it is mix-blend-mode:
-   screen) and makes the food the brightest thing on the page. */
+   The dark is what lets the spotlight read as light and makes the food the
+   brightest thing on the page. */
 .menu-vitrine {
   background:
     radial-gradient(90% 55% at 75% 104%, rgb(214 179 106 / 0.16), rgb(214 179 106 / 0) 62%),
@@ -431,10 +431,12 @@ main.page-frame :where([class*="bg-"], [class*="bg-"] *) {
   mask-image: linear-gradient(to bottom, #000 0%, #000 10%, transparent 72%);
 }
 /* Spotlight: a soft cone from above the card onto the front of the table, and
-   the warm pool it leaves there. It stays still while the table turns. */
+   the warm pool it leaves there. It stays still while the table turns. Plain
+   see-through light, not a blend mode: on the dark card it looks the same,
+   and a blend would be worked out again over the turning dishes every frame. */
 .spot-beam {
   z-index: 1400;
-  mix-blend-mode: screen;
+  will-change: transform;
   background:
     radial-gradient(55% 34% at 50% 0%, rgb(255 238 214 / 0.14), rgb(255 238 214 / 0.05) 55%, transparent 100%),
     conic-gradient(from 150deg at 50% -60%, transparent 0deg, rgb(255 240 218 / 0.08) 12deg, rgb(255 242 222 / 0.18) 30deg, rgb(255 240 218 / 0.08) 48deg, transparent 60deg, transparent 360deg);
@@ -445,7 +447,6 @@ main.page-frame :where([class*="bg-"], [class*="bg-"] *) {
 .spot-pool {
   z-index: 5;
   border-radius: 50%;
-  mix-blend-mode: screen;
   background: radial-gradient(closest-side, rgb(255 236 206 / 0.22), rgb(255 236 206 / 0.07) 60%, transparent);
 }
 /* Specks of seasoning caught in the light; TableStage places them. */
@@ -506,16 +507,18 @@ main.page-frame :where([class*="bg-"], [class*="bg-"] *) {
   border-radius: 50%;
   background: radial-gradient(closest-side, rgb(38 20 8 / 0.62), rgb(38 20 8 / 0.3) 55%, rgb(38 20 8 / 0));
   filter: blur(1.5px);
-  mix-blend-mode: multiply;
 }
 .dish-img {
   filter: drop-shadow(calc(var(--dw, 100) * 0.012px) calc(var(--dw, 100) * 0.022px) calc(var(--dw, 100) * 0.02px) rgb(40 22 10 / 0.38))
     drop-shadow(0 calc(var(--dw, 100) * 0.006px) calc(var(--dw, 100) * 0.006px) rgb(40 22 10 / 0.3));
 }
-/* Hidden until TableStage places it: the server HTML has no sizes yet, so an
-   unplaced dish would show at its full 720px. layout() sets opacity inline. */
-.table-piece {
+/* One place setting (mat, shadows, plate, food), moved as one: its origin is
+   the point it stands on, and it is sized for the front of the table and
+   scaled from there. Hidden until TableStage places it: the server HTML has
+   no sizes yet, so an unplaced dish would show at its full 720px. */
+.table-setting {
   opacity: 0;
+  transform-origin: 0 0;
   will-change: transform;
 }
 
