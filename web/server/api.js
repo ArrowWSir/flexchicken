@@ -6,6 +6,8 @@
 //   POST /api/staff/login    { role, pin, name }
 //   POST /api/staff/logout   { role }
 //   POST /api/staff/code     { as: "admin", role, current, next }   the owner changes a code
+//   POST /api/staff/list     { as: "admin", pin }       opens the order list (its own PIN)
+//   POST /api/staff/list-lock                           closes it again
 //   GET  /api/admin/export?as=admin                     every row, to move the shop
 //   POST /api/admin/import   { as: "admin", dump }      into an empty shop only
 //   GET  /api/staff/me?as=admin
@@ -23,6 +25,12 @@ const MAX_CALL_BODY = 64 * KB;
 const MAX_STAFF_BODY = 4 * KB;
 const MAX_IMPORT_BODY = 60 * KB * KB;
 const STAFF_MAX_AGE_S = 30 * 24 * 3600;
+// The order list's own PIN opens it for one working day at most; the screen
+// asks for it again on every visit anyway.
+const LIST_MAX_AGE_S = 8 * 3600;
+const LIST_COOKIE = "fc_list";
+// The order list PIN until the owner changes it (or sets LIST_PIN).
+const DEFAULT_LIST_CODE = "0000";
 const MIN_SECRET_CHARS = 32;
 const STAFF_ROLES = new Set(["admin", "driver", "clock"]);
 const PHOTO_PATH = /^\/api\/photo\/([A-Za-z0-9_-]{1,80})\.(webp|jpeg|png)$/;
@@ -89,14 +97,16 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
   let globalLoginPausedUntil = 0;
   const rateLimits = Object.fromEntries(Object.entries(LIMITS).map(([name, l]) => [name, createRateLimit(l)]));
   const secret = typeof env.SESSION_SECRET === "string" && env.SESSION_SECRET.length >= MIN_SECRET_CHARS ? env.SESSION_SECRET : null;
-  // Two codes: the owner's (admin screens, and unlocking the clock tablet)
-  // and the drivers'. One the owner set in /admin wins; until then the
-  // Worker secret stands.
-  const keyOf = (role) => (role === "driver" ? "driver" : "admin");
+  // Three codes: the owner's (admin screens, and unlocking the clock tablet),
+  // the drivers', and the order list's (a second lock inside the admin). One
+  // the owner set in /admin wins; until then the Worker secret stands.
+  const keyOf = (role) => (role === "driver" || role === "list" ? role : "admin");
   const savedCode = (role) => store.read(CODES, {})[keyOf(role)] ?? null;
   const secretCode = (role) => {
-    const code = keyOf(role) === "driver" ? env.DRIVER_PIN : env.ADMIN_PIN;
-    return typeof code === "string" && CODE_SHAPE.test(code) ? code : null;
+    const key = keyOf(role);
+    const code = { driver: env.DRIVER_PIN, list: env.LIST_PIN, admin: env.ADMIN_PIN }[key];
+    if (typeof code === "string" && CODE_SHAPE.test(code)) return code;
+    return key === "list" ? DEFAULT_LIST_CODE : null;
   };
   const isSetUp = (role) => Boolean(secret && (savedCode(role) || secretCode(role)));
   async function codeMatches(role, given) {
@@ -128,8 +138,18 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
     if (!STAFF_ROLES.has(as) || !secret) return { role: "public", ip: caller };
     const claims = await verifyClaims(secret, readCookie(request.headers.get("cookie"), cookieName(as)), now());
     if (!claims || claims.role !== as || claims.v !== (await versionFor(as))) return { role: "public", ip: caller };
-    return { role: claims.role, id: claims.id, name: claims.name, ip: caller };
+    const actor = { role: claims.role, id: claims.id, name: claims.name, ip: caller };
+    return claims.role === "admin" ? { ...actor, hasListKey: await hasListKey(request) } : actor;
   }
+
+  // The order list's cookie: good only beside the owner's sign-in, and only
+  // under the current order list PIN.
+  async function hasListKey(request) {
+    const claims = await verifyClaims(secret, readCookie(request.headers.get("cookie"), LIST_COOKIE), now());
+    return Boolean(claims && claims.role === "list" && claims.v === (await versionFor("list")));
+  }
+  const listCookie = async () =>
+    cookieFor(LIST_COOKIE, await signClaims(secret, { role: "list", v: await versionFor("list") }, now(), LIST_MAX_AGE_S), LIST_MAX_AGE_S);
 
   // State-changing calls must come from this site's own pages: a custom
   // header (which other sites cannot send without a CORS preflight) and,
@@ -195,17 +215,22 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
     return ok(claims, { "set-cookie": await issueCookie(claims) });
   }
 
-  /** Checks a typed code with the lockouts; a failure Response, or null when right. */
-  async function guardCode(caller, role, given) {
+  /**
+   * Checks a typed code with the lockouts; a failure Response, or null when
+   * right. `roles` may name more than one code that will do.
+   */
+  async function guardCode(caller, roles, given, wrongMessage = "That code is not right.") {
     const wait = Math.max(loginLimiter.waitMs(caller, now()), globalLoginPausedUntil - now());
     if (wait > 0) return fail(429, `Too many wrong codes. Try again in ${Math.ceil(wait / 1000)} seconds.`);
-    if (await codeMatches(role, given)) {
+    let isRight = false;
+    for (const role of [roles].flat()) isRight = isRight || (await codeMatches(role, given));
+    if (isRight) {
       loginLimiter.succeed(caller);
       return null;
     }
     loginLimiter.fail(caller, now());
     if (!globalLoginFails.hit("all", now())) globalLoginPausedUntil = now() + 15 * MINUTE;
-    return fail(401, "That code is not right.");
+    return fail(401, wrongMessage);
   }
 
   // The owner changes a code, like a password: signed in on an admin screen,
@@ -214,14 +239,19 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
     const { body } = await readBody(request, MAX_STAFF_BODY);
     const actor = await actorFor(request, body.as);
     if (actor.role !== "admin") throw new ShopError(403, "Only the owner can change the shift codes. Sign in again.");
-    const role = body.role === "driver" ? "driver" : body.role === "admin" ? "admin" : null;
+    const role = ["admin", "driver", "list"].includes(body.role) ? body.role : null;
     if (!role) throw new ShopError(400, "Choose which code to change.");
-    const wrong = await guardCode(actor.ip, "admin", body.current);
-    if (wrong) return fail(401, "Your current owner's code is not right.");
+    // The order list PIN changes with itself, or with the owner's code when
+    // it has been forgotten.
+    const wrong =
+      role === "list"
+        ? await guardCode(actor.ip, ["list", "admin"], body.current, "The current PIN is not right.")
+        : await guardCode(actor.ip, "admin", body.current, "Your current owner's code is not right.");
+    if (wrong) return wrong;
     const next = body.next;
     if (typeof next !== "string" || !CODE_SHAPE.test(next)) throw new ShopError(400, "Use 4 to 8 digits for the new code.");
     const other = role === "admin" ? "driver" : "admin";
-    if (await codeMatches(other, next)) {
+    if (role !== "list" && (await codeMatches(other, next))) {
       throw new ShopError(400, role === "admin" ? "That is the driver code. Pick a different owner's code." : "That is the owner's code. Pick a different driver code.");
     }
     const salt = newSalt();
@@ -232,8 +262,24 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
     else write();
     versions.clear();
     // This device stays signed in; every other one using the old code is out.
-    const headers = role === "admin" ? { "set-cookie": await issueCookie({ role: "admin", id: actor.id, name: actor.name }) } : {};
+    const fresh = { admin: () => issueCookie({ role: "admin", id: actor.id, name: actor.name }), list: listCookie }[role];
+    const headers = fresh ? { "set-cookie": await fresh() } : {};
     return ok({ role, changedAt: record.changedAt }, headers);
+  }
+
+  // The order list's own PIN, typed on an admin screen that is signed in.
+  async function unlockList(request) {
+    const { body } = await readBody(request, MAX_STAFF_BODY);
+    const actor = await actorFor(request, body.as);
+    if (actor.role !== "admin") throw new ShopError(403, "Sign in to the admin first.");
+    const wrong = await guardCode(actor.ip, "list", body.pin, "That PIN is not right.");
+    if (wrong) return wrong;
+    return ok(null, { "set-cookie": await listCookie() });
+  }
+
+  async function lockList(request) {
+    await readBody(request, MAX_STAFF_BODY);
+    return ok(null, { "set-cookie": cookieFor(LIST_COOKIE, "", 0) });
   }
 
   async function logout(request) {
@@ -287,6 +333,8 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
     "POST /api/staff/login": login,
     "POST /api/staff/logout": logout,
     "POST /api/staff/code": changeCode,
+    "POST /api/staff/list": unlockList,
+    "POST /api/staff/list-lock": lockList,
     "GET /api/staff/me": me,
   };
 

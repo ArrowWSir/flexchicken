@@ -7,7 +7,7 @@ import { watchForBlocks } from "./security.mjs";
 const ADMIN_PIN = process.env.CLOUD_ADMIN_PIN || "135792";
 
 const CUSTOMER_PAGES = ["/", "/full-menu", "/checkout", "/account", "/track?id=ord_000000000000000000000000", "/stamp", "/allergens", "/privacy", "/terms"];
-const STAFF_PAGES = ["/admin", "/admin/orders", "/admin/cards", "/admin/menu", "/admin/offers", "/admin/shop", "/admin/staff", "/admin/expenses", "/driver", "/clock"];
+const STAFF_PAGES = ["/admin", "/admin/orders", "/admin/cards", "/admin/menu", "/admin/offers", "/admin/shop", "/admin/staff", "/admin/order-list", "/driver", "/clock"];
 
 async function scrollThrough(page) {
   await page.waitForLoadState("networkidle");

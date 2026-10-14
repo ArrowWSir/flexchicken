@@ -156,6 +156,61 @@ describe("changing a shift code from the admin screen", () => {
   });
 });
 
+describe("the order list's own PIN", () => {
+  const unlock = (api, cookie, pin, ip) => api.handle(post("/api/staff/list", { as: "admin", pin }, { cookie, ip }));
+  const listCall = (api, cookie) =>
+    api.handle(post("/api/shop/call", { method: "saveExpenseSheet", args: [{ date: "2026-10-09", lines: [{ item: "Wings", qty: "10 kg" }] }], as: "admin" }, { cookie }));
+  const cookieOf = (res) => res.headers.get("set-cookie").split(";")[0];
+
+  test("opens with 0000 until changed, on top of the owner's sign-in", async () => {
+    const { api } = setup();
+    const admin = await signIn(api, "admin", "73519046");
+    expect((await listCall(api, admin.cookie)).status).toBe(403);
+    expect((await unlock(api, "", "0000")).status).toBe(403);
+    const wrong = await unlock(api, admin.cookie, "1234");
+    expect(wrong.status).toBe(401);
+    expect((await wrong.json()).error).toBe("That PIN is not right.");
+    const res = await unlock(api, admin.cookie, "0000");
+    expect(res.status).toBe(200);
+    expect(res.headers.get("set-cookie")).toMatch(/fc_list=.+HttpOnly/);
+    const both = `${admin.cookie}; ${cookieOf(res)}`;
+    expect((await listCall(api, both)).status).toBe(200);
+    // The list cookie alone is not enough.
+    expect((await listCall(api, cookieOf(res))).status).toBe(403);
+    const locked = await api.handle(post("/api/staff/list-lock", {}, { cookie: both }));
+    expect(locked.headers.get("set-cookie")).toMatch(/fc_list=; .*Max-Age=0/);
+  });
+
+  test("LIST_PIN replaces the default", async () => {
+    const { api } = setup({ ...ENV, LIST_PIN: "4321" });
+    const admin = await signIn(api, "admin", "73519046");
+    expect((await unlock(api, admin.cookie, "0000")).status).toBe(401);
+    expect((await unlock(api, admin.cookie, "4321")).status).toBe(200);
+  });
+
+  test("changes like a password; other devices must type the new PIN", async () => {
+    const { api, store } = setup();
+    const admin = await signIn(api, "admin", "73519046");
+    const other = cookieOf(await unlock(api, admin.cookie, "0000"));
+    const change = (current, next) => api.handle(post("/api/staff/code", { as: "admin", role: "list", current, next }, { cookie: admin.cookie }));
+    const wrong = await change("9999", "2468");
+    expect(wrong.status).toBe(401);
+    expect((await wrong.json()).error).toBe("The current PIN is not right.");
+    const res = await change("0000", "2468");
+    expect(res.status).toBe(200);
+    expect(JSON.stringify(store.read("staff_codes", {}))).not.toContain("2468");
+    // This device keeps the list open; a device opened with the old PIN does not.
+    expect((await listCall(api, `${admin.cookie}; ${cookieOf(res)}`)).status).toBe(200);
+    expect((await listCall(api, `${admin.cookie}; ${other}`)).status).toBe(403);
+    expect((await unlock(api, admin.cookie, "0000")).status).toBe(401);
+    expect((await unlock(api, admin.cookie, "2468")).status).toBe(200);
+    // A forgotten PIN is reset with the owner's code; the owner's code is untouched.
+    expect((await change("73519046", "1357")).status).toBe(200);
+    expect((await unlock(api, admin.cookie, "1357")).status).toBe(200);
+    expect((await signIn(api, "admin", "73519046")).res.status).toBe(200);
+  });
+});
+
 describe("moving the shop to another account", () => {
   test("the owner exports every row and loads it into an empty shop", async () => {
     const store = { ...memoryStore(), dump: () => ({ version: 1, kv: [{ key: "settings", value: "{}" }], items: [], photos: [] }), restore: vi.fn(() => ({ kv: 1, items: 0, photos: 0 })) };

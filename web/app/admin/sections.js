@@ -1,4 +1,4 @@
-import { BadgePercent, ChefHat, IdCard, ReceiptText, Store, Users, UtensilsCrossed } from "lucide-react";
+import { BadgePercent, ChefHat, ClipboardList, IdCard, Store, Users, UtensilsCrossed } from "lucide-react";
 
 // The admin is two rooms. Service is the shift: orders coming in and cards
 // being stamped, worked fast on a tablet by the counter. Studio is the back
@@ -16,13 +16,13 @@ export const MODES = [
   {
     id: "studio",
     label: "Studio",
-    blurb: "Edit the menu, offers, shop and team; keep the expenses",
+    blurb: "Edit the menu, offers, shop and team; make order lists",
     sections: [
       { href: "/admin/menu", label: "Menu", icon: UtensilsCrossed },
       { href: "/admin/offers", label: "Offers", icon: BadgePercent },
       { href: "/admin/shop", label: "Shop & delivery", short: "Shop", icon: Store },
       { href: "/admin/staff", label: "Staff & hours", short: "Staff", icon: Users },
-      { href: "/admin/expenses", label: "Expenses", icon: ReceiptText },
+      { href: "/admin/order-list", label: "Order list", icon: ClipboardList },
     ],
   },
 ];

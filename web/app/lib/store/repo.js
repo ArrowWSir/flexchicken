@@ -226,7 +226,7 @@ export function createRepo(store, now = Date.now, { newOrderId = null, maxOrders
       savePromotions(isNew ? [promo, ...promos] : promos.map((p) => (p.id === promo.id ? promo : p)));
       return promo;
     },
-    // The owner's expense sheets (/admin/expenses, lib/expenses.js).
+    // The owner's order lists (/admin/order-list, lib/expenses.js).
     listExpenseSheets,
     /** Saves a new sheet, or replaces the one with `input.id`. `newId` comes from the server. */
     saveExpenseSheet(input) {

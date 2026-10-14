@@ -26,6 +26,7 @@ function postcodes(found = NEAR) {
 const PUBLIC = { role: "public", ip: "1.1.1.1" };
 const CLOCK = { role: "clock", id: "clock", name: "Shop clock" };
 const ADMIN = { role: "admin", id: "kitchen", name: "Kitchen" };
+const LIST = { ...ADMIN, hasListKey: true }; // the owner, with the order list PIN typed
 const DRIVER = { role: "driver", id: "drv_sam", name: "Sam" };
 const OTHER_DRIVER = { role: "driver", id: "drv_alex", name: "Alex" };
 
@@ -216,21 +217,23 @@ describe("what each screen may read", () => {
     expect(core.snapshot(["stamp_tokens"], ADMIN, {}).stamp_tokens).toHaveLength(1);
   });
 
-  test("expense sheets are the owner's alone", async () => {
+  test("order lists need the owner's sign-in and the order list PIN", async () => {
     const { core } = setup();
-    const sheet = { date: "2026-10-09", lines: [{ item: "Wings", source: "Brakes", price: "45" }] };
-    for (const actor of [PUBLIC, CLOCK]) {
+    const sheet = { date: "2026-10-09", lines: [{ item: "Wings", qty: "10 kg" }] };
+    for (const actor of [PUBLIC, CLOCK, ADMIN]) {
       await expect(core.call("saveExpenseSheet", [sheet], actor)).rejects.toMatchObject({ status: 403 });
     }
-    const { result } = await core.call("saveExpenseSheet", [sheet], ADMIN);
+    const { result } = await core.call("saveExpenseSheet", [sheet], LIST);
     expect(result.id).toMatch(/^exp/);
-    expect(result.lines[0].pricePence).toBe(4500);
+    expect(result.lines[0]).toMatchObject({ item: "Wings", qty: "10 kg" });
     expect(core.snapshot(["expense_sheets"], PUBLIC, {}).expense_sheets).toEqual([]);
     expect(core.snapshot(["expense_sheets"], CLOCK, {}).expense_sheets).toEqual([]);
-    expect(core.snapshot(["expense_sheets"], ADMIN, {}).expense_sheets).toHaveLength(1);
-    await expect(core.call("saveExpenseSheet", [{ ...sheet, lines: [{ item: "Oil", price: "lots" }] }], ADMIN)).rejects.toMatchObject({ status: 400 });
-    await core.call("removeExpenseSheet", [result.id], ADMIN);
     expect(core.snapshot(["expense_sheets"], ADMIN, {}).expense_sheets).toEqual([]);
+    expect(core.snapshot(["expense_sheets"], LIST, {}).expense_sheets).toHaveLength(1);
+    await expect(core.call("saveExpenseSheet", [{ ...sheet, lines: [{ qty: "2" }] }], LIST)).rejects.toMatchObject({ status: 400 });
+    await expect(core.call("removeExpenseSheet", [result.id], ADMIN)).rejects.toMatchObject({ status: 403 });
+    await core.call("removeExpenseSheet", [result.id], LIST);
+    expect(core.snapshot(["expense_sheets"], LIST, {}).expense_sheets).toEqual([]);
   });
 
   test("everyone reads the menu, settings and offers", () => {

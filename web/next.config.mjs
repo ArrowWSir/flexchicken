@@ -9,6 +9,10 @@ const nextConfig = {
   turbopack: {
     root: import.meta.dirname,
   },
+  // Expenses became the order list; old bookmarks land there.
+  async redirects() {
+    return [{ source: "/admin/expenses", destination: "/admin/order-list", permanent: true }];
+  },
 };
 
 export default nextConfig;

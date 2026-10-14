@@ -188,3 +188,47 @@ test("the server refuses staff actions without a staff sign-in", async ({ reques
   const pin = await request.post("/api/shop/call", { headers, data: { method: "identify", args: ["101", "1234"] } });
   expect(pin.status()).toBe(403);
 });
+
+test("the order list opens with its own PIN, and the server keeps lists from an admin without it", async ({ browser }) => {
+  const owner = await newDevice(browser);
+  await unlockAdmin(owner.page, "/admin/order-list");
+  await owner.page.getByLabel("Order list PIN").fill("1234");
+  await owner.page.getByRole("button", { name: "Open order list" }).click();
+  await expect(owner.page.getByText("That PIN is not right.")).toBeVisible();
+  await owner.page.getByLabel("Order list PIN").fill("0000");
+  await owner.page.getByRole("button", { name: "Open order list" }).click();
+  await expect(owner.page.getByRole("heading", { name: "Order list", level: 1 })).toBeVisible();
+
+  const title = `Stock ${run}`;
+  await owner.page.getByRole("button", { name: "New list" }).click();
+  await owner.page.getByLabel("Title").fill(title);
+  await owner.page.getByLabel("Item 1", { exact: true }).fill("Chicken wings");
+  await owner.page.getByLabel("Quantity 1", { exact: true }).fill("10 kg");
+  await owner.page.getByRole("button", { name: "Preview & download PDF" }).click();
+  const preview = owner.page.getByRole("dialog", { name: `Preview: ${title}` });
+  const [download] = await Promise.all([owner.page.waitForEvent("download"), preview.getByRole("button", { name: "Download PDF" }).click()]);
+  expect(download.suggestedFilename()).toMatch(/^flex-chicken-order-list-/);
+
+  // Another admin device, signed in but without the order list PIN, gets nothing.
+  const other = await newDevice(browser);
+  await unlockAdmin(other.page, "/admin");
+  const seen = await other.page.evaluate(async () => (await (await fetch("/api/shop/state?topics=expense_sheets&as=admin")).json()).data);
+  expect(seen.expense_sheets).toEqual([]);
+  const saved = await other.page.evaluate(async () => {
+    const res = await fetch("/api/shop/call", {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-flexchicken": "1" },
+      body: JSON.stringify({ method: "saveExpenseSheet", args: [{ date: "2026-10-14", lines: [{ item: "Salt" }] }], as: "admin" }),
+    });
+    return res.status;
+  });
+  expect(saved).toBe(403);
+
+  // Clean up the owner's list.
+  await preview.getByRole("button", { name: "Close preview" }).first().click();
+  owner.page.once("dialog", (dialog) => dialog.accept());
+  await owner.page.getByRole("button", { name: new RegExp(`^Delete ${title}`) }).click();
+  await expect(owner.page.getByRole("region", { name: "Saved lists" }).getByText(title)).toHaveCount(0);
+  await owner.context.close();
+  await other.context.close();
+});

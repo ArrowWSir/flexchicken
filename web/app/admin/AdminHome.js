@@ -4,7 +4,7 @@ import { ChevronRight, Search } from "lucide-react";
 import { isFinished } from "../lib/orders";
 import { livePromotions } from "../lib/promotions";
 import { openShift } from "../lib/timeclock";
-import { useCards, useExpenseSheets, useMenu, useOrders, usePromotions, useSettings, useShifts, useStaff } from "../hooks/useShop";
+import { useCards, useMenu, useOrders, usePromotions, useSettings, useShifts, useStaff } from "../hooks/useShop";
 import { useNow } from "../hooks/useDevice";
 import { FIELD } from "./ui";
 import { MODES } from "./sections";
@@ -82,7 +82,6 @@ export default function AdminHome() {
   const promotions = usePromotions();
   const staff = useStaff();
   const shifts = useShifts();
-  const sheets = useExpenseSheets();
   const settings = useSettings();
   const [query, setQuery] = useState("");
 
@@ -103,7 +102,7 @@ export default function AdminHome() {
     "/admin/offers": liveOffers ? `${plural(liveOffers, "offer")} live now` : "No offers live",
     "/admin/shop": settings.isTakingOrders ? "Taking orders · hours, delivery, prices" : "Orders paused · hours, delivery, prices",
     "/admin/staff": team.length ? `${onShift} of ${plural(team.length, "person", "people")} on shift` : "No staff added yet",
-    "/admin/expenses": sheets.length ? `${plural(sheets.length, "sheet")} kept` : "No sheets yet",
+    "/admin/order-list": "What to buy, as a PDF · own PIN",
   };
 
   return (

@@ -232,11 +232,13 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
       run: ([input]) => repo.savePromotion({ ...requireObject(input, "That offer could not be read."), newId: newId("promo") }),
     },
     removePromotion: { allow: OWNER, run: ([id]) => repo.removePromotion(requireId(id)) },
+    // The order list sits behind its own PIN as well as the owner's sign-in.
     saveExpenseSheet: {
       allow: OWNER,
+      needsListKey: true,
       run: ([input]) => repo.saveExpenseSheet({ ...requireObject(input, "That sheet could not be read."), newId: newId("exp") }),
     },
-    removeExpenseSheet: { allow: OWNER, run: ([id]) => repo.removeExpenseSheet(requireId(id)) },
+    removeExpenseSheet: { allow: OWNER, needsListKey: true, run: ([id]) => repo.removeExpenseSheet(requireId(id)) },
   };
 
   const actionFor = (name) => (typeof name === "string" && Object.hasOwn(ACTIONS, name) ? ACTIONS[name] : null);
@@ -251,6 +253,7 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
     if (!action.allow.includes(actor?.role)) {
       throw new ShopError(403, CLOCK === action.allow ? "This screen is for the shop's clock tablet. Unlock it with the owner's code." : "Staff only. Sign in again.");
     }
+    if (action.needsListKey && !actor.hasListKey) throw new ShopError(403, "Enter the order list PIN first.");
     if (!Array.isArray(args)) throw new ShopError(400, "That request could not be read.");
     try {
       const prepared = action.prepare ? await action.prepare(args, actor) : {};
@@ -318,8 +321,8 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
       if (actor.role !== "clock") return [];
       return repo.listShifts().filter((s) => s.endAt === null).map(({ id, staffId, startAt }) => ({ id, staffId, startAt, endAt: null, closedBy: null }));
     },
-    // What the shop spends is the owner's business only.
-    [TOPICS.expenses]: (actor) => (actor.role === "admin" ? repo.listExpenseSheets() : []),
+    // The order list: the owner's sign-in and the order list PIN.
+    [TOPICS.expenses]: (actor) => (actor.role === "admin" && actor.hasListKey ? repo.listExpenseSheets() : []),
     [TOPICS.stampTokens]: (actor) => (actor.role === "admin" ? readTokens(store.read(TOPICS.stampTokens, [])) : []),
   };
 

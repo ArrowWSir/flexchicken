@@ -207,6 +207,16 @@ export function createCloudRepo({ local, storage, fetcher = fetch, openSocket = 
     },
     /** False until a server topic's first answer, so screens do not show "nothing" while loading. */
     isReady: (name) => !SERVER_TOPICS.has(topicOf(name)) || cache.has(topicOf(name)),
+    /** Fetches these topics again, dropping the copy held (after the order list PIN opens them). */
+    reload(names) {
+      const topics = names.map(topicOf);
+      topics.forEach((t) => {
+        cache.delete(t);
+        generation.set(t, (generation.get(t) ?? 0) + 1);
+        emit(t);
+      });
+      refresh(topics);
+    },
     /** A staff screen's role, after its sign-in; the cache fetches again as that role. */
     setStaffRole(role) {
       if (role === staffRole) return;

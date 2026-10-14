@@ -7,6 +7,7 @@ import { field } from "./StaffRow";
 const KINDS = [
   { id: "admin", label: "Owner's code", hint: "Opens /admin and sets up the clock tablet." },
   { id: "driver", label: "Driver code", hint: "Opens /driver, for every driver." },
+  { id: "list", label: "Order list PIN", hint: "Opens the order list. Starts as 0000." },
 ];
 const EMPTY = { current: "", next: "", repeat: "" };
 const digits = (value) => value.replace(/\D/g, "").slice(0, 8);
@@ -33,10 +34,11 @@ export default function ShiftCodes() {
       setDraft(EMPTY);
       setNote({
         tone: "ok",
-        text:
-          kind === "admin"
-            ? "Owner's code changed. Other admin screens and the clock tablet need the new code."
-            : "Driver code changed. Drivers sign in again with the new code.",
+        text: {
+          admin: "Owner's code changed. Other admin screens and the clock tablet need the new code.",
+          driver: "Driver code changed. Drivers sign in again with the new code.",
+          list: "Order list PIN changed. Use the new PIN to open the order list.",
+        }[kind],
       });
     } catch (err) {
       setNote({ tone: "error", text: err.message });
@@ -51,7 +53,7 @@ export default function ShiftCodes() {
         Shift codes
       </h2>
       <form onSubmit={submit} className="grid gap-4 rounded-[22px] bg-roast-900 p-4 ring-1 ring-cream/10 sm:p-5">
-        <fieldset className="grid gap-2 sm:grid-cols-2">
+        <fieldset className="grid gap-2 sm:grid-cols-3">
           <legend className="mb-2 text-[13px] font-semibold">Which code</legend>
           {KINDS.map((k) => (
             <label
@@ -66,7 +68,7 @@ export default function ShiftCodes() {
         </fieldset>
         <div className="grid gap-3 sm:grid-cols-3">
           <label className="grid gap-1.5 text-[13px] font-semibold">
-            Your current owner's code
+            {kind === "list" ? "Current PIN or your owner's code" : "Your current owner's code"}
             <input type="password" inputMode="numeric" autoComplete="current-password" value={draft.current} onChange={(e) => set({ current: digits(e.target.value) })} className={`${field} tracking-[0.3em]`} />
           </label>
           <label className="grid gap-1.5 text-[13px] font-semibold">

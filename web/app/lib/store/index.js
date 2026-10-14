@@ -25,7 +25,7 @@ export const ASYNC_ACTIONS = Object.freeze([
 
 /** The browser-store repo with the cloud repo's shape: actions return promises. */
 export function withAsyncActions(base) {
-  const wrapped = { ...base, isReady: () => true, setStaffRole: () => {} };
+  const wrapped = { ...base, isReady: () => true, setStaffRole: () => {}, reload: () => {} };
   for (const name of ASYNC_ACTIONS) wrapped[name] = async (...args) => base[name](...args);
   return wrapped;
 }

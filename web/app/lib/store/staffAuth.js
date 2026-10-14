@@ -1,4 +1,5 @@
-// Sign-in for the staff screens (/admin, /driver).
+// Sign-in for the staff screens (/admin, /driver), and the order list's own
+// PIN inside the admin.
 //
 // Cloud: the shift code is checked by the server, which sets an HttpOnly
 // cookie; the codes are Worker secrets and never reach the browser.
@@ -14,10 +15,11 @@ const LOCAL_PINS =
     : {
         admin: process.env.NEXT_PUBLIC_ADMIN_PIN || "2580",
         driver: process.env.NEXT_PUBLIC_DRIVER_PIN || "1111",
+        list: process.env.NEXT_PUBLIC_LIST_PIN || "0000",
       };
 const KEY = (role) => `fc_staff_${role}`;
 const CODE_KEY = (which) => `fc_local_code_${which}`;
-const codeKind = (role) => (role === "driver" ? "driver" : "admin"); // the clock opens with the owner's code
+const codeKind = (role) => (role === "driver" || role === "list" ? role : "admin"); // the clock opens with the owner's code
 const CODE_SHAPE = /^\d{4,8}$/;
 
 // Local builds keep a changed code on this device only.
@@ -76,10 +78,17 @@ const localAuth = {
   async signOut(role) {
     save(role, null);
   },
+  async unlockList(pin) {
+    if (pin !== localCode("list")) throw new Error("That PIN is not right.");
+  },
+  async lockList() {},
   async changeCode(role, current, next) {
-    if (current !== localCode("admin")) throw new Error("Your current owner's code is not right.");
+    // The order list PIN changes with itself, or with the owner's code when forgotten.
+    if (role === "list" ? current !== localCode("list") && current !== localCode("admin") : current !== localCode("admin")) {
+      throw new Error(role === "list" ? "The current PIN is not right." : "Your current owner's code is not right.");
+    }
     if (!CODE_SHAPE.test(next ?? "")) throw new Error("Use 4 to 8 digits for the new code.");
-    if (next === localCode(role === "admin" ? "driver" : "admin")) throw new Error("The owner's code and the driver code must be different.");
+    if (role !== "list" && next === localCode(role === "admin" ? "driver" : "admin")) throw new Error("The owner's code and the driver code must be different.");
     try {
       localStorage.setItem(CODE_KEY(role), next);
     } catch {
@@ -114,7 +123,16 @@ const cloudAuth = {
     save(role, null);
     await api("/api/staff/logout", { role }).catch(() => {});
   },
-  /** The owner changes the owner's or the drivers' code; this device stays signed in. */
+  /** Opens the order list with its own PIN; the server then sends this device the lists. */
+  async unlockList(pin) {
+    await api("/api/staff/list", { as: "admin", pin });
+    getRepo().reload(["expenses"]);
+  },
+  async lockList() {
+    await api("/api/staff/list-lock", {}).catch(() => {});
+    getRepo().reload(["expenses"]);
+  },
+  /** The owner changes the owner's, the drivers' or the order list's code; this device stays signed in. */
   async changeCode(role, current, next) {
     await api("/api/staff/code", { as: "admin", role, current, next });
   },
