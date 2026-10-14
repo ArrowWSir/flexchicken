@@ -73,7 +73,7 @@ test("an offer made in Studio shows under the card and comes off the Box", async
 
 test("customers can download the menu", async ({ page }) => {
   await page.goto("/");
-  await page.locator("#menu").getByRole("link", { name: "Menu" }).click();
+  await page.locator("#menu").getByRole("link", { name: "Menu", exact: true }).click();
   await expect(page).toHaveURL(/\/full-menu$/);
   await expect(page.getByRole("heading", { level: 2, name: "Burgers" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Save as PDF or print" })).toBeVisible();
