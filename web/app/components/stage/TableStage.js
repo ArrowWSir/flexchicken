@@ -16,7 +16,8 @@ import { measureDish } from "../../lib/dishFit";
 
 // Geometry, as fractions of the stage width.
 const TABLE_X = 0.76;
-const FRONT_Y = 0.79; // x stage height: where the front plate stands
+const FRONT_Y = 0.74; // x stage height: where the front plate stands
+const DESIGN_ASPECT = 0.8; // stage height / width the sizes below were set for
 const RING = 0.44; // radius of the ring of plates
 const OVERHANG = 0.13; // table top beyond the ring
 // The camera: table top height / width. table.jpg's brass rim measures
@@ -118,15 +119,17 @@ export default function TableStage({ items, activeIndex, onSelect, onStep, isRed
     const { width, height } = size.current;
     if (!width) return;
     const { position, velocity } = motion.current;
-    const ring = width * RING;
+    // In a card shorter than the one this was drawn for, the whole table shrinks to fit.
+    const unit = width * Math.min(1, height / (width * DESIGN_ASPECT));
+    const ring = unit * RING;
     const ringRy = ring * TILT;
     const cx = width * TABLE_X;
     const cy = height * FRONT_Y - ringRy;
-    const R = ring + width * OVERHANG;
+    const R = ring + unit * OVERHANG;
     const ry = R * TILT;
-    const rim = width * RIM_DEPTH;
+    const rim = unit * RIM_DEPTH;
     const focal = ring * CAMERA_DISTANCE;
-    const plateW = width * PLATE;
+    const plateW = unit * PLATE;
     const motionBlur = Math.min(MOTION_BLUR_PX, (Math.abs(velocity) / MOTION_BLUR_AT) * MOTION_BLUR_PX);
     const tableAngle = position * step;
 

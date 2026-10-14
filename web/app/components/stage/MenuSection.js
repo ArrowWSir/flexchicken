@@ -117,7 +117,7 @@ export default function MenuSection() {
 
       <div ref={tableRef} className="mt-4 scroll-mt-20">
         {/* isolate: plates stack among themselves, never above the sticky header. */}
-        <div className="menu-vitrine on-dark relative isolate aspect-[25/20] w-full overflow-hidden rounded-[28px]">
+        <div className="menu-vitrine on-dark relative isolate aspect-[25/14] w-full overflow-hidden rounded-[28px]">
           <TableStage
             items={category.items}
             activeIndex={activeIndex}
