@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { SIMPLE_DISH, showDish } from "./menu.mjs";
+import { watchForBlocks } from "./security.mjs";
 
 // The database build: each browser context is a separate device, so nothing
 // here can pass by sharing one browser's storage. Run against the preview
@@ -7,8 +8,23 @@ import { SIMPLE_DISH, showDish } from "./menu.mjs";
 const ADMIN_PIN = process.env.CLOUD_ADMIN_PIN || "135792";
 const run = Date.now().toString(36);
 
+// Anything the security headers block on any device fails the test.
+let devices = [];
+test.beforeEach(() => {
+  devices = [];
+});
+test.afterEach(() => {
+  expect(devices.flat()).toEqual([]);
+});
+
+async function newContext(browser, options = {}) {
+  const context = await browser.newContext({ ...test.info().project.use, ...options });
+  devices.push(await watchForBlocks(context));
+  return context;
+}
+
 async function newDevice(browser) {
-  const context = await browser.newContext(test.info().project.use);
+  const context = await newContext(browser);
   const page = await context.newPage();
   await page.route("https://*.tile.openstreetmap.org/**", (route) => route.abort());
   return { context, page };
@@ -60,7 +76,7 @@ test("an order placed on a phone reaches the kitchen on another device, live bot
 test("a driver on their own phone takes a delivery and the customer watches", async ({ browser }) => {
   const phone = await newDevice(browser);
   const kitchen = await newDevice(browser);
-  const driverContext = await browser.newContext({ ...test.info().project.use, permissions: ["geolocation"], geolocation: { latitude: 51.5195, longitude: 0.1985 } });
+  const driverContext = await newContext(browser, { permissions: ["geolocation"], geolocation: { latitude: 51.5195, longitude: 0.1985 } });
   const driver = await driverContext.newPage();
   await driver.route("https://*.tile.openstreetmap.org/**", (route) => route.abort());
   const customer = phone.page;

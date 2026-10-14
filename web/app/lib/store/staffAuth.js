@@ -6,10 +6,15 @@
 // browser, a lock on the door rather than security.
 import { IS_CLOUD, getRepo } from "./index";
 
-const LOCAL_PINS = {
-  admin: process.env.NEXT_PUBLIC_ADMIN_PIN || "2580",
-  driver: process.env.NEXT_PUBLIC_DRIVER_PIN || "1111",
-};
+// Spelled out (not IS_CLOUD) so the build drops the local defaults from the
+// live bundle: the cloud checks codes on the server only.
+const LOCAL_PINS =
+  process.env.NEXT_PUBLIC_STORE === "cloud"
+    ? {}
+    : {
+        admin: process.env.NEXT_PUBLIC_ADMIN_PIN || "2580",
+        driver: process.env.NEXT_PUBLIC_DRIVER_PIN || "1111",
+      };
 const KEY = (role) => `fc_staff_${role}`;
 const CODE_KEY = (which) => `fc_local_code_${which}`;
 const codeKind = (role) => (role === "driver" ? "driver" : "admin"); // the clock opens with the owner's code

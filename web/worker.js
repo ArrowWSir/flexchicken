@@ -8,12 +8,37 @@ export { ShopObject } from "./server/shopObject.js";
 
 const SHOP = "flexchicken";
 
+// What pages may load, and from where. Every outside service the site uses
+// is listed here; add a new one here or the browser blocks it (README,
+// "Security"). Scripts and styles allow inline code because Next.js writes
+// each page's data into inline scripts and the drawers inject styles; the
+// rest is locked to this site.
+const CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob: https://*.tile.openstreetmap.org", // map tiles
+  "font-src 'self'",
+  "connect-src 'self' wss://flexchicken.uk https://api.postcodes.io https://router.project-osrm.org", // live socket, postcode check, driver routes
+  "worker-src 'self'",
+  "manifest-src 'self'",
+  "media-src 'self'",
+  "frame-src 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+].join("; ");
+
 const SECURITY_HEADERS = {
   "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "content-security-policy-report-only": CSP,
   "x-content-type-options": "nosniff",
   "x-frame-options": "DENY",
   "referrer-policy": "strict-origin-when-cross-origin",
-  "permissions-policy": "camera=(), microphone=(), payment=()",
+  // Location stays on for this site: the checkout and the driver screen use it.
+  "permissions-policy": "camera=(), microphone=(), payment=(), usb=(), geolocation=(self)",
+  "cross-origin-opener-policy": "same-origin",
 };
 
 function withSecurityHeaders(response) {

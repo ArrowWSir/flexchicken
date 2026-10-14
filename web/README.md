@@ -61,7 +61,15 @@ Clock records are kept in the tablet's browser, not on the computer, so open `/a
 | `/driver` | Drivers | Take a ready order, share location, turn-by-turn directions in the page, call, mark delivered |
 | `/clock` | All staff | Clock in and out with a personal 4-digit PIN; who is on shift now. Leave it open on the shop tablet |
 
-On the live site the shift codes are Worker secrets (see "Where the data lives"). In dev and `npm run shop` they come from `.env.local` (defaults: admin `2580`, driver `1111`). Clock PINs are personal and set by the owner in `/admin/staff`; five wrong PINs in a row lock the clock pad for 30 seconds.
+On the live site the shift codes are Worker secrets (see "Where the data lives"). In dev and `npm run shop` they come from `.env.local` (defaults: admin `2580`, driver `1111`). These defaults are public: never use them as the live codes. Clock PINs are personal and set by the owner in `/admin/staff`; five wrong PINs in a row lock the clock pad for 30 seconds.
+
+## Security
+
+- **Headers** are set in one place, `SECURITY_HEADERS` in `worker.js`, on every response (pages, API, photos). `npm run preview` serves through the same file, so local tests see the live headers; `npm run dev` does not send them.
+- **Content-Security-Policy** (`CSP` in `worker.js`) lists every outside address the site may use: OpenStreetMap tiles (`img-src`), postcodes.io and the OSRM route server (`connect-src`). Add a new outside service there (the right directive for what it loads) or browsers block it. Scripts and styles allow inline code because Next.js writes each page's data into inline scripts; so there are no hashes to recompute. Keep `object-src 'none'`, `base-uri 'self'`, `form-action 'self'` and `frame-ancestors 'none'`.
+- **Permissions-Policy** keeps location on for this site only (checkout and the driver screen need it). Card payments (Teya) may need `payment` turned back on.
+- **Test after any header change:** start `npm run preview`, then `npx playwright test -c playwright.cloud.config.mjs --workers=1`. `e2e/security.spec.mjs` checks the headers and walks every page; every cross-device test also fails if anything is blocked (`e2e/security.mjs`). Ordering tests need the shop open by its saved hours.
+- **Shift codes:** the owner's should be 8 digits, not a pattern or a date. Never commit `.dev.vars` or `.env.local`.
 
 ## Still a preview
 

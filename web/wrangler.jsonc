@@ -20,6 +20,9 @@
     { "pattern": "flexchicken.uk", "custom_domain": true },
     { "pattern": "www.flexchicken.uk", "custom_domain": true }
   ],
+  // `npm run preview` would otherwise hand the Worker the first route's host,
+  // and worker.js would redirect localhost to the live site in a loop.
+  "dev": { "host": "localhost" },
   // Secrets, set with `npx wrangler secret put NAME` (never in this file):
   //   ADMIN_PIN, DRIVER_PIN  shift codes for /admin and /driver
   //   SESSION_SECRET         signs staff cookies (at least 32 characters)
