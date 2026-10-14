@@ -7,15 +7,16 @@ import { ICONS } from "./pins";
 
 const MILE_IN_METRES = 1609.344;
 
-// Keeps every marker in view as they move.
+// Keeps every marker in view as they move. Without animation: leaving the
+// page mid-zoom (placing an order) made Leaflet throw on the removed map.
 function FitTo({ points, padding }) {
   const map = useMap();
   const key = points.map((p) => `${p.latitude.toFixed(4)},${p.longitude.toFixed(4)}`).join("|");
   useEffect(() => {
     if (points.length === 1) {
-      map.setView([points[0].latitude, points[0].longitude], 15);
+      map.setView([points[0].latitude, points[0].longitude], 15, { animate: false });
     } else if (points.length > 1) {
-      map.fitBounds(L.latLngBounds(points.map((p) => [p.latitude, p.longitude])), { padding: [padding, padding] });
+      map.fitBounds(L.latLngBounds(points.map((p) => [p.latitude, p.longitude])), { padding: [padding, padding], animate: false });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key, map]);

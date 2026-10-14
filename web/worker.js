@@ -32,7 +32,7 @@ const CSP = [
 
 const SECURITY_HEADERS = {
   "strict-transport-security": "max-age=31536000; includeSubDomains",
-  "content-security-policy-report-only": CSP,
+  "content-security-policy": CSP,
   "x-content-type-options": "nosniff",
   "x-frame-options": "DENY",
   "referrer-policy": "strict-origin-when-cross-origin",
