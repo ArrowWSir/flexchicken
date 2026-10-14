@@ -57,23 +57,26 @@ function OptionGroup({ option, value, onChange }) {
   );
 }
 
-export default function OptionsSheet() {
-  const { pending, confirm, cancelPending } = useCart();
+/**
+ * The choices for one dish (drink, heat, extras) in a bottom sheet. `item` set
+ * opens it; `onConfirm(selections, qty)` gets the answer; `actionLabel` names
+ * the button ("Add to Box", "Buy now", "Add to my picks").
+ */
+export function OptionsDrawer({ item, startQty = 1, actionLabel, onConfirm, onClose }) {
   const [selections, setSelections] = useState({});
   const [qty, setQty] = useState(1);
-  const item = pending?.item;
 
   useEffect(() => {
-    if (!pending) return;
-    setSelections(defaultSelections(pending.item));
-    setQty(pending.qty);
-  }, [pending]);
+    if (!item) return;
+    setSelections(defaultSelections(item));
+    setQty(startQty);
+  }, [item, startQty]);
 
   const missing = item ? missingRequired(item, selections) : [];
   const total = item ? (unitPence(item, selections) * qty) / 100 : 0;
 
   return (
-    <Drawer.Root open={Boolean(pending)} onOpenChange={(open) => !open && cancelPending()}>
+    <Drawer.Root open={Boolean(item)} onOpenChange={(open) => !open && onClose()}>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 z-50 bg-roast-950/45 backdrop-blur-[2px]" />
         <Drawer.Content className="fixed inset-x-0 bottom-0 z-50 mx-auto flex max-h-[88dvh] max-w-[560px] flex-col rounded-t-[28px] bg-ground outline-none">
@@ -106,14 +109,10 @@ export default function OptionsSheet() {
                 <button
                   type="button"
                   disabled={missing.length > 0}
-                  onClick={() => confirm(selections, qty)}
+                  onClick={() => onConfirm(selections, qty)}
                   className="press mt-3 flex h-13 w-full items-center justify-center rounded-2xl bg-flex py-3.5 text-[15px] font-semibold text-white hover:bg-flex-deep disabled:bg-line disabled:text-muted"
                 >
-                  {missing.length > 0
-                    ? `Choose ${missing.join(" & ").toLowerCase()}`
-                    : pending.mode === "buy"
-                      ? "Buy now"
-                      : "Add to Box"}
+                  {missing.length > 0 ? `Choose ${missing.join(" & ").toLowerCase()}` : actionLabel}
                 </button>
               </div>
             </>
@@ -121,5 +120,19 @@ export default function OptionsSheet() {
         </Drawer.Content>
       </Drawer.Portal>
     </Drawer.Root>
+  );
+}
+
+/** The cart's own sheet: opens when a dish added from the menu needs a choice. */
+export default function OptionsSheet() {
+  const { pending, confirm, cancelPending } = useCart();
+  return (
+    <OptionsDrawer
+      item={pending?.item ?? null}
+      startQty={pending?.qty ?? 1}
+      actionLabel={pending?.mode === "buy" ? "Buy now" : "Add to Box"}
+      onConfirm={confirm}
+      onClose={cancelPending}
+    />
   );
 }

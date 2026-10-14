@@ -169,3 +169,42 @@ describe("formatPriceShort", () => {
     expect(formatPriceShort(1250)).toBe("£12.50");
   });
 });
+
+describe("mergeCart (the full menu's picks into the Box)", () => {
+  test("adds every picked line to the Box in one go", async () => {
+    const { mergeCart } = await import("./cart");
+    const picks = addToCart(addToCart(EMPTY_CART, pepsi, {}, 2), burgerMeal, { Drink: "Water" }, 1);
+    const box = mergeCart(EMPTY_CART, picks);
+    expect(box.lines.map((l) => [l.name, l.qty])).toEqual([
+      ["Pepsi", 2],
+      ["Hot Honey Burger Meal", 1],
+    ]);
+  });
+
+  test("the same dish with the same choices adds to the line already in the Box", async () => {
+    const { mergeCart } = await import("./cart");
+    const box = addToCart(EMPTY_CART, burgerMeal, { Drink: "Water" }, 1);
+    const picks = addToCart(addToCart(EMPTY_CART, burgerMeal, { Drink: "Water" }, 2), burgerMeal, { Drink: "Pepsi" }, 1);
+    const merged = mergeCart(box, picks);
+    expect(merged.lines.map((l) => [l.key, l.qty])).toEqual([
+      ["10|Drink=Water", 3],
+      ["10|Drink=Pepsi", 1],
+    ]);
+  });
+
+  test("never goes past the most of one line the Box allows", async () => {
+    const { mergeCart } = await import("./cart");
+    const box = addToCart(EMPTY_CART, pepsi, {}, MAX_QTY - 1);
+    const merged = mergeCart(box, addToCart(EMPTY_CART, pepsi, {}, 5));
+    expect(cartSummary(merged).count).toBe(MAX_QTY);
+  });
+
+  test("leaves both carts as they were", async () => {
+    const { mergeCart } = await import("./cart");
+    const box = addToCart(EMPTY_CART, pepsi, {}, 1);
+    const picks = addToCart(EMPTY_CART, pepsi, {}, 1);
+    mergeCart(box, picks);
+    expect(box.lines[0].qty).toBe(1);
+    expect(picks.lines[0].qty).toBe(1);
+  });
+});

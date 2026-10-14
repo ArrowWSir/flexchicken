@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useId, useRef, useState } from "react";
-import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { ChevronDown, ChevronLeft, ChevronRight, LayoutList } from "lucide-react";
 import { useMenu } from "../../hooks/useShop";
 import useDishSlider from "../../hooks/useDishSlider";
 import useFitText from "../../hooks/useFitText";
@@ -106,10 +107,22 @@ export default function MenuSection() {
               Pick your <span className="text-flex">craving</span>
             </h2>
           </div>
-          <MenuDownload
-            label="Menu"
-            className="press mb-0.5 flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-ground-raised px-3.5 text-[13px] font-semibold text-ink ring-1 ring-line hover:bg-surface"
-          />
+          {/* Ordering several dishes at once: the whole menu as a list (app/order). */}
+          <div className="mb-0.5 flex shrink-0 flex-col items-end gap-2">
+            <Link
+              href="/order"
+              className="press flex h-10 items-center gap-1.5 rounded-full bg-roast-800 px-3.5 text-[13px] font-semibold text-cream hover:bg-roast-700"
+            >
+              <LayoutList className="size-4 shrink-0" strokeWidth={2.2} aria-hidden="true" />
+              {/* The narrowest phones keep the heading beside it on two lines. */}
+              <span className="max-[359px]:hidden">Explore full menu</span>
+              <span className="min-[360px]:hidden">Full menu</span>
+            </Link>
+            <MenuDownload
+              label="Menu"
+              className="press flex h-10 items-center gap-1.5 rounded-full bg-ground-raised px-3.5 text-[13px] font-semibold text-ink ring-1 ring-line hover:bg-surface"
+            />
+          </div>
         </div>
 
         <BadgeGrid categories={categories} activeId={target.categoryId} onSelect={chooseCategory} />

@@ -97,6 +97,19 @@ export function removeLine(cart, key) {
   return { lines: cart.lines.filter((line) => line.key !== key) };
 }
 
+/**
+ * Moves every line of `picks` (the full menu's selection, built with the same
+ * functions) into `cart`. A dish with the same choices joins the line already
+ * there, up to MAX_QTY.
+ */
+export function mergeCart(cart, picks) {
+  return picks.lines.reduce((box, pick) => {
+    const existing = box.lines.find((line) => line.key === pick.key);
+    if (existing) return setLineQty(box, pick.key, existing.qty + pick.qty);
+    return { lines: [...box.lines, { ...pick, qty: clampQty(pick.qty) }] };
+  }, cart);
+}
+
 export function cartSummary(cart) {
   return cart.lines.reduce(
     (sum, line) => ({ count: sum.count + line.qty, subtotalPence: sum.subtotalPence + line.qty * line.unitPence }),

@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { EMPTY_CART, addToCart, defaultSelections, loadCart, missingRequired, removeLine, saveCart, setLineQty } from "../../lib/cart";
+import { EMPTY_CART, addToCart, defaultSelections, loadCart, mergeCart, missingRequired, removeLine, saveCart, setLineQty } from "../../lib/cart";
 import { browserEnv } from "../../lib/browserEnv";
 import { priceCart } from "../../lib/promotions";
 import { usePromotions } from "../../hooks/useShop";
@@ -75,6 +75,12 @@ export default function CartProvider({ children }) {
     [pending, finish]
   );
 
+  /**
+   * Everything picked on the full menu (a cart of its own) into the Box at
+   * once. That page's own bar confirms it, so no toast or flying dish here.
+   */
+  const addPicks = useCallback((picks) => commit(mergeCart(cart, picks)), [cart, commit]);
+
   const value = useMemo(
     () => ({
       cart,
@@ -82,6 +88,7 @@ export default function CartProvider({ children }) {
       // Subtotal, the best live offer and what it saves (lib/promotions).
       summary: priceCart(cart, promotions),
       request,
+      addPicks,
       confirm,
       pending,
       cancelPending: () => setPending(null),
@@ -92,7 +99,7 @@ export default function CartProvider({ children }) {
       setIsCartOpen,
       lastAdded,
     }),
-    [cart, promotions, isReady, request, confirm, pending, commit, isCartOpen, lastAdded]
+    [cart, promotions, isReady, request, addPicks, confirm, pending, commit, isCartOpen, lastAdded]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
