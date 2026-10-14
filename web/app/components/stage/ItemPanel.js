@@ -35,31 +35,15 @@ export default function ItemPanel({ item, chosen, phase }) {
 
   return (
     <article data-phase={phase} aria-live="polite" className="rounded-[22px] bg-ground-raised p-4 ring-1 ring-line shadow-paper sm:p-5">
+      {/* The dish's name is in the menu card above; this leads with what it costs. */}
       <div className="flex items-start justify-between gap-4">
-        <h3 className="min-w-0 font-display uppercase leading-[0.95] text-ink">
-          {item.titleLight && (
-            <span className="block overflow-hidden pb-[0.06em]">
-              <span className="title-line block text-[clamp(14px,3.8vw,18px)] font-medium tracking-[0.01em] text-muted">
-                {item.titleLight}
-              </span>
-            </span>
-          )}
-          <span className="block overflow-hidden pb-[0.08em]">
-            <span className="title-line title-line--second block text-[clamp(22px,6.4vw,34px)] font-black tracking-[-0.02em]">
-              {item.titleBold}
-            </span>
-          </span>
-        </h3>
-        <p className="shrink-0 pt-0.5 font-display text-[clamp(19px,5vw,24px)] font-extrabold text-flex-ink">
+        <p className="min-w-0 max-w-[46ch] pt-1 text-[13.5px] leading-snug text-muted">
+          {item.description || (item.isMeal ? "Served with fries and a drink." : item.name)}
+        </p>
+        <p className="shrink-0 font-display text-[clamp(22px,6vw,28px)] font-extrabold text-flex-ink">
           <NumberFlow value={chosen.price} format={GBP} locales="en-GB" />
         </p>
       </div>
-
-      {(item.description || item.isMeal) && (
-        <p className="mt-2 max-w-[46ch] text-[13.5px] leading-snug text-muted">
-          {item.description || "Served with fries and a drink."}
-        </p>
-      )}
 
       {extras.length > 0 && (
         <ul className="mt-2 flex flex-wrap gap-1.5" aria-label="Options">

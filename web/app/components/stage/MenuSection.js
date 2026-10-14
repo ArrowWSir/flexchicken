@@ -3,6 +3,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useMenu } from "../../hooks/useShop";
 import useDishSlider from "../../hooks/useDishSlider";
+import useFitText from "../../hooks/useFitText";
 import BadgeGrid from "../badges/BadgeGrid";
 import TableStage from "./TableStage";
 import ItemRail from "./ItemRail";
@@ -10,10 +11,53 @@ import ItemPanel from "./ItemPanel";
 import { SHOW_DISH_EVENT } from "../offers/OfferStrip";
 import MenuDownload from "../menu/MenuDownload";
 
+// The bold line is sized from its longest word (Montserrat black caps run
+// about 0.68em a letter), so a long name wraps onto a second line rather than
+// shrinking to nothing; useFitText then trims any word that still overflows.
+const BOLD_GLYPH_EM = 0.68;
+const BOLD_MAX_CQW = 24;
+
+function boldSize(words) {
+  const longest = Math.max(...words.split(/\s+/).map((w) => w.length), 1);
+  return `${Math.min(BOLD_MAX_CQW, 100 / (longest * BOLD_GLYPH_EM)).toFixed(2)}cqw`;
+}
+
+// The dish's name in the menu card, left of the table, as in a shop window.
+// It slides out and the next one in while the table turns (data-phase).
+function StageTitle({ item, phase }) {
+  const lightRef = useRef(null);
+  const boldRef = useRef(null);
+  useFitText([lightRef, boldRef], `${item.titleLight}|${item.titleBold}`);
+  return (
+    <div className="pointer-events-none absolute inset-y-0 left-5 z-[2000] flex w-[42%] flex-col justify-center" data-phase={phase}>
+      <h3 className="font-display uppercase leading-[0.95] text-cream [container-type:inline-size] [text-shadow:0_2px_14px_rgb(0_0_0/0.6)]" aria-live="polite">
+        {item.titleLight && (
+          <span className="block overflow-hidden pb-[0.06em]">
+            <span ref={lightRef} className="title-line block whitespace-nowrap text-[calc(12cqw*var(--fit,1))] font-medium leading-[1.1] tracking-[0.04em] text-cream/80">
+              {item.titleLight}
+            </span>
+          </span>
+        )}
+        <span className="block overflow-hidden pb-[0.06em]">
+          <span
+            ref={boldRef}
+            className="title-line title-line--second block font-black tracking-[-0.02em] [text-wrap:balance]"
+            style={{ fontSize: `calc(${boldSize(item.titleBold)} * var(--fit, 1))` }}
+          >
+            {item.titleBold}
+          </span>
+        </span>
+        {/* The flame bar from the logo: the card's one touch of red. */}
+        <span className="mt-[5cqw] block h-[3px] w-[26cqw] rounded-full bg-[linear-gradient(90deg,var(--color-flame-light),var(--color-flex))]" aria-hidden="true" />
+      </h3>
+    </div>
+  );
+}
+
 // Phone first. The owner's wireframe put the badges beside the table; on a
 // phone that leaves the table a sliver, so the badges sit above it as one
-// thumb-sized grid, and the table takes the full width, still running off the
-// right edge of the frame. The dishes' names and actions follow.
+// thumb-sized grid, and the menu card takes the full width: the dish's name on
+// the left, the turning table on the right. Price and actions follow.
 export default function MenuSection() {
   const { categories } = useMenu();
   const { target, shown, phase, goTo, step, isReducedMotion } = useDishSlider(categories);
@@ -71,9 +115,9 @@ export default function MenuSection() {
         <BadgeGrid categories={categories} activeId={target.categoryId} onSelect={chooseCategory} />
       </div>
 
-      <div ref={tableRef} className="relative isolate -mr-4 mt-4 scroll-mt-20 sm:-mr-8">
+      <div ref={tableRef} className="mt-4 scroll-mt-20">
         {/* isolate: plates stack among themselves, never above the sticky header. */}
-        <div className="relative aspect-[1/0.78] w-full">
+        <div className="menu-vitrine on-dark relative isolate aspect-[25/20] w-full overflow-hidden rounded-[28px]">
           <TableStage
             items={category.items}
             activeIndex={activeIndex}
@@ -82,10 +126,12 @@ export default function MenuSection() {
             isReducedMotion={isReducedMotion}
             label={`${category.label}: ${category.items[activeIndex]?.name}`}
           />
+          <div className="menu-vitrine-shade pointer-events-none absolute inset-y-0 left-0 z-[1500] w-[62%]" aria-hidden="true" />
+          {shownItem && <StageTitle item={shownItem} phase={phase} />}
+          <p className="pointer-events-none absolute bottom-3 left-5 z-[2000] text-[11px] font-medium text-cream/60" aria-hidden="true">
+            ← Swipe the table →
+          </p>
         </div>
-        <p className="pointer-events-none absolute bottom-1 left-0 text-[11px] font-medium text-muted" aria-hidden="true">
-          ← Swipe the table →
-        </p>
       </div>
 
       <div className="mt-5 space-y-3">
