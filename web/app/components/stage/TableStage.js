@@ -5,7 +5,7 @@ import { ringFocus, ringOffset, ringVisibility, slotStep } from "../../lib/table
 import { measureDish } from "../../lib/dishFit";
 
 // The owner's round travertine table (table.jpg, flattened by
-// assets-src/make_table.py) seen from above at an angle (the camera of plate 1.jpg).
+// assets-src/make_table.py) seen from above at the angle of that photo.
 // Dishes stand on cream plates in a ring near its edge; the plate at the front
 // left is the selected dish. Turning the table turns everything on it: the
 // stone, the gold birds, the plates and the food. It sits at the right of the page and runs
@@ -16,12 +16,16 @@ import { measureDish } from "../../lib/dishFit";
 
 // Geometry, as fractions of the stage width (height for *_Y).
 const TABLE_X = 0.66;
-const TABLE_Y = 0.44;
-const TABLE_RADIUS = 0.6;
-const TILT = 0.535; // plate 1.jpg's camera: the plate there is 516 x 276 px
-const EDGE_DEPTH = 0.045; // thickness of the table top's front edge
+const TABLE_Y = 0.475;
+const TABLE_RADIUS = 0.56; // seen from higher the table is taller: this keeps all of it in the stage
+// table.jpg's camera: its brass rim is an ellipse 1019 x 1556 px (make_table.py RIM).
+const TILT = 0.655;
+// The plate and mat photos were taken lower (plate 1.jpg: 516 x 276 px); they
+// are stretched up to the table's tilt.
+const PHOTO_TILT = 0.535;
+const EDGE_DEPTH = 0.04; // thickness of the table top's front edge: thinner seen from higher
 const RING = 0.68; // x table radius: where the plates stand
-const PLATE = 0.34; // nearest plate's width
+const PLATE = 0.32; // nearest plate's width
 // Each plate stands on a round jute mat (public/scene/mat.webp, already at the
 // camera's tilt, plus a sliver of braided edge below).
 const MAT = 1.16; // x plate width: a band of mat round the plate; the front two plates are ~1.18 apart
@@ -50,10 +54,13 @@ const DEPTH_BLUR_PX = 1.8;
 // perspective alone draws them the same. Focus sets the selected one apart:
 // it grows, draws over its neighbours, and the rest of the table steps back.
 // Focus eases in as a dish turns to the front, so it travels with the table.
+// Kept light: heavy dimming turned the cream plates grey and the food dull.
 const FOCUS_SCALE = 0.2; // extra size at full focus
-const UNFOCUS_DIM = 0.24; // brightness taken from dishes out of focus
-const UNFOCUS_DESATURATE = 0.3;
-const UNFOCUS_BLUR_PX = 0.7;
+const UNFOCUS_DIM = 0.06; // brightness taken from dishes out of focus
+const UNFOCUS_DESATURATE = 0.08;
+const UNFOCUS_BLUR_PX = 0.5;
+const FAR_DIM = 0.1; // brightness taken from the back of the table
+const FAR_DESATURATE = 0.08;
 const MOTION_BLUR_PX = 2.4;
 const MOTION_BLUR_AT = 6; // items/second that reaches full blur
 
@@ -147,8 +154,8 @@ export default function TableStage({ items, activeIndex, onSelect, onStep, isRed
       const depth = 10 + Math.round(((near + focus) / 2) * DEPTH_STEPS) * LAYER_COUNT;
       const layer = (name) => String(depth + LAYERS[name]);
       const blur = DEPTH_BLUR_PX * (1 - near) ** 1.5 + UNFOCUS_BLUR_PX * unfocus + motionBlur;
-      const brightness = (0.72 + 0.28 * near) * (1 - UNFOCUS_DIM * unfocus);
-      const saturation = (0.8 + 0.2 * near) * (1 - UNFOCUS_DESATURATE * unfocus);
+      const brightness = (1 - FAR_DIM * (1 - near)) * (1 - UNFOCUS_DIM * unfocus);
+      const saturation = (1 - FAR_DESATURATE * (1 - near)) * (1 - UNFOCUS_DESATURATE * unfocus);
       const filter = `brightness(${brightness.toFixed(3)}) saturate(${saturation.toFixed(3)})${blur > 0.15 ? ` blur(${blur.toFixed(2)}px)` : ""}`;
 
       const pw = plateW * scale;
@@ -172,7 +179,7 @@ export default function TableStage({ items, activeIndex, onSelect, onStep, isRed
         const mw = pw * MAT;
         mat.style.transform = `translate3d(${x - mw / 2}px, ${y - (mw * TILT) / 2}px, 0)`;
         mat.style.width = `${mw}px`;
-        mat.style.height = `${mw * MAT_ASPECT}px`;
+        mat.style.height = `${mw * MAT_ASPECT * (TILT / PHOTO_TILT)}px`;
         mat.style.zIndex = layer("mat");
         mat.style.opacity = String(visible);
         mat.style.filter = filter;
