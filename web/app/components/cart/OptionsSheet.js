@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Drawer } from "vaul";
 import NumberFlow from "@number-flow/react";
-import { Check } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { defaultSelections, missingRequired, unitPence } from "../../lib/cart";
 import { useCart } from "./CartProvider";
 import QtyStepper from "../ui/QtyStepper";
@@ -87,10 +87,17 @@ export function OptionsDrawer({ item, startQty = 1, actionLabel, onConfirm, onCl
         <Drawer.Overlay className="fixed inset-0 z-50 bg-roast-950/45 backdrop-blur-[2px]" />
         <Drawer.Content className="fixed inset-x-0 bottom-0 z-50 mx-auto flex max-h-[88dvh] max-w-[560px] flex-col rounded-t-[28px] bg-ground outline-none">
           <Drawer.Handle className="mt-3 !w-12 !bg-line" />
+          {/* Dragging down closes it too, but not everyone knows that. */}
+          <Drawer.Close
+            aria-label="Close"
+            className="press absolute right-4 top-4 z-10 flex size-10 items-center justify-center rounded-full bg-ground-raised text-roast-900 ring-1 ring-line hover:ring-roast-700"
+          >
+            <X className="size-4" aria-hidden="true" />
+          </Drawer.Close>
           {shown && (
             <>
               <div className="overflow-y-auto px-5 pb-4 pt-4">
-                <Drawer.Title className="font-display text-[24px] font-black uppercase leading-none tracking-[-0.01em]">
+                <Drawer.Title className="pr-12 font-display text-[24px] font-black uppercase leading-none tracking-[-0.01em]">
                   {shown.name}
                 </Drawer.Title>
                 <Drawer.Description className="mt-1.5 text-[13.5px] text-muted">

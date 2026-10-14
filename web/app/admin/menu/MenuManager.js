@@ -5,6 +5,7 @@ import { formatPrice, toPence } from "../../lib/cart";
 import { addItem, removeItem, setSoldOut, updateItem } from "../../lib/menuEdits";
 import { getRepo } from "../../lib/store";
 import { useMenu } from "../../hooks/useShop";
+import useDragScroll from "../../hooks/useDragScroll";
 import { FIELD } from "../ui";
 import ItemEditor from "./ItemEditor";
 
@@ -66,6 +67,7 @@ export default function MenuManager() {
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
   const [isSoldOutOnly, setIsSoldOutOnly] = useState(false);
+  const chipRow = useDragScroll();
   const category = all.find((c) => c.id === categoryId) ?? all[0];
   const everything = all.flatMap((c) => c.items.map((item) => ({ item, where: c.label })));
   const soldOutCount = everything.filter(({ item }) => item.isSoldOut).length;
@@ -131,40 +133,47 @@ export default function MenuManager() {
           </button>
         </div>
 
-        <div className="flex gap-2">
-          <label className="relative min-w-0 flex-1">
-            <span className="sr-only">Search every dish by name</span>
-            <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-cream/50" aria-hidden="true" />
-            <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search all dishes" autoComplete="off" className={`${FIELD} pl-10`} />
-          </label>
-          <button
-            type="button"
-            aria-pressed={isSoldOutOnly}
-            onClick={() => setIsSoldOutOnly((on) => !on)}
-            className={`press flex h-11 shrink-0 items-center gap-1.5 rounded-xl px-3.5 text-[13.5px] font-semibold ${
-              isSoldOutOnly ? "bg-flex text-white" : "ring-1 ring-cream/15 hover:bg-cream/10"
-            }`}
-          >
-            Sold out
-            <span className={`rounded-full px-1.5 text-[11.5px] ${isSoldOutOnly ? "bg-black/25" : soldOutCount ? "bg-flex text-white" : "bg-black/20"}`}>{soldOutCount}</span>
-          </button>
-        </div>
-
-        <div role="tablist" aria-label="Categories" className="no-scrollbar scroll-row flex gap-1.5 overflow-x-auto pb-1">
-          {all.map((c) => (
+        {/* Stays under the admin bar while the list scrolls, so search and
+            the categories are always one tap away. */}
+        <div className="sticky top-[calc(6.25rem+1px+env(safe-area-inset-top))] z-20 -mx-3 grid grid-cols-1 gap-3 bg-roast-950/90 px-3 py-2 backdrop-blur-xl sm:-mx-5 sm:px-5">
+          <div className="flex gap-2">
+            <label className="relative min-w-0 flex-1">
+              <span className="sr-only">Search every dish by name</span>
+              <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-cream/50" aria-hidden="true" />
+              <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search all dishes" autoComplete="off" className={`${FIELD} pl-10`} />
+            </label>
             <button
-              key={c.id}
               type="button"
-              role="tab"
-              aria-selected={!isFiltering && c.id === category.id}
-              onClick={() => pickCategory(c.id)}
-              className={`press shrink-0 rounded-full px-3.5 py-2 text-[13px] font-semibold ${
-                !isFiltering && c.id === category.id ? "bg-cream text-roast-900" : "bg-cream/8 text-cream/75 hover:text-cream"
+              aria-pressed={isSoldOutOnly}
+              onClick={() => setIsSoldOutOnly((on) => !on)}
+              className={`press flex h-11 shrink-0 items-center gap-1.5 rounded-xl px-3.5 text-[13.5px] font-semibold ${
+                isSoldOutOnly ? "bg-flex text-white" : "ring-1 ring-cream/15 hover:bg-cream/10"
               }`}
             >
-              {c.label} <span className="opacity-60">{c.items.length}</span>
+              Sold out
+              <span className={`rounded-full px-1.5 text-[11.5px] ${isSoldOutOnly ? "bg-black/25" : soldOutCount ? "bg-flex text-white" : "bg-black/20"}`}>{soldOutCount}</span>
             </button>
-          ))}
+          </div>
+
+          <div role="tablist" aria-label="Categories" {...chipRow} className="no-scrollbar scroll-row flex cursor-grab gap-1.5 overflow-x-auto pb-1 active:cursor-grabbing">
+            {all.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                role="tab"
+                aria-selected={!isFiltering && c.id === category.id}
+                onClick={(e) => {
+                  pickCategory(c.id);
+                  e.currentTarget.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+                }}
+                className={`press shrink-0 rounded-full px-3.5 py-2 text-[13px] font-semibold ${
+                  !isFiltering && c.id === category.id ? "bg-cream text-roast-900" : "bg-cream/8 text-cream/75 hover:text-cream"
+                }`}
+              >
+                {c.label} <span className="opacity-60">{c.items.length}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         {error && (
