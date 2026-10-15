@@ -112,7 +112,9 @@ main.page-frame :where([class*="bg-"], [class*="bg-"] *) {
 
 /* Busy blocks (the category badges) sit on a frosted wash of the ground
    colour, so the plate and hands behind them soften instead of competing.
-   The wash fades out at every edge: no visible box, the design is unchanged. */
+   The wash fades out at every edge: no visible box, the design is unchanged.
+   At 68% the blurred hands still showed through as brown smudges, so the
+   wash is nearly solid. */
 .backdrop-calm {
   position: relative;
   isolation: isolate;
@@ -124,9 +126,9 @@ main.page-frame :where([class*="bg-"], [class*="bg-"] *) {
   inset: -48px -20px;
   z-index: -1;
   pointer-events: none;
-  background: rgb(236 222 203 / 0.68);
-  -webkit-backdrop-filter: blur(12px) saturate(0.85);
-  backdrop-filter: blur(12px) saturate(0.85);
+  background: rgb(236 222 203 / 0.9);
+  -webkit-backdrop-filter: blur(20px) saturate(0.7);
+  backdrop-filter: blur(20px) saturate(0.7);
   --calm-y: linear-gradient(to bottom, transparent, #000 var(--calm-fade), #000 calc(100% - var(--calm-fade)), transparent);
   --calm-x: linear-gradient(to right, transparent, #000 var(--calm-fade), #000 calc(100% - var(--calm-fade)), transparent);
   -webkit-mask-image: var(--calm-y), var(--calm-x);
