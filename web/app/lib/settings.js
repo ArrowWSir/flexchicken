@@ -16,12 +16,17 @@ export const DEFAULT_SETTINGS = Object.freeze({
   // Opening hours, Europe/London; a day is ["12:00", "23:00"] or null (closed).
   hours: BRAND.hours.schedule,
   // How the receipt prints when an order is accepted: "screen" is the till
-  // browser's own print (lib/printer.js); "network" is the Epson printer that
-  // collects receipts from the website (server/printQueue.js).
+  // browser's own print (lib/printer.js); "till" is the Epson printer on the
+  // shop's network, which the till's open staff screen sends receipts to
+  // (lib/eposDirect.js); "network" is an Epson that collects them from the
+  // website itself (Server Direct Print). Both queue on the server
+  // (server/printQueue.js).
   receiptPrinter: "screen",
 });
 
-export const RECEIPT_PRINTERS = Object.freeze(["screen", "network"]);
+export const RECEIPT_PRINTERS = Object.freeze(["screen", "till", "network"]);
+/** The modes where accepting queues the receipt on the server. */
+export const QUEUED_PRINTERS = Object.freeze(["till", "network"]);
 
 /** Merge saved settings over the defaults, dropping anything malformed. */
 export function readSettings(saved) {

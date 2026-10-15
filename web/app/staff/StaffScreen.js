@@ -3,6 +3,7 @@ import { usePathname } from "next/navigation";
 import { ChefHat, IdCard, LogOut } from "lucide-react";
 import StaffGate, { signOutStaff } from "../components/staff/StaffGate";
 import OrderAlerts from "../admin/OrderAlerts";
+import TillPrinterRelay from "../components/staff/TillPrinterRelay";
 
 const PAGES = [
   { href: "/staff", label: "Orders", icon: ChefHat },
@@ -44,6 +45,7 @@ export default function StaffScreen({ children }) {
                 </span>
               </nav>
               <OrderAlerts ordersUrl="/staff" />
+              <TillPrinterRelay />
               <button
                 type="button"
                 onClick={() => signOutStaff("staff")}

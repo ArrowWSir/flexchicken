@@ -13,7 +13,7 @@ const SHOP = "flexchicken";
 // "Security"). Scripts and styles allow inline code because Next.js writes
 // each page's data into inline scripts and the drawers inject styles; the
 // rest is locked to this site.
-const CSP = [
+const CSP_PARTS = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
@@ -28,7 +28,26 @@ const CSP = [
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
-].join("; ");
+];
+const CSP = CSP_PARTS.join("; ");
+
+// The staff screens on the till also send receipts to the Epson printer on
+// the shop's network (lib/eposDirect.js), so their pages may reach its
+// address too, as the owner set it in Admin → Shop. Nothing else may.
+const STAFF_PAGE = /^\/(staff|admin)(\/|$)/;
+const PRINTER_ORIGIN = /^https?:\/\/\d{1,3}(\.\d{1,3}){3}$/;
+const cspWith = (origins) => CSP_PARTS.map((p) => (p.startsWith("connect-src ") ? [p, ...origins].join(" ") : p)).join("; ");
+
+async function staffPageCsp(env) {
+  try {
+    const origins = (await shopFor(env).printerConnectOrigins()).filter((o) => PRINTER_ORIGIN.test(o));
+    return origins.length ? cspWith(origins) : null;
+  } catch (err) {
+    // The page still loads; only the till's printing is blocked until the next one.
+    console.error("printer csp", err);
+    return null;
+  }
+}
 
 const SECURITY_HEADERS = {
   "strict-transport-security": "max-age=31536000; includeSubDomains",
@@ -75,6 +94,15 @@ export default {
     }
     if (url.pathname.startsWith("/api/photo/") && request.method === "GET") return withSecurityHeaders(await photo(request, env, ctx));
     if (url.pathname.startsWith("/api/")) return withSecurityHeaders(await shopFor(env).fetch(request));
-    return withSecurityHeaders(await nextHandler.fetch(request, env, ctx));
+    const page = await nextHandler.fetch(request, env, ctx);
+    if (STAFF_PAGE.test(url.pathname) && page.headers.get("content-type")?.includes("text/html")) {
+      const csp = await staffPageCsp(env);
+      if (csp) {
+        const out = new Response(page.body, page);
+        out.headers.set("content-security-policy", csp);
+        return withSecurityHeaders(out);
+      }
+    }
+    return withSecurityHeaders(page);
   },
 };

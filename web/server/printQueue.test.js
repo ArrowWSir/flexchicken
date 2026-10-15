@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { createShopCore } from "./shopCore";
-import { printRequestXml, readPrintResult } from "./printQueue";
+import { cleanPrinterAddress, printRequestXml, readPrintResult } from "./printQueue";
 
 function memoryStore() {
   const data = new Map();
@@ -243,5 +243,148 @@ describe("readPrintResult", () => {
 describe("printRequestXml", () => {
   test("wraps one document for the printer's own paper unit", () => {
     expect(printRequestXml("<epos-print/>")).toContain("<PrintData><epos-print/></PrintData>");
+  });
+});
+
+describe("the till sending receipts (a printer without Server Direct Print)", () => {
+  const TILL = { ...STAFF, origin: ORIGIN };
+  const tillShop = async () => {
+    const shop = setup();
+    await shop.core.call("saveSettings", [{ receiptPrinter: "till" }], ADMIN);
+    return shop;
+  };
+
+  test("accepting queues the receipt, and the till claims it once with the stamp QR", async () => {
+    const shop = await tillShop();
+    const order = await shop.placeOrder();
+    await shop.accept(order);
+    const { result: job, changed } = await shop.core.call("claimReceipt", [], TILL);
+    expect(job.jobId).toBe(shop.view().jobs[0].id);
+    expect(job.document).toMatch(/^<epos-print xmlns="http:\/\/www\.epson-pos\.com\/schemas\/2011\/03\/epos-print">/);
+    expect(job.document).toContain("#0001");
+    expect(job.document).toMatch(/<symbol type="qrcode_model_2"[^>]*>https:\/\/flexchicken\.uk\/stamp\?t=[A-Z2-9]{20}<\/symbol>/);
+    expect(changed).toContain("printer");
+    expect(shop.view().jobs[0].status).toBe("sent");
+    expect((await shop.core.call("claimReceipt", [], TILL)).result).toBeNull();
+  });
+
+  test("the printer's answer settles the receipt, and the next one goes", async () => {
+    const shop = await tillShop();
+    await shop.accept(await shop.placeOrder());
+    await shop.accept(await shop.placeOrder());
+    const { result: first } = await shop.core.call("claimReceipt", [], TILL);
+    await shop.core.call("reportReceipt", [first.jobId, { outcome: "answered", responseFile: PRINTED }], TILL);
+    expect(shop.view().jobs[0]).toMatchObject({ status: "printed", problem: null });
+    expect(shop.view().lastSeenAt).not.toBeNull();
+    const { result: second } = await shop.core.call("claimReceipt", [], TILL);
+    await shop.core.call("reportReceipt", [second.jobId, { outcome: "answered", responseFile: NO_PAPER }], TILL);
+    expect(shop.view().jobs[1]).toMatchObject({ status: "failed", problem: "The printer is out of paper." });
+  });
+
+  test("a receipt that never reached the printer goes back in the queue, and fails after three tries", async () => {
+    const shop = await tillShop();
+    const order = await shop.placeOrder();
+    await shop.accept(order);
+    for (let i = 0; i < 2; i++) {
+      const { result: job } = await shop.core.call("claimReceipt", [], TILL);
+      await shop.core.call("reportReceipt", [job.jobId, { outcome: "unreached" }], TILL);
+      expect(shop.view().jobs[0].status).toBe("waiting");
+    }
+    const { result: last } = await shop.core.call("claimReceipt", [], TILL);
+    await shop.core.call("reportReceipt", [last.jobId, { outcome: "unreached" }], TILL);
+    expect(shop.view().jobs[0]).toMatchObject({ status: "failed", problem: expect.stringContaining("could not reach the printer") });
+    await shop.core.call("printReceipt", [order.id], STAFF);
+    expect(shop.view().jobs[1]).toMatchObject({ orderId: order.id, reason: "reprint", status: "waiting" });
+  });
+
+  test("a receipt that may have printed asks staff to check, and is not sent again by itself", async () => {
+    const shop = await tillShop();
+    await shop.accept(await shop.placeOrder());
+    const { result: job } = await shop.core.call("claimReceipt", [], TILL);
+    await shop.core.call("reportReceipt", [job.jobId, { outcome: "unsure" }], TILL);
+    expect(shop.view().jobs[0]).toMatchObject({ status: "unconfirmed", problem: "The printer may not have printed it. Check it came out." });
+    expect((await shop.core.call("claimReceipt", [], TILL)).result).toBeNull();
+  });
+
+  test("a report handed in twice counts once", async () => {
+    const shop = await tillShop();
+    await shop.accept(await shop.placeOrder());
+    const { result: job } = await shop.core.call("claimReceipt", [], TILL);
+    await shop.core.call("reportReceipt", [job.jobId, { outcome: "answered", responseFile: PRINTED }], TILL);
+    await shop.core.call("reportReceipt", [job.jobId, { outcome: "answered", responseFile: NO_PAPER }], TILL);
+    expect(shop.view().jobs[0].status).toBe("printed");
+  });
+
+  test("a receipt whose order is gone fails, and the next one goes in the same claim", async () => {
+    const shop = await tillShop();
+    const first = await shop.placeOrder();
+    await shop.accept(first);
+    await shop.accept(await shop.placeOrder());
+    shop.store.write("orders", shop.store.read("orders", []).filter((o) => o.id !== first.id));
+    const { result: job } = await shop.core.call("claimReceipt", [], TILL);
+    expect(job.document).toContain("#0002");
+    expect(shop.view().jobs[0]).toMatchObject({ status: "failed", problem: "That order no longer exists." });
+  });
+
+  test("the network printer's answer never settles a receipt the till took", async () => {
+    const shop = await tillShop();
+    await shop.accept(await shop.placeOrder());
+    await shop.core.call("claimReceipt", [], TILL);
+    await shop.useNetworkPrinter();
+    shop.core.printer.result(PRINTED);
+    expect(shop.view().jobs[0].status).toBe("sent");
+  });
+
+  test("a late answer for a receipt already given up on changes nothing", async () => {
+    const shop = await tillShop();
+    await shop.accept(await shop.placeOrder());
+    const { result: job } = await shop.core.call("claimReceipt", [], TILL);
+    shop.tick(91_000);
+    await shop.core.call("reportReceipt", [job.jobId, { outcome: "answered", responseFile: PRINTED }], TILL);
+    expect(shop.view().jobs[0].status).toBe("unconfirmed");
+  });
+
+  test("checking in marks the printer as there", async () => {
+    const shop = await tillShop();
+    expect(shop.view().lastSeenAt).toBeNull();
+    await shop.core.call("tillPrinterCheckIn", [], TILL);
+    expect(shop.view().lastSeenAt).toBe(Date.UTC(2026, 9, 8, 18, 0));
+  });
+
+  test("only works when the owner chose the till, and only for staff screens", async () => {
+    const shop = setup();
+    await shop.useNetworkPrinter();
+    await expect(shop.core.call("claimReceipt", [], TILL)).rejects.toMatchObject({ status: 400 });
+    await expect(shop.core.call("tillPrinterCheckIn", [], TILL)).rejects.toMatchObject({ status: 400 });
+    const till = await tillShop();
+    await expect(till.core.call("claimReceipt", [], PUBLIC)).rejects.toMatchObject({ status: 403 });
+    await expect(till.core.call("claimReceipt", [], DRIVER)).rejects.toMatchObject({ status: 403 });
+    await expect(till.core.call("reportReceipt", ["pj_none", { outcome: "answered" }], TILL)).rejects.toMatchObject({ status: 400 });
+  });
+
+  test("the owner sets the printer's address; staff screens read it, and the staff pages may reach it", async () => {
+    const shop = await tillShop();
+    expect(shop.core.printer.connectOrigins()).toEqual([]);
+    await expect(shop.core.call("setPrinterAddress", ["192.168.1.172"], STAFF)).rejects.toMatchObject({ status: 403 });
+    const { changed } = await shop.core.call("setPrinterAddress", ["192.168.1.172"], ADMIN);
+    expect(changed).toContain("printer");
+    expect(shop.view().address).toBe("192.168.1.172");
+    expect(shop.core.printer.connectOrigins()).toEqual(["https://192.168.1.172", "http://192.168.1.172"]);
+    await expect(shop.core.call("setPrinterAddress", ["flexchicken.uk"], ADMIN)).rejects.toMatchObject({ status: 400 });
+    expect(shop.view().address).toBe("192.168.1.172");
+  });
+});
+
+describe("cleanPrinterAddress", () => {
+  test("takes a private IPv4 address, with or without the https:// it may be pasted with", () => {
+    expect(cleanPrinterAddress(" 192.168.1.172 ")).toBe("192.168.1.172");
+    expect(cleanPrinterAddress("https://10.0.0.5/")).toBe("10.0.0.5");
+    expect(cleanPrinterAddress("172.20.1.9")).toBe("172.20.1.9");
+  });
+
+  test("refuses public addresses, names and anything that could carry more", () => {
+    for (const bad of ["8.8.8.8", "172.32.0.1", "192.168.1.256", "192.168.01.5", "printer.local", "192.168.1.5:8080", "192.168.1.5 'unsafe-eval'", "", null]) {
+      expect(() => cleanPrinterAddress(bad), String(bad)).toThrow("Enter the printer's IP address");
+    }
   });
 });

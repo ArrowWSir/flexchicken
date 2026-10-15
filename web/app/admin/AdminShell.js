@@ -4,6 +4,7 @@ import { LayoutGrid, LogOut } from "lucide-react";
 import StaffGate, { signOutStaff } from "../components/staff/StaffGate";
 import { MODES, modeOf } from "./sections";
 import OrderAlerts from "./OrderAlerts";
+import TillPrinterRelay from "../components/staff/TillPrinterRelay";
 
 // The kitchen's screens are dark: easier on the eyes on a pass, and the
 // tickets stand out like paper dockets. The bar has two rows: which room
@@ -47,6 +48,7 @@ export default function AdminShell({ children }) {
                 </span>
               </nav>
               <OrderAlerts />
+              <TillPrinterRelay />
               <button
                 type="button"
                 onClick={() => signOutStaff("admin")}

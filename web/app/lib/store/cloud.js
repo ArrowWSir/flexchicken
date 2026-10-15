@@ -266,6 +266,11 @@ export function createCloudRepo({ local, storage, fetcher = fetch, openSocket = 
     printTestReceipt: () => call("printTestReceipt"),
     printerLink: () => call("printerLink"),
     resetPrinterLink: () => call("resetPrinterLink"),
+    setPrinterAddress: (address) => call("setPrinterAddress", address),
+    // The till sending receipts to the printer on the shop's network (lib/eposDirect.js).
+    tillPrinterCheckIn: () => call("tillPrinterCheckIn"),
+    claimReceipt: () => call("claimReceipt"),
+    reportReceipt: (jobId, outcome) => call("reportReceipt", jobId, outcome),
     getMenuEdits: () => ({ ...EMPTY_EDITS, ...read(TOPICS.menu, {}) }),
     async saveMenuEdits(edits) {
       // The server answers with the edits as saved: show them at once, so the

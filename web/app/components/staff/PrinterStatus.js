@@ -3,7 +3,7 @@ import { Printer, RotateCcw } from "lucide-react";
 import { getRepo } from "../../lib/store";
 import { formatTime } from "../../lib/receipt";
 import { printerHealth } from "../../lib/receiptPrinter";
-import { usePrinter } from "../../hooks/usePrinter";
+import { useIsTillPrinter, usePrinter } from "../../hooks/usePrinter";
 
 const reprint = (orderId) => getRepo().printReceipt(orderId).catch((err) => window.alert(err.message));
 
@@ -20,6 +20,7 @@ const LABELS = {
  */
 export default function PrinterStatus({ now }) {
   const health = printerHealth(usePrinter(), now);
+  const isTill = useIsTillPrinter();
   const isWell = health.state === "ready" && health.problems.length === 0;
   const waiting = health.waiting > 0 ? ` · ${health.waiting} receipt${health.waiting === 1 ? "" : "s"} waiting` : "";
 
@@ -33,11 +34,16 @@ export default function PrinterStatus({ now }) {
     );
   }
 
+  // With the till sending receipts, the till's open staff screen is part of the chain.
   const why =
     health.state === "never"
-      ? "It has not checked in with the website. The owner sets it up in Admin → Shop → Receipt printer."
+      ? isTill
+        ? "The till has not reached it yet. The owner sets it up in Admin → Shop → Receipt printer, on the till."
+        : "It has not checked in with the website. The owner sets it up in Admin → Shop → Receipt printer."
       : health.state === "offline"
-        ? `Last heard from at ${formatTime(health.lastSeenAt)}. Check its power, network cable and paper. Receipts wait and print when it is back.`
+        ? isTill
+          ? `Last reached at ${formatTime(health.lastSeenAt)}. Keep /staff open on the till, and check the printer's power, network cable and paper. Receipts wait and print when it is back.`
+          : `Last heard from at ${formatTime(health.lastSeenAt)}. Check its power, network cable and paper. Receipts wait and print when it is back.`
         : null;
 
   return (

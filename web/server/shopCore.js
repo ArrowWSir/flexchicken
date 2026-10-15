@@ -13,7 +13,7 @@ import { promoStatus } from "../app/lib/promotions.js";
 import { repriceCart } from "../app/lib/reprice.js";
 import { TOPICS, createRepo } from "../app/lib/store/repo.js";
 import { readTokens } from "../app/lib/stampTokens.js";
-import { JOBS, KEY, PRINTER_TOPIC, STATUS, createPrintQueue } from "./printQueue.js";
+import { ADDRESS, JOBS, KEY, PRINTER_TOPIC, STATUS, createPrintQueue } from "./printQueue.js";
 import {
   ShopError,
   cleanCardId,
@@ -39,6 +39,10 @@ const DRIVERS = ["driver", "admin"];
 const SERVICE = ["staff", "admin"];
 const ON_ORDERS = ["driver", "staff", "admin"];
 const OWNER = ["admin"];
+
+// A printer's answer is a few hundred bytes; anything longer is not one.
+const MAX_PRINTER_ANSWER = 4096;
+const TILL_OUTCOMES = new Set(["answered", "unreached", "unsure"]);
 
 // Orders the database keeps; staff screens get the latest of them.
 const MAX_ORDERS = 5000;
@@ -265,12 +269,27 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
     printTestReceipt: { allow: OWNER, run: () => printQueue.enqueue(null, "test") },
     printerLink: { allow: OWNER, run: () => ({ key: printQueue.ensureKey() }) },
     resetPrinterLink: { allow: OWNER, run: () => ({ key: printQueue.resetKey() }) },
+    setPrinterAddress: { allow: OWNER, run: ([address]) => printQueue.setAddress(address) },
+    // The till sending receipts to the printer on the shop's network
+    // (lib/eposDirect.js). `actor.origin` is this site, for the stamp link.
+    tillPrinterCheckIn: { allow: SERVICE, run: () => printQueue.tillCheckIn() },
+    claimReceipt: { allow: SERVICE, run: (_args, actor) => printQueue.claim(actor.origin) },
+    reportReceipt: {
+      allow: SERVICE,
+      run: ([jobId, sent]) => {
+        const o = isObject(sent) ? sent : {};
+        const responseFile = typeof o.responseFile === "string" ? o.responseFile.slice(0, MAX_PRINTER_ANSWER) : "";
+        const outcome = TILL_OUTCOMES.has(o.outcome) ? o.outcome : "unsure";
+        return printQueue.report(requireId(jobId), { outcome, responseFile });
+      },
+    },
   };
 
   // The topics screens know: the printer's two stores are one topic to them,
   // and some stores are never sent at all.
   const HIDDEN = new Set([REQUESTS, KEY]);
-  const screenTopics = (written) => [...new Set([...written].filter((t) => !HIDDEN.has(t)).map((t) => (t === JOBS || t === STATUS ? PRINTER_TOPIC : t)))];
+  const PRINTER_STORES = new Set([JOBS, STATUS, ADDRESS]);
+  const screenTopics = (written) => [...new Set([...written].filter((t) => !HIDDEN.has(t)).map((t) => (PRINTER_STORES.has(t) ? PRINTER_TOPIC : t)))];
 
   /** Runs `fn` as one transaction; the screen topics it changed come back with its result. */
   function tracking(fn) {
@@ -397,6 +416,8 @@ export function createShopCore({ store, now = Date.now, newId, fetcher = fetch, 
       keyMatches: (given) => printQueue.keyMatches(given),
       poll: (origin) => tracking(() => printQueue.poll(origin)),
       result: (responseFile) => tracking(() => printQueue.result(responseFile)),
+      /** Where staff pages may connect to reach the printer (worker.js, their CSP). */
+      connectOrigins: () => printQueue.connectOrigins(),
     },
     usesPin: (name) => Boolean(actionFor(name)?.usesPin),
     /** Which per-caller limit this call counts against, if any. */

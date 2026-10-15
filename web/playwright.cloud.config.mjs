@@ -5,7 +5,7 @@ import { defineConfig, devices } from "@playwright/test";
 // Codes come from .dev.vars.
 export default defineConfig({
   testDir: "./e2e",
-  testMatch: ["cloud.spec.mjs", "security.spec.mjs", "printer.spec.mjs"],
+  testMatch: ["cloud.spec.mjs", "security.spec.mjs", "printer.spec.mjs", "till-printer.spec.mjs"],
   timeout: 60_000,
   use: { baseURL: process.env.CLOUD_URL || "http://localhost:8787" },
   projects: [{ name: "phone", use: { ...devices["Pixel 7"] } }],

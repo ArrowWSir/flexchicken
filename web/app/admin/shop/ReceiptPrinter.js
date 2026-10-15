@@ -5,6 +5,7 @@ import { getRepo, IS_CLOUD } from "../../lib/store";
 import { formatTime } from "../../lib/receipt";
 import { printerHealth } from "../../lib/receiptPrinter";
 import { usePrinter } from "../../hooks/usePrinter";
+import TillPrinterSetup from "./TillPrinterSetup";
 
 const COPIED_MS = 2000;
 // How often the printer asks for receipts: a ticket prints within this.
@@ -12,8 +13,10 @@ const POLL_SECONDS = 5;
 
 const CHOICES = [
   { id: "screen", label: "This screen's print dialog", hint: "A printer set up on the till itself (USB, or the till's own)." },
-  { id: "network", label: "Epson printer on the network", hint: "TM-m30II or TM-m30III with a network cable or Wi-Fi. Prints with nothing set up on the till." },
+  { id: "till", label: "Epson on the shop network, sent by the till", hint: "TM-m30II and other Epson receipt printers with ePOS-Print. The till's staff screen sends each receipt." },
+  { id: "network", label: "Epson with Server Direct Print", hint: "TM-m30II-NT, -H, -S, -SL or TM-m30III only. Prints with nothing open on the till." },
 ];
+const QUEUED = new Set(["till", "network"]);
 
 const STATE_TEXT = {
   ready: "Connected: the printer checked in just now.",
@@ -138,10 +141,10 @@ export default function ReceiptPrinter({ settings, now, onSave }) {
   };
   return (
     <div>
-      <fieldset className="grid gap-2.5 sm:grid-cols-2">
+      <fieldset className="grid gap-2.5 lg:grid-cols-3">
         <legend className="sr-only">How receipts print</legend>
         {CHOICES.map((c) => {
-          const isDisabled = c.id === "network" && !IS_CLOUD;
+          const isDisabled = QUEUED.has(c.id) && !IS_CLOUD;
           return (
             <label
               key={c.id}
@@ -167,6 +170,7 @@ export default function ReceiptPrinter({ settings, now, onSave }) {
         })}
       </fieldset>
       {IS_CLOUD && chosen === "network" && <Setup now={now} />}
+      {IS_CLOUD && chosen === "till" && <TillPrinterSetup now={now} />}
     </div>
   );
 }

@@ -57,7 +57,7 @@ async function placeCollection(page) {
 test("accepting prints on the network printer, and a failed receipt can be printed again", async ({ browser, request }) => {
   const owner = await (await browser.newContext({ ...test.info().project.use })).newPage();
   await unlockAdmin(owner, "/admin/shop#printer");
-  await owner.getByRole("radio", { name: /Epson printer on the network/ }).check();
+  await owner.getByRole("radio", { name: /Epson with Server Direct Print/ }).check();
   const link = owner.getByText(/\/api\/printer\?key=/);
   await expect(link).toBeVisible();
   const key = new URL(await link.textContent()).searchParams.get("key");

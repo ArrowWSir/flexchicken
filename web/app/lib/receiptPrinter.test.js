@@ -15,6 +15,12 @@ describe("readPrinter", () => {
     expect(printer.jobs.map((j) => j.id)).toEqual(["pj_1"]);
     expect(printer.lastSeenAt).toBe(NOW);
   });
+
+  test("keeps the printer's IP address, and drops anything that is not one", () => {
+    expect(readPrinter({ address: "192.168.1.172", jobs: [] }).address).toBe("192.168.1.172");
+    expect(readPrinter({ address: "evil.example", jobs: [] }).address).toBeNull();
+    expect(readPrinter({ jobs: [] }).address).toBeNull();
+  });
 });
 
 describe("printerHealth", () => {

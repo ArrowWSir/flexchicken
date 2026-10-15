@@ -11,7 +11,8 @@ const JOB_STATUSES = new Set(["waiting", "sent", "printed", "failed", "unconfirm
 const PROBLEM_STATUSES = new Set(["failed", "unconfirmed", "expired"]);
 const OK_OR_ON_ITS_WAY = new Set(["waiting", "sent", "printed"]);
 
-export const EMPTY_PRINTER = Object.freeze({ lastSeenAt: null, jobs: Object.freeze([]) });
+export const EMPTY_PRINTER = Object.freeze({ lastSeenAt: null, address: null, jobs: Object.freeze([]) });
+const IPV4 = /^\d{1,3}(\.\d{1,3}){3}$/;
 
 const isTime = (value) => Number.isFinite(value) && value > 0;
 
@@ -31,7 +32,9 @@ export function readPrinter(saved) {
           problem: typeof j.problem === "string" ? j.problem : null,
         }))
     : [];
-  return { lastSeenAt: isTime(saved.lastSeenAt) ? saved.lastSeenAt : null, jobs };
+  // The printer's IP on the shop's network, for the till that sends it receipts.
+  const address = typeof saved.address === "string" && IPV4.test(saved.address) ? saved.address : null;
+  return { lastSeenAt: isTime(saved.lastSeenAt) ? saved.lastSeenAt : null, address, jobs };
 }
 
 /**

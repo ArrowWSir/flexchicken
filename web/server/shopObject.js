@@ -33,6 +33,11 @@ export class ShopObject extends DurableObject {
     ctx.setWebSocketAutoResponse(new WebSocketRequestResponsePair("ping", "pong"));
   }
 
+  /** The printer's addresses on the shop's network, for the staff pages' CSP (worker.js). Called over RPC only. */
+  printerConnectOrigins() {
+    return this.core.printer.connectOrigins();
+  }
+
   async fetch(request) {
     const url = new URL(request.url);
     if (url.pathname === "/api/shop/live") return this.live(request, url);

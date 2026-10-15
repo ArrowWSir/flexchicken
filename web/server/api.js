@@ -173,7 +173,7 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
     throw new ShopError(400, "That request could not be read.");
   }
 
-  async function shopCall(request) {
+  async function shopCall(request, url) {
     const { body, size } = await readBody(request, MAX_MENU_BODY);
     const { method, args, as } = body;
     if (method !== "saveMenuEdits" && size > MAX_CALL_BODY) throw new ShopError(413, "That is too much to send at once.");
@@ -186,7 +186,8 @@ export function createApi({ core, store, env, broadcast, now = Date.now }) {
       if (wait > 0) return fail(429, `Too many wrong PINs. Try again in ${Math.ceil(wait / 1000)} seconds.`);
     }
     try {
-      const { result, changed } = await core.call(method, args, actor);
+      // The site's own address goes along for links the server writes (the receipt's stamp QR).
+      const { result, changed } = await core.call(method, args, { ...actor, origin: url.origin });
       if (usesPin) pinLimiter.succeed(actor.ip);
       if (changed.length) broadcast(changed);
       // `changed` lets the caller refresh at once, before the socket says so.
