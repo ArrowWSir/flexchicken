@@ -100,29 +100,25 @@ export default function MenuSection() {
     <section id="menu" aria-labelledby="menu-heading" className="mt-12 scroll-mt-20">
       {/* backdrop-calm: the plate backdrop softens behind the badges (globals.css). */}
       <div className="backdrop-calm">
-        <div className="mb-5 flex items-end justify-between gap-3">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-flex-ink">Order here</p>
-            <h2 id="menu-heading" className="mt-1 font-display text-[clamp(28px,8.4vw,40px)] font-black uppercase leading-[0.92] tracking-[-0.02em]">
-              Pick your <span className="text-flex">craving</span>
-            </h2>
-          </div>
-          {/* Ordering several dishes at once: the whole menu as a list (app/order). */}
-          <div className="mb-0.5 flex shrink-0 flex-col items-end gap-2">
-            <Link
-              href="/order"
-              className="press flex h-10 items-center gap-1.5 rounded-full bg-roast-800 px-3.5 text-[13px] font-semibold text-cream hover:bg-roast-700"
-            >
-              <LayoutList className="size-4 shrink-0" strokeWidth={2.2} aria-hidden="true" />
-              {/* The narrowest phones keep the heading beside it on two lines. */}
-              <span className="max-[359px]:hidden">Explore full menu</span>
-              <span className="min-[360px]:hidden">Full menu</span>
-            </Link>
-            <MenuDownload
-              label="Menu"
-              className="press flex h-10 items-center gap-1.5 rounded-full bg-ground-raised px-3.5 text-[13px] font-semibold text-ink ring-1 ring-line hover:bg-surface"
-            />
-          </div>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-flex-ink">Order here</p>
+        <h2 id="menu-heading" className="mt-1 font-display text-[clamp(28px,8.4vw,40px)] font-black uppercase leading-[0.92] tracking-[-0.02em]">
+          Pick your <span className="text-flex">craving</span>
+        </h2>
+        {/* One row under the heading: ordering several dishes at once (the
+            whole menu as a list, app/order) on the left, the printable menu on
+            the right, so the heading keeps the full width. */}
+        <div className="mb-5 mt-3.5 flex items-center justify-between gap-3">
+          <Link
+            href="/order"
+            className="press flex h-10 items-center gap-1.5 rounded-full bg-roast-800 px-3.5 text-[13px] font-semibold text-cream hover:bg-roast-700"
+          >
+            <LayoutList className="size-4 shrink-0" strokeWidth={2.2} aria-hidden="true" />
+            Explore full menu
+          </Link>
+          <MenuDownload
+            label="Menu"
+            className="press flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-ground-raised px-3.5 text-[13px] font-semibold text-ink ring-1 ring-line hover:bg-surface"
+          />
         </div>
 
         <BadgeGrid categories={categories} activeId={target.categoryId} onSelect={chooseCategory} />
