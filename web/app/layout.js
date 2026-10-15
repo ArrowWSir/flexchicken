@@ -1,5 +1,7 @@
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
+import InstallBar from "./components/InstallBar";
+import { CATCH_INSTALL, manifestUrl } from "./lib/apps";
 
 // Montserrat is the typeface of the FLEX CHICKEN wordmark (bold FLEX,
 // regular CHICKEN), so headings speak in the logo's voice. Poppins is the
@@ -28,6 +30,7 @@ export const metadata = {
   title: TITLE,
   description: DESCRIPTION,
   applicationName: "Flex Chicken",
+  manifest: manifestUrl("customer"),
   appleWebApp: { capable: true, title: "Flex Chicken", statusBarStyle: "default" },
   icons: { icon: "/brand/icon-192.png", apple: "/brand/apple-touch-icon.png" },
   openGraph: {
@@ -51,7 +54,11 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en-GB" className={`${montserrat.variable} ${poppins.variable}`} suppressHydrationWarning>
-      <body>{children}</body>
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: CATCH_INSTALL }} />
+        <InstallBar />
+        {children}
+      </body>
     </html>
   );
 }
