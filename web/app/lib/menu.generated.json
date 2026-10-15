@@ -2631,7 +2631,7 @@
             }
           ],
           "isMeal": true,
-          "image": null
+          "image": "/menu/chicken-fillet-burger-box-meal.webp"
         },
         {
           "id": 1189,
@@ -2711,7 +2711,7 @@
             }
           ],
           "isMeal": true,
-          "image": null
+          "image": "/menu/1-4-pounder-burger-box-meal.webp"
         },
         {
           "id": 1191,
@@ -2791,7 +2791,7 @@
             }
           ],
           "isMeal": true,
-          "image": null
+          "image": "/menu/1-2-pounder-burger-box-meal.webp"
         },
         {
           "id": 1192,
@@ -2889,7 +2889,7 @@
             }
           ],
           "isMeal": true,
-          "image": null
+          "image": "/menu/spicy-chicken-burger-box-meal.webp"
         },
         {
           "id": 1190,
@@ -2969,7 +2969,7 @@
             }
           ],
           "isMeal": true,
-          "image": null
+          "image": "/menu/fusion-flex-burger-box-meal.webp"
         },
         {
           "id": 1193,
@@ -3049,7 +3049,7 @@
             }
           ],
           "isMeal": true,
-          "image": null
+          "image": "/menu/flex-variety-box.webp"
         }
       ]
     },
@@ -4208,7 +4208,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": null
+          "image": "/menu/water.webp"
         }
       ]
     }

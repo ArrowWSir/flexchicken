@@ -352,11 +352,12 @@ main.page-frame :where([class*="bg-"], [class*="bg-"] *) {
 .badge-enamel[data-active="true"] {
   background: radial-gradient(circle at 50% 40%, #3b2419, var(--color-roast-800) 65%, var(--color-roast-950));
 }
+/* The gloss lies on the enamel, under the dish: over it, it fogged the food. */
 .badge-enamel::before {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 1;
   border-radius: inherit;
   pointer-events: none;
   background:

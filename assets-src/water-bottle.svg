@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 760" width="300" height="760">
+  <!-- A plain 500ml still water bottle, no brand: drawn so the menu has a
+       water picture without showing anyone's label. make_extras.py renders it. -->
+  <defs>
+    <!-- Clear plastic with water inside: pale blue, brighter at the edges
+         where the light bends, a soft column of light left of centre. -->
+    <linearGradient id="water" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#9cc8e4"/>
+      <stop offset="0.08" stop-color="#d9eef9"/>
+      <stop offset="0.2" stop-color="#bcdcf0"/>
+      <stop offset="0.32" stop-color="#f4fbff"/>
+      <stop offset="0.42" stop-color="#c6e2f3"/>
+      <stop offset="0.7" stop-color="#a9d2ea"/>
+      <stop offset="0.9" stop-color="#cfe7f6"/>
+      <stop offset="1" stop-color="#86b7d8"/>
+    </linearGradient>
+    <linearGradient id="air" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#c9dfec"/>
+      <stop offset="0.25" stop-color="#ffffff"/>
+      <stop offset="0.5" stop-color="#e3f0f8"/>
+      <stop offset="0.85" stop-color="#d4e7f3"/>
+      <stop offset="1" stop-color="#a9c9de"/>
+    </linearGradient>
+    <linearGradient id="cap" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#0d4f8f"/>
+      <stop offset="0.3" stop-color="#3f8fd6"/>
+      <stop offset="0.45" stop-color="#7cbcf0"/>
+      <stop offset="0.7" stop-color="#2a76bf"/>
+      <stop offset="1" stop-color="#0b3f75"/>
+    </linearGradient>
+    <linearGradient id="label" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#4f93c9"/>
+      <stop offset="0.3" stop-color="#9fd0f2"/>
+      <stop offset="0.45" stop-color="#cbe8fb"/>
+      <stop offset="0.75" stop-color="#7fb9e3"/>
+      <stop offset="1" stop-color="#3f7fb5"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" x2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="body">
+      <path id="outline" d="M118 118 h64 v26 c0 10 4 16 12 24 c34 34 48 62 50 104 v8 c0 8 -6 12 -6 20 c0 8 6 12 6 20 v250 c0 8 -6 12 -6 20 c0 8 6 12 6 20 v74 c0 18 -8 28 -22 32 c-10 3 -16 0 -24 4 c-12 6 -26 8 -48 8 c-22 0 -36 -2 -48 -8 c-8 -4 -14 -1 -24 -4 c-14 -4 -22 -14 -22 -32 v-74 c0 -8 6 -12 6 -20 c0 -8 -6 -12 -6 -20 v-250 c0 -8 6 -12 6 -20 c0 -8 -6 -12 -6 -20 v-8 c2 -42 16 -70 50 -104 c8 -8 12 -14 12 -24 z"/>
+    </clipPath>
+  </defs>
+
+  <!-- body: air above the water line, water below -->
+  <g clip-path="url(#body)">
+    <rect x="0" y="100" width="300" height="660" fill="url(#air)"/>
+    <rect x="0" y="236" width="300" height="524" fill="url(#water)"/>
+    <!-- the water's surface, seen slightly from above -->
+    <ellipse cx="150" cy="236" rx="100" ry="7" fill="#e8f5fd"/>
+    <ellipse cx="150" cy="238" rx="100" ry="5" fill="none" stroke="#8fc0e0" stroke-width="1.5"/>
+    <!-- moulded rings at the shoulder and the grip -->
+    <g fill="none" stroke="#ffffff" stroke-opacity="0.75" stroke-width="3">
+      <path d="M60 300 q90 10 180 0"/>
+      <path d="M60 340 q90 10 180 0"/>
+      <path d="M60 600 q90 10 180 0"/>
+      <path d="M60 640 q90 10 180 0"/>
+    </g>
+    <g fill="none" stroke="#6ea7cf" stroke-opacity="0.55" stroke-width="2">
+      <path d="M60 304 q90 10 180 0"/>
+      <path d="M60 344 q90 10 180 0"/>
+      <path d="M60 604 q90 10 180 0"/>
+      <path d="M60 644 q90 10 180 0"/>
+    </g>
+    <!-- plain label: no name, no logo -->
+    <rect x="40" y="392" width="220" height="164" fill="url(#label)"/>
+    <path d="M40 470 c40 -18 70 18 110 0 c40 -18 70 18 110 0 v86 h-220 z" fill="#ffffff" fill-opacity="0.28"/>
+    <path d="M40 500 c40 -14 70 14 110 0 c40 -14 70 14 110 0" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="3"/>
+    <rect x="40" y="392" width="220" height="5" fill="#ffffff" fill-opacity="0.5"/>
+    <rect x="40" y="551" width="220" height="5" fill="#25618f" fill-opacity="0.35"/>
+    <!-- the base's feet -->
+    <path d="M70 712 q20 22 40 0 q20 22 40 0 q20 22 40 0 q20 22 40 0" fill="none" stroke="#5f9cc6" stroke-opacity="0.5" stroke-width="3"/>
+    <!-- light down the left, a thin rim of light on the right -->
+    <rect x="78" y="150" width="22" height="600" fill="url(#shine)" opacity="0.85"/>
+    <rect x="226" y="270" width="8" height="460" fill="url(#shine)" opacity="0.6"/>
+  </g>
+  <use href="#outline" fill="none" stroke="#5d93b8" stroke-opacity="0.6" stroke-width="2"/>
+
+  <!-- neck ring and cap -->
+  <rect x="108" y="110" width="84" height="12" rx="4" fill="#d9ebf6" stroke="#8fb6cf" stroke-width="1.5"/>
+  <rect x="114" y="34" width="72" height="80" rx="8" fill="url(#cap)"/>
+  <g stroke="#0a3561" stroke-opacity="0.45" stroke-width="2.5">
+    <line x1="124" y1="44" x2="124" y2="106"/>
+    <line x1="134" y1="44" x2="134" y2="106"/>
+    <line x1="144" y1="44" x2="144" y2="106"/>
+    <line x1="154" y1="44" x2="154" y2="106"/>
+    <line x1="164" y1="44" x2="164" y2="106"/>
+    <line x1="174" y1="44" x2="174" y2="106"/>
+  </g>
+  <rect x="114" y="34" width="72" height="9" rx="4" fill="#5aa5e6"/>
+  <rect x="114" y="98" width="72" height="5" fill="#082e55" fill-opacity="0.5"/>
+</svg>

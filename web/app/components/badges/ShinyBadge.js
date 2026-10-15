@@ -66,11 +66,11 @@ export default function ShinyBadge({ category, image, isActive, onSelect, sweepD
             <img
               src={image}
               alt=""
-              width={720}
-              height={720}
+              width={264}
+              height={264}
               loading="lazy"
               draggable={false}
-              className="relative z-[1] size-[96%] translate-y-[4%] object-contain drop-shadow-[0_4px_5px_rgb(45_28_21/0.35)]"
+              className="relative z-[2] size-full object-contain drop-shadow-[0_3px_4px_rgb(45_28_21/0.35)]"
             />
           ) : (
             <Icon
