@@ -810,7 +810,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": null
+          "image": "/menu/bbq-ribs-2.webp"
         },
         {
           "id": 1741,
@@ -836,7 +836,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": null
+          "image": "/menu/bbq-ribs-8.webp"
         },
         {
           "id": 1742,
@@ -3135,7 +3135,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": null
+          "image": "/menu/1-piece-chicken.webp"
         },
         {
           "id": 1201,
@@ -3161,7 +3161,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": null
+          "image": "/menu/3-piece-chicken.webp"
         },
         {
           "id": "4-piece-chicken",
@@ -3174,7 +3174,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": null
+          "image": "/menu/4-piece-chicken.webp"
         },
         {
           "id": 1204,
@@ -3187,7 +3187,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": null
+          "image": "/menu/6-piece-chicken.webp"
         },
         {
           "id": 1205,
@@ -3200,7 +3200,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": null
+          "image": "/menu/10-piece-chicken.webp"
         },
         {
           "id": 1208,
@@ -3398,7 +3398,7 @@
             }
           ],
           "isMeal": true,
-          "image": null
+          "image": "/menu/1-piece-chicken-meal.webp"
         },
         {
           "id": 1211,
@@ -3530,7 +3530,7 @@
             }
           ],
           "isMeal": true,
-          "image": null
+          "image": "/menu/3-piece-chicken-meal.webp"
         },
         {
           "id": 1210,

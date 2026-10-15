@@ -94,9 +94,10 @@ function fromBoard(entry, categoryId, byId, hasImage) {
   };
   const product = entry.from ? need(entry.from) : null;
   const optionSources = product ? [product] : (entry.optionsFrom ?? []).map(need);
+  const slug = product?.slug ?? entry.id;
   return {
     id: product?.id ?? entry.id,
-    slug: product?.slug ?? entry.id,
+    slug,
     categoryId,
     name: entry.name,
     ...splitTitle(entry.name),
@@ -104,7 +105,7 @@ function fromBoard(entry, categoryId, byId, hasImage) {
     description: entry.description ?? product?.description ?? "",
     options: toOptions(mergeOptions(optionSources.map((p) => p.options ?? []))),
     isMeal: isMealName(entry.name),
-    image: photoFor(entry.photo ?? product?.slug, hasImage),
+    image: photoFor(entry.photo ?? slug, hasImage),
   };
 }
 

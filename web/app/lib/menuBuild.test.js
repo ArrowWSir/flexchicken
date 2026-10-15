@@ -122,6 +122,14 @@ describe("buildMenu", () => {
     expect(menu.categories[0].items[0]).toMatchObject({ image: "/menu/chicken-wrap.webp", description: "New." });
   });
 
+  test("a new dish shows the picture saved under its own id", () => {
+    const menu = build([{ id: "r", items: [{ id: "bbq-ribs-2", name: "BBQ Ribs – 2 Piece", price: 4.89 }] }], {
+      products: [],
+      hasImage: (slug) => slug === "bbq-ribs-2",
+    });
+    expect(menu.categories[0].items[0].image).toBe("/menu/bbq-ribs-2.webp");
+  });
+
   test("a new dish gets its own id and copies options from the products it names", () => {
     const heat = { label: "Heat", required: true, choices: [{ label: "Hot", price_add: 0 }] };
     const drink = { label: "Drink", required: true, choices: [{ label: "Pepsi", price_add: 0 }] };

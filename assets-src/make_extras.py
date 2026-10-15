@@ -5,8 +5,9 @@
   is convex, so the cut-out is filled out to its convex hull.
 - Water: a plain bottle with no brand, drawn in water-bottle.svg. Render it
   first (see below), this script places it like every other dish.
-- Box meals: each is the burger meal photo (burger, chips, can) with wings in
-  front, as the box has "chips, drink & 3 wings". The variety box uses the
+- Box meals: each is the burger meal photo (burger, chips, can) with 3 wings
+  in front, as the box has "chips, drink & 3 wings". Run make_counts.py
+  first: it lays out the 3 wings. The variety box uses the
   2 piece chicken meal.
 - Category badges: one dish per category, cropped tight and centred, so it
   fills the round badge instead of sitting small at the bottom of it.
@@ -36,7 +37,7 @@ BOX_MEALS = {
     "fusion-flex-burger-box-meal": "fusion-flex-burger-meal",  # already boxed, with wings
     "flex-variety-box": "2-piece-chicken-meal",
 }
-WINGS = "4-spicy-wings"
+WINGS = os.path.join(HERE, ".wings-3.png")  # exactly 3, made by make_counts.py
 HAS_WINGS = {"fusion-flex-burger-meal"}
 WINGS_WIDTH = 0.36  # x the meal photo's width
 WINGS_OVERLAP = 0.28  # how far the wings tuck under the meal, x their width
@@ -114,7 +115,8 @@ def make_box(meal_slug: str) -> Image.Image:
     meal = load(meal_slug)
     if meal_slug in HAS_WINGS:
         return meal
-    wings = load(WINGS)
+    wings = Image.open(WINGS).convert("RGBA")
+    wings = wings.crop(wings.getbbox())
     w = round(meal.width * WINGS_WIDTH)
     wings = wings.resize((w, round(wings.height * w / wings.width)), Image.LANCZOS)
     # The wings sit in front, low and right of centre, overlapping the meal.

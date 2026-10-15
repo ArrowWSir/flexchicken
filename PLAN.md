@@ -28,6 +28,10 @@ The front end runs in `web/`; see [web/README.md](web/README.md) for commands an
 - A separate **Delivery** panel lets drivers take a ready order at pickup and share their live location, so the customer can watch the driver come.
 - Postcodes outside every delivery zone are flagged at checkout as collection only.
 - A **staff clock** in its own panel (`/clock`): each person clocks in and out with a personal 4-digit PIN. The owner manages the team and reads weekly hours (with a CSV for payroll) under **Admin → Staff & hours**.
+- **Counter & Till Hardware (confirmed):**
+  - **Till terminal:** **SUNMI D3 Pro** Smart Desktop POS Terminal (15.6″ Android 13 touchscreen running Chrome for the kitchen screen, orders board, and staff clock).
+  - **Counter receipt printer:** **Epson TM-m30II** (Model M362B, 80mm thermal, plugged into the router; it has no Server Direct Print, so the till’s open /staff page sends it each receipt over the shop network: Admin → Shop → Receipt printer, "sent by the till").
+  - **Kitchen printer:** **SUNMI NT311** (80mm Kitchen Cloud POS Printer, grease/splash-resistant).
 
 **Phone-first layout, changed from the wireframe with the owner's go-ahead:** on a phone the badges sit above the table as one 5 × 2 grid. The table takes the full width and still runs off the right edge. Contact is in the footer, and there is a short About section.
 
