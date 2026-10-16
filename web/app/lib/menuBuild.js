@@ -67,10 +67,16 @@ function mergeOptions(lists) {
 }
 
 const isMealName = (name) => /\bmeal\b|\bbox\b/i.test(name);
-const photoFor = (slug, hasImage) => (slug && hasImage(slug) ? `/menu/${slug}.webp` : null);
+// A dish drawn standing on the table's plate (assets-src/make_plated.py) is
+// kept apart in /menu/plated/: the table stands it on the plate as drawn.
+const photoFinder = (hasImage, isPlated) => (slug) => {
+  if (!slug) return null;
+  if (isPlated(slug)) return `/menu/plated/${slug}.webp`;
+  return hasImage(slug) ? `/menu/${slug}.webp` : null;
+};
 
 /** A live-site product exactly as the site lists it (drinks). */
-function fromProduct(product, categoryId, hasImage) {
+function fromProduct(product, categoryId, photoFor) {
   const name = cleanName(product.name);
   return {
     id: product.id,
@@ -82,12 +88,12 @@ function fromProduct(product, categoryId, hasImage) {
     description: product.description || "",
     options: toOptions(product.options),
     isMeal: isMealName(name),
-    image: photoFor(product.slug, hasImage),
+    image: photoFor(product.slug),
   };
 }
 
 /** One line of the board, filled in from the product it points at. */
-function fromBoard(entry, categoryId, byId, hasImage) {
+function fromBoard(entry, categoryId, byId, photoFor) {
   const need = (id) => {
     if (!byId.has(id)) throw new Error(`Menu board: "${entry.name}" points at product ${id}, which the site data does not have.`);
     return byId.get(id);
@@ -105,7 +111,7 @@ function fromBoard(entry, categoryId, byId, hasImage) {
     description: entry.description ?? product?.description ?? "",
     options: toOptions(mergeOptions(optionSources.map((p) => p.options ?? []))),
     isMeal: isMealName(entry.name),
-    image: photoFor(entry.photo ?? slug, hasImage),
+    image: photoFor(entry.photo ?? slug),
   };
 }
 
@@ -122,18 +128,19 @@ function checkOnePricePerItem(categories) {
 }
 
 /**
- * @param {{ products: object[], sections: object[], hasImage: (slug: string) => boolean, board?: object[] }} input
+ * @param {{ products: object[], sections: object[], hasImage: (slug: string) => boolean, isPlated?: (slug: string) => boolean, board?: object[] }} input
  */
-export function buildMenu({ products, sections, hasImage, board = MENU_BOARD }) {
+export function buildMenu({ products, sections, hasImage, isPlated = () => false, board = MENU_BOARD }) {
+  const photoFor = photoFinder(hasImage, isPlated);
   const byId = new Map(products.map((p) => [p.id, p]));
   const bySection = new Map(sections.map((s) => [s.anchor, s.product_ids]));
 
   const categories = board
     .map(({ items, section, ...def }) => {
-      if (!section) return { ...def, items: items.map((entry) => fromBoard(entry, def.id, byId, hasImage)) };
+      if (!section) return { ...def, items: items.map((entry) => fromBoard(entry, def.id, byId, photoFor)) };
       const listed = (bySection.get(section) ?? [])
         .filter((id) => byId.has(id) && !DROP_IDS.has(id))
-        .map((id) => fromProduct(byId.get(id), def.id, hasImage))
+        .map((id) => fromProduct(byId.get(id), def.id, photoFor))
         .sort((a, b) => a.price - b.price || a.name.localeCompare(b.name));
       return { ...def, items: listed };
     })

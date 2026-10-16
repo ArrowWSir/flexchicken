@@ -6,9 +6,9 @@
 - Water: a plain bottle with no brand, drawn in water-bottle.svg. Render it
   first (see below), this script places it like every other dish.
 - Box meals: each is the burger meal photo (burger, chips, can) with 3 wings
-  in front, as the box has "chips, drink & 3 wings". Run make_counts.py
-  first: it lays out the 3 wings. The variety box uses the
-  2 piece chicken meal.
+  in front, as the box has "chips, drink & 3 wings". Run make_plated.py
+  first: it lays out the 3 wings. (The variety box is drawn on its plate
+  by make_plated.py.)
 - Category badges: one dish per category, cropped tight and centred, so it
   fills the round badge instead of sitting small at the bottom of it.
   Output: web/public/badges/{category id}.webp
@@ -35,9 +35,8 @@ BOX_MEALS = {
     "1-2-pounder-burger-box-meal": "1-2-pounder-burger-meal",
     "spicy-chicken-burger-box-meal": "spicy-chicken-burger-meal",
     "fusion-flex-burger-box-meal": "fusion-flex-burger-meal",  # already boxed, with wings
-    "flex-variety-box": "2-piece-chicken-meal",
 }
-WINGS = os.path.join(HERE, ".wings-3.png")  # exactly 3, made by make_counts.py
+WINGS = os.path.join(HERE, ".wings-3.png")  # exactly 3, made by make_plated.py
 HAS_WINGS = {"fusion-flex-burger-meal"}
 WINGS_WIDTH = 0.36  # x the meal photo's width
 WINGS_OVERLAP = 0.28  # how far the wings tuck under the meal, x their width
@@ -60,7 +59,9 @@ BADGE_FILL = 0.9  # the dish's longer side, x the badge
 
 
 def load(slug: str) -> Image.Image:
-    im = Image.open(os.path.join(OUT, f"{slug}.webp")).convert("RGBA")
+    """A dish's picture: the one drawn on its plate if there is one."""
+    plated = os.path.join(OUT, "plated", f"{slug}.webp")
+    im = Image.open(plated if os.path.exists(plated) else os.path.join(OUT, f"{slug}.webp")).convert("RGBA")
     return im.crop(im.getbbox())
 
 

@@ -797,7 +797,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/bbq-lamb-ribs-x-1.webp"
+          "image": "/menu/plated/bbq-lamb-ribs-x-1.webp"
         },
         {
           "id": "bbq-ribs-2",
@@ -810,7 +810,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/bbq-ribs-2.webp"
+          "image": "/menu/plated/bbq-ribs-2.webp"
         },
         {
           "id": 1741,
@@ -823,7 +823,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/bbq-lamb-ribs-x-5.webp"
+          "image": "/menu/plated/bbq-lamb-ribs-x-5.webp"
         },
         {
           "id": "bbq-ribs-8",
@@ -836,7 +836,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/bbq-ribs-8.webp"
+          "image": "/menu/plated/bbq-ribs-8.webp"
         },
         {
           "id": 1742,
@@ -849,7 +849,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/bbq-lamb-ribs-x-12.webp"
+          "image": "/menu/plated/bbq-lamb-ribs-x-12.webp"
         }
       ]
     },
@@ -3049,7 +3049,7 @@
             }
           ],
           "isMeal": true,
-          "image": "/menu/flex-variety-box.webp"
+          "image": "/menu/plated/flex-variety-box.webp"
         }
       ]
     },
@@ -3070,7 +3070,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/4-spicy-wings.webp"
+          "image": "/menu/plated/4-spicy-wings.webp"
         },
         {
           "id": 1196,
@@ -3083,7 +3083,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/6-spicy-wings.webp"
+          "image": "/menu/plated/6-spicy-wings.webp"
         },
         {
           "id": 1197,
@@ -3096,7 +3096,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/8-spicy-wings.webp"
+          "image": "/menu/plated/8-spicy-wings.webp"
         },
         {
           "id": 1198,
@@ -3109,7 +3109,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/12-spicy-wings.webp"
+          "image": "/menu/plated/12-spicy-wings.webp"
         },
         {
           "id": 1199,
@@ -3122,7 +3122,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/20-spicy-wings.webp"
+          "image": "/menu/plated/20-spicy-wings.webp"
         },
         {
           "id": 1200,
@@ -3135,7 +3135,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/1-piece-chicken.webp"
+          "image": "/menu/plated/1-piece-chicken.webp"
         },
         {
           "id": 1201,
@@ -3148,7 +3148,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/2-piece-chicken.webp"
+          "image": "/menu/plated/2-piece-chicken.webp"
         },
         {
           "id": 1202,
@@ -3161,7 +3161,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/3-piece-chicken.webp"
+          "image": "/menu/plated/3-piece-chicken.webp"
         },
         {
           "id": "4-piece-chicken",
@@ -3174,7 +3174,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/4-piece-chicken.webp"
+          "image": "/menu/plated/4-piece-chicken.webp"
         },
         {
           "id": 1204,
@@ -3187,7 +3187,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/6-piece-chicken.webp"
+          "image": "/menu/plated/6-piece-chicken.webp"
         },
         {
           "id": 1205,
@@ -3200,7 +3200,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/10-piece-chicken.webp"
+          "image": "/menu/plated/10-piece-chicken.webp"
         },
         {
           "id": 1208,
@@ -3266,7 +3266,7 @@
             }
           ],
           "isMeal": true,
-          "image": "/menu/3-spicy-wings-meal.webp"
+          "image": "/menu/plated/3-spicy-wings-meal.webp"
         },
         {
           "id": 1207,
@@ -3332,7 +3332,7 @@
             }
           ],
           "isMeal": true,
-          "image": "/menu/6-spicy-wings-meal.webp"
+          "image": "/menu/plated/6-spicy-wings-meal.webp"
         },
         {
           "id": 1209,
@@ -3398,7 +3398,7 @@
             }
           ],
           "isMeal": true,
-          "image": "/menu/1-piece-chicken-meal.webp"
+          "image": "/menu/plated/1-piece-chicken-meal.webp"
         },
         {
           "id": 1211,
@@ -3464,7 +3464,7 @@
             }
           ],
           "isMeal": true,
-          "image": "/menu/2-piece-chicken-meal.webp"
+          "image": "/menu/plated/2-piece-chicken-meal.webp"
         },
         {
           "id": 1212,
@@ -3530,7 +3530,7 @@
             }
           ],
           "isMeal": true,
-          "image": "/menu/3-piece-chicken-meal.webp"
+          "image": "/menu/plated/3-piece-chicken-meal.webp"
         },
         {
           "id": 1210,
@@ -3596,7 +3596,7 @@
             }
           ],
           "isMeal": true,
-          "image": "/menu/flex-combo-meal-1.webp"
+          "image": "/menu/plated/flex-combo-meal-1.webp"
         }
       ]
     },
@@ -3966,7 +3966,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/onion-ringas-x-4.webp"
+          "image": "/menu/plated/onion-ringas-x-4.webp"
         },
         {
           "id": 1230,
@@ -3979,7 +3979,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/onion-ringas-x-8.webp"
+          "image": "/menu/plated/onion-ringas-x-8.webp"
         },
         {
           "id": 1231,
@@ -3992,7 +3992,7 @@
           "description": "",
           "options": [],
           "isMeal": false,
-          "image": "/menu/onion-ringas-x-12.webp"
+          "image": "/menu/plated/onion-ringas-x-12.webp"
         },
         {
           "id": 1232,

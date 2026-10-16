@@ -526,6 +526,11 @@ main.page-frame :where([class*="bg-"], [class*="bg-"] *) {
   filter: drop-shadow(calc(var(--dw, 100) * 0.012px) calc(var(--dw, 100) * 0.022px) calc(var(--dw, 100) * 0.02px) rgb(40 22 10 / 0.38))
     drop-shadow(0 calc(var(--dw, 100) * 0.006px) calc(var(--dw, 100) * 0.006px) rgb(40 22 10 / 0.3));
 }
+/* A dish drawn on its plate (assets-src/make_plated.py) has its shadows in
+   the picture already. */
+.dish-img--plated {
+  filter: none;
+}
 /* One place setting (mat, shadows, plate, food), moved as one: its origin is
    the point it stands on, and it is sized for the front of the table and
    scaled from there. Hidden until TableStage places it: the server HTML has

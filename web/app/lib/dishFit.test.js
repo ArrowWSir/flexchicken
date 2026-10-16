@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { alphaBounds } from "./dishFit";
+import { alphaBounds, isPlated } from "./dishFit";
 
 // A width x height RGBA buffer with the given pixels opaque.
 function image(width, height, solid = []) {
@@ -33,5 +33,17 @@ describe("alphaBounds", () => {
 
   test("returns null when nothing is there", () => {
     expect(alphaBounds(image(4, 4), 4, 4)).toBeNull();
+  });
+});
+
+describe("isPlated", () => {
+  test("knows a picture drawn on the plate by its folder", () => {
+    expect(isPlated("/menu/plated/4-spicy-wings.webp")).toBe(true);
+  });
+
+  test("a plain photo, an upload or no picture is not drawn on the plate", () => {
+    expect(isPlated("/menu/chicken-fillet-burger.webp")).toBe(false);
+    expect(isPlated("data:image/webp;base64,AAAA")).toBe(false);
+    expect(isPlated(null)).toBe(false);
   });
 });

@@ -21,6 +21,7 @@ const menu = buildMenu({
   products: read("products.json"),
   sections: read("menu-sections.json").sections,
   hasImage: (slug) => existsSync(join(publicMenu, `${slug}.webp`)),
+  isPlated: (slug) => existsSync(join(publicMenu, "plated", `${slug}.webp`)),
 });
 
 writeFileSync(out, `${JSON.stringify(menu, null, 2)}\n`);

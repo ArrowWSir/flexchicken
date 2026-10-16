@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { UtensilsCrossed } from "lucide-react";
 import { ringOffset, ringVisibility, slotStep } from "../../lib/table";
-import { measureDish } from "../../lib/dishFit";
+import { isPlated, measureDish, PLATED_CENTRE } from "../../lib/dishFit";
 
 // The owner's round travertine table (table.jpg, flattened by
 // assets-src/make_table.py) inside the menu card, laid out like a shop
@@ -120,13 +120,24 @@ const SPECKS = (() => {
  * point the setting stands on (the group's origin). Only runs when the card
  * resizes or a photo is measured; `put` skips it otherwise.
  */
-function sizeSetting(parts, plateW, fit, hasImage) {
+function sizeSetting(parts, plateW, fit, image) {
   const ph = plateW * TILT;
   const mw = plateW * MAT;
   box(parts.mat, -mw / 2, -(mw * TILT) / 2, mw, mw * MAT_ASPECT * (TILT / PHOTO_TILT));
   const sw = plateW * 1.12;
   box(parts.plateShadow, -sw / 2 + plateW * 0.06, -(sw * TILT) / 2 + ph * 0.12, sw, sw * TILT);
   box(parts.plate, -plateW / 2, -ph / 2, plateW, ph);
+
+  // A dish drawn on the plate is as wide as the plate, its centre on the
+  // plate's centre; its shadows are in the picture.
+  if (isPlated(image)) {
+    box(parts.dish, -plateW / 2, -PLATED_CENTRE * plateW, plateW, plateW);
+    put(parts.dish, "--dw", String(plateW));
+    put(parts.dish, "opacity", fit ? "1" : "0");
+    put(parts.dishShadow, "opacity", "0");
+    return fit ? (PLATED_CENTRE - fit.top) * plateW : plateW * 0.4;
+  }
+  const hasImage = Boolean(image);
 
   // Until its photo is measured the food stays hidden; the plate shows.
   const foodW = fit ? fit.right - fit.left : 1;
@@ -208,7 +219,7 @@ export default function TableStage({ items, activeIndex, onSelect, onStep, isRed
       const parts = settingRefs.current[i];
       if (!parts?.group) return;
       const fit = item.image ? fits.current.get(item.image) : PLACEHOLDER_FIT;
-      const foodH = sizeSetting(parts, plateW, fit, Boolean(item.image));
+      const foodH = sizeSetting(parts, plateW, fit, item.image);
 
       const offset = ringOffset(i, position, count);
       const a = toRad(offset * step);
@@ -435,7 +446,14 @@ export default function TableStage({ items, activeIndex, onSelect, onStep, isRed
             <div ref={part(i, "dishShadow")} className="dish-shadow absolute" />
             <div ref={part(i, "dish")} data-fly-source={item.id} className="absolute flex items-end justify-center opacity-0">
               {item.image ? (
-                <img src={item.image} alt="" width={720} height={720} draggable={false} className="dish-img size-full object-contain" />
+                <img
+                  src={item.image}
+                  alt=""
+                  width={720}
+                  height={720}
+                  draggable={false}
+                  className={`dish-img size-full object-contain${isPlated(item.image) ? " dish-img--plated" : ""}`}
+                />
               ) : (
                 <span className="mb-[10%] flex size-[34%] items-center justify-center rounded-full bg-cream/15 text-cream/60">
                   <UtensilsCrossed className="size-1/2" strokeWidth={1.6} />

@@ -6,6 +6,15 @@
 /** Bounds as fractions of the image: { left, right, top, bottom }. */
 export const DEFAULT_FIT = Object.freeze({ left: 0.07, right: 0.93, top: 0.12, bottom: 0.92 });
 
+// A dish drawn standing on the table's plate (assets-src/make_plated.py) is
+// not fitted like a photo: its picture is as wide as the plate, with the
+// plate's centre this far down it (plate3d.CENTRE_Y / plate3d.SIZE), and its
+// shadows are drawn in.
+export const PLATED_CENTRE = 560 / 720;
+
+/** Whether a dish picture was drawn on the plate rather than photographed. */
+export const isPlated = (src) => typeof src === "string" && src.startsWith("/menu/plated/");
+
 const SAMPLE = 128; // px: plenty to find the edges, cheap to scan
 const SOLID = 24; // alpha above this counts as food, not a soft fringe
 const cache = new Map();
